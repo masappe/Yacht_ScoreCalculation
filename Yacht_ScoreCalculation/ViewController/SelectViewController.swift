@@ -33,11 +33,40 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
         cell?.textLabel?.text = snipe.shared.list[indexPath.row].boatNumber
+        //選択したのセルのみに色付け
+        if (snipe.shared.list[indexPath.row].selected)! {
+            //選択中
+            cell!.backgroundColor = .red
+        } else {
+            //未選択
+            cell!.backgroundColor = .clear
+        }
         return cell!
     }
 
     func reloadTableView() {
         tableView.reloadData()
+    }
+    //タップした時の処理
+    //タップした船はレースに出場し色付けされる
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (snipe.shared.list[indexPath.row].selected)! {
+            //未選択へ
+            snipe.shared.list[indexPath.row].selected = false
+            for i in 0..<raceInformation.shared.raceList.count {
+                if snipe.shared.list[indexPath.row] == raceInformation.shared.raceList[i] {
+                    raceInformation.shared.raceList.remove(at: i)
+                    raceInformation.shared.cutResultList.remove(at: i)
+                    break
+                }
+            }
+        }else {
+            //選択へ
+            snipe.shared.list[indexPath.row].selected = true
+            raceInformation.shared.raceList.append(snipe.shared.list[indexPath.row])
+            raceInformation.shared.cutResultList.append(snipe.shared.list[indexPath.row])
+        }
+        tableView.reloadRows(at: [indexPath], with: .automatic)
     }
     //画面遷移する前に呼ばれる
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

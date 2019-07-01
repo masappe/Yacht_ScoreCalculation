@@ -26,8 +26,8 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         beforeTableView.dataSource = self
         
         //listを一時格納
-        for i in 0..<snipe.shared.list.count {
-            tempBoat.append(snipe.shared.list[i])
+        for i in 0..<raceInformation.shared.raceList.count {
+            tempBoat.append(raceInformation.shared.raceList[i])
         }
 
         // Do any additional setup after loading the view.
@@ -42,8 +42,7 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             return "レース終了リスト"
         }
         if tableView.tag == 2 {
-            print("ANNN")
-            return "残ってるひ船リスト"
+            return "残っている船リスト"
         }
         return nil
     }
@@ -61,7 +60,6 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     //表示するデータの代入
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print(tableView.tag)
         if tableView.tag == 1 {
             let cell = afterTableView.dequeueReusableCell(withIdentifier: "after")
             cell?.textLabel?.text = currentResult.shared.list[indexPath.row].boatNumber
@@ -103,7 +101,24 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         return UISwipeActionsConfiguration(actions: [delete])
 
     }
-
+    @IBAction func backRaceButton(_ sender: Any) {
+        //レース数の更新
+        if raceInformation.shared.currentRaceNumber >= 2{
+            raceInformation.shared.currentRaceNumber = raceInformation.shared.currentRaceNumber - 1
+        }
+    }
+    @IBAction func nextRaceButton(_ sender: Any) {
+        print(raceInformation.shared.currentRaceNumber)
+        
+        //レース数の更新
+        raceInformation.shared.currentRaceNumber = raceInformation.shared.currentRaceNumber + 1
+        if raceInformation.shared.raceCount < raceInformation.shared.currentRaceNumber {
+            raceInformation.shared.raceCount = raceInformation.shared.currentRaceNumber
+        }
+        //アラートの処理を入れる
+        
+    }
+    
     @IBAction func backButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }

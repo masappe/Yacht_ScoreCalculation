@@ -24,6 +24,7 @@ class DecideViewController: UIViewController {
     
     @IBAction func registerButton(_ sender: Any) {
         registerBoat.insert(first: boatNumber.text!, second: skipper.text!, thrid: crew.text!)
+        registerBoat.selected = false
         snipe.shared.list.append(registerBoat)
         self.dismiss(animated: true, completion: {
             //tableViewのreload
