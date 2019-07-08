@@ -8,20 +8,31 @@
 
 import UIKit
 
-class DecideViewController: UIViewController {
+class DecideViewController: UIViewController,UITextFieldDelegate {
     var registerBoat = boat()
     @IBOutlet weak var boatNumber: UITextField!
     @IBOutlet weak var skipper: UITextField!
     @IBOutlet weak var crew: UITextField!
+    @IBOutlet weak var boatNumberTextField: UITextField!
+    @IBOutlet weak var skipperTextField: UITextField!
+    @IBOutlet weak var crewTextField: UITextField!
+    
     var tableViewControllerDelegate: TableViewControllerDelegate!
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        boatNumberTextField.delegate = self
+        skipperTextField.delegate = self
+        crewTextField.delegate = self
+        
+        boatNumberTextField.keyboardType = .numberPad
 
         // Do any additional setup after loading the view.
     }
     
+    //登録ボタン
     @IBAction func registerButton(_ sender: Any) {
         registerBoat.insert(first: boatNumber.text!, second: skipper.text!, thrid: crew.text!)
         registerBoat.selected = false
@@ -36,8 +47,13 @@ class DecideViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func debugButton(_ sender: Any) {
-        
+    //キーボードを閉じる
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     /*

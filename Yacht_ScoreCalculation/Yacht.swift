@@ -10,15 +10,16 @@ import Foundation
 
 class raceInformation:NSObject {
     //レース数
-    var raceCount:Int = 0
+    var raceCount:Int = 1
     //現在のレース
     var currentRaceNumber:Int = 1
     //cutレースがいつからか
-    var cutRaceNumber:Int!
+    var cutRaceNumber:Int! = 3
     //レースの結果
     var raceList: [boat] = []
     //cutレースの結果
     var cutResultList: [boat] = []
+    
 
     //大会名
     var raceName:String!
@@ -26,19 +27,23 @@ class raceInformation:NSObject {
     private override init(){}
 }
 
-class raceResult:NSObject {
-    //出でいないレースがあったらだめ
-    //バブルソート
-    //raceListの配列の順番を変える
-    //cutレースの時の順位の計算
-    func cutRaceResult() {
-        
-    }
-    //cutレースがない時の順位の計算
-    func raceResult() {
-        
-    }
-}
+//class raceResult:NSObject {
+//    //cutレースの時の順位の計算
+//    func cutRaceResult() {
+//        raceInformation.shared.cutResultList.sort{ $0.cutPoint > $1.cutPoint }
+//        for i in 0..<raceInformation.shared.cutResultList.count {
+//            raceInformation.shared.cutResultList[i].cutResult = i + 1
+//        }
+//    }
+//    //cutレースがない時の順位の計算
+//    func raceResult() {
+//        raceInformation.shared.raceList.sort{$0.totalPoint > $1.totalPoint}
+//        for i in 0..<raceInformation.shared.raceList.count {
+//            raceInformation.shared.raceList[i].result = i + 1
+//        }
+//    }
+//
+//}
 
 class boat:NSObject {
     //艇番
@@ -50,13 +55,13 @@ class boat:NSObject {
     //現在のレースの順位
     var currentRacePoint:Int!
     //各レースのの順位
-    var racePoint:[Int] = []
+    var racePoint:[Int] = [0]
     //合計点数
     var totalPoint:Int!
     //cutの点数
     var cutPoint:Int!
     //一番悪い点数
-    var badPoint:Int!
+    var badPoint:Int=0
     //順位
     var result:Int!
     //cut順位
@@ -70,13 +75,13 @@ class boat:NSObject {
         self.skipper = second
         self.crew = thrid
     }
-    //現在のレースの着順を更新する
-    func insertRacePoint() {
-        for i in 0..<currentResult.shared.list.count {
-            currentResult.shared.list[i].currentRacePoint = i + 1
-        }
-        racePoint[raceInformation.shared.currentRaceNumber] = currentRacePoint
-    }
+//    //現在のレースの着順を更新する
+//    func insertRacePoint() {
+//        for i in 0..<afterGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1].count {
+//            afterGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1][i].currentRacePoint = i + 1
+//        }
+//        racePoint[raceInformation.shared.currentRaceNumber-1] = currentRacePoint
+//    }
     //レースの合計点数を計算する
     func calculateRacePoint() {
         let sum = racePoint.reduce(0) {(num1:Int,num2:Int) -> Int in
@@ -107,7 +112,20 @@ class snipe:NSObject {
 }
 
 class currentResult:NSObject {
-    var list: [boat] = []
+    var list = [[boat]]()
     static let shared = currentResult()
     private override init() {}
+}
+
+class beforeGoalBoat:NSObject {
+    var list = [[boat]]()
+    static let shared = beforeGoalBoat()
+    private override init() {}
+
+}
+class afterGoalBoat:NSObject {
+    var list = [[boat]]()
+    static let shared = afterGoalBoat()
+    private override init() {}
+
 }

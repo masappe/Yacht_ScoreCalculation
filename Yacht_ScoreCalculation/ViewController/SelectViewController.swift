@@ -21,15 +21,22 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
         //delegate,datasource
         tableView.delegate = self
         tableView.dataSource = self
+        for i in 0...7 {
+            var registerBoat = boat()
+            registerBoat.insert(first: String(i), second: "", thrid: "")
+            registerBoat.selected = false
+            snipe.shared.list.append(registerBoat)
+        }
 
         // Do any additional setup after loading the view.
     }
     
 
+    //tableviewの個数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return snipe.shared.list.count
     }
-    
+    //tableviewに表示するセルの情報
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
         cell?.textLabel?.text = snipe.shared.list[indexPath.row].boatNumber
@@ -68,6 +75,7 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
         }
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
+    
     //画面遷移する前に呼ばれる
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toDecide" {
