@@ -21,9 +21,10 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
         //delegate,datasource
         tableView.delegate = self
         tableView.dataSource = self
+        //テストデータで使用中
         for i in 0...7 {
-            var registerBoat = boat()
-            registerBoat.insert(first: String(i), second: "", thrid: "")
+            let registerBoat = boat()
+            registerBoat.insert(first: Int(i), second: "", thrid: "")
             registerBoat.selected = false
             snipe.shared.list.append(registerBoat)
         }
@@ -39,7 +40,7 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
     //tableviewに表示するセルの情報
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-        cell?.textLabel?.text = snipe.shared.list[indexPath.row].boatNumber
+        cell?.textLabel?.text = String(snipe.shared.list[indexPath.row].boatNumber)
         //選択したのセルのみに色付け
         if (snipe.shared.list[indexPath.row].selected)! {
             //選択中
@@ -60,18 +61,9 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
         if (snipe.shared.list[indexPath.row].selected)! {
             //未選択へ
             snipe.shared.list[indexPath.row].selected = false
-            for i in 0..<raceInformation.shared.raceList.count {
-                if snipe.shared.list[indexPath.row] == raceInformation.shared.raceList[i] {
-                    raceInformation.shared.raceList.remove(at: i)
-                    raceInformation.shared.cutResultList.remove(at: i)
-                    break
-                }
-            }
         }else {
             //選択へ
             snipe.shared.list[indexPath.row].selected = true
-            raceInformation.shared.raceList.append(snipe.shared.list[indexPath.row])
-            raceInformation.shared.cutResultList.append(snipe.shared.list[indexPath.row])
         }
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
@@ -79,8 +71,19 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
     //画面遷移する前に呼ばれる
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toDecide" {
+            //delegateの設定
             let decideViewController = segue.destination as! DecideViewController
             decideViewController.tableViewControllerDelegate = self
+        }
+        if segue.identifier == "toRace" {
+            //レースに追加する船の反映
+            for i in 0..<snipe.shared.list.count {
+                if snipe.shared.list[i].selected {
+                    raceInformation.shared.raceList.append(snipe.shared.list[i])
+//                    raceInformation.shared.cutResultList.append(snipe.shared.list[i])
+                }
+            }
+
         }
     }
 

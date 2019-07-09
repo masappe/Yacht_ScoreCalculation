@@ -129,7 +129,7 @@
                                         <rightBarButtonItems>
                                             <barButtonItem title="次へ" id="pEV-oq-qJA">
                                                 <connections>
-                                                    <segue destination="bV7-bw-g0K" kind="presentation" id="aPI-NA-lAp"/>
+                                                    <segue destination="bV7-bw-g0K" kind="presentation" identifier="toRace" id="aPI-NA-lAp"/>
                                                 </connections>
                                             </barButtonItem>
                                             <barButtonItem title="＋" id="WAA-9r-Zvi">
@@ -323,11 +323,92 @@
                         <outlet property="tabBar" destination="mD2-4O-lvu" id="xaZ-3g-5UT"/>
                         <outlet property="tableView" destination="8eZ-5i-YKI" id="bcA-ad-J8X"/>
                         <outlet property="titleLabel" destination="DoB-Kh-5qI" id="BJV-IW-DGq"/>
+                        <segue destination="4vu-NB-RMt" kind="presentation" identifier="toPersonal" id="j8i-wC-JAl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nDB-OI-t15" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3068" y="26.53673163418291"/>
+        </scene>
+        <!--Personal View Controller-->
+        <scene sceneID="YFe-67-HM7">
+            <objects>
+                <viewController id="4vu-NB-RMt" customClass="PersonalViewController" customModule="Yacht_ScoreCalculation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7Ad-fq-uLJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="艇番" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z8d-BA-Bo9">
+                                <rect key="frame" x="71" y="77" width="201" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uJ8-HD-WAH">
+                                <rect key="frame" x="58" y="189" width="93" height="124"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xoN-3R-nUc">
+                                <rect key="frame" x="228" y="189" width="82" height="124"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yr8-YS-2Pb">
+                                <rect key="frame" x="0.0" y="321" width="375" height="346"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="Qmx-M9-SFQ">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Qmx-M9-SFQ" id="67b-e7-MJG">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gs3-Uh-UtW">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="艇情報" id="f5F-t1-Iy4">
+                                        <barButtonItem key="leftBarButtonItem" title="戻る" id="hxR-9r-nzW">
+                                            <connections>
+                                                <action selector="backButton:" destination="4vu-NB-RMt" id="qKG-2w-JMC"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="スキッパー：　クルー：" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kwn-Tu-wRt">
+                                <rect key="frame" x="65" y="124" width="212" height="57"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="IyB-2V-OKU"/>
+                    </view>
+                    <connections>
+                        <outlet property="boatNumber" destination="Z8d-BA-Bo9" id="kQ3-pC-hKS"/>
+                        <outlet property="cutRaceLabel" destination="xoN-3R-nUc" id="rme-xh-n48"/>
+                        <outlet property="raceLabel" destination="uJ8-HD-WAH" id="oRi-6o-0Rr"/>
+                        <outlet property="tableView" destination="yr8-YS-2Pb" id="6fP-IN-LG7"/>
+                        <outlet property="team" destination="Kwn-Tu-wRt" id="RNf-8i-9Sv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iJx-ZQ-D2D" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3068" y="-710.19490254872574"/>
         </scene>
     </scenes>
 </document>
