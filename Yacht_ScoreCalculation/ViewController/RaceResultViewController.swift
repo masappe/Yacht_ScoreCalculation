@@ -18,11 +18,12 @@ class RaceResultViewController: UIViewController,UITabBarDelegate,UITableViewDel
     var state:String!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tabBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
         titleLabel.title = "\(raceInformation.shared.raceCount)レースまでの結果"
+        
+
 
     }
     //tabbarの状態
