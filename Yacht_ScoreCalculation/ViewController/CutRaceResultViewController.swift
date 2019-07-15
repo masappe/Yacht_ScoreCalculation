@@ -9,12 +9,15 @@
 
 import UIKit
 
-class RaceResultViewController: UIViewController,UITabBarDelegate,UITableViewDelegate,UITableViewDataSource {
-
+class CutRaceResultViewController: UIViewController,UITabBarDelegate,UITableViewDelegate,UITableViewDataSource {
+    
+    
     @IBOutlet weak var titleLabel: UINavigationItem!
     @IBOutlet weak var tableView: UITableView!
+//    var state:String!
     override func viewDidLoad() {
         super.viewDidLoad()
+        //        tabBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
         titleLabel.title = "\(raceInformation.shared.raceCount)レースまでの結果"
@@ -28,18 +31,16 @@ class RaceResultViewController: UIViewController,UITabBarDelegate,UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "カットレースなしの結果"
+        return "カットレースの結果"
     }
-
     //tableviewのセルの個数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return raceInformation.shared.raceList.count
     }
-
     //tableviewのセル情報
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-        cell?.textLabel?.text = "\(indexPath.row+1)位 艇番:\(raceInformation.shared.raceList[indexPath.row].boatNumber!) 合計:\(raceInformation.shared.raceList[indexPath.row].totalPoint)点"
+        cell?.textLabel?.text = "\(indexPath.row+1)位 艇番:\(raceInformation.shared.raceList[indexPath.row].boatNumber!) 合計:\(raceInformation.shared.raceList[indexPath.row].cutPoint)点"
         return cell!
     }
     
@@ -70,6 +71,6 @@ class RaceResultViewController: UIViewController,UITabBarDelegate,UITableViewDel
             raceInformation.shared.raceList[i].result = i + 1
         }
     }
-
-
+    
+    
 }

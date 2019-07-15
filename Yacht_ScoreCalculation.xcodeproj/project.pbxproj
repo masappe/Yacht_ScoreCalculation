@@ -19,6 +19,8 @@
 		693E183F22C7891200A3FF8F /* DecideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693E183E22C7891200A3FF8F /* DecideViewController.swift */; };
 		693E184222C7B58D00A3FF8F /* RaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693E184122C7B58D00A3FF8F /* RaceViewController.swift */; };
 		693E184422CB184500A3FF8F /* RaceResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693E184322CB184500A3FF8F /* RaceResultViewController.swift */; };
+		69C276D122DB800700C82416 /* tabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C276D022DB800700C82416 /* tabBarController.swift */; };
+		69C276D722DC326100C82416 /* CutRaceResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C276D622DC326100C82416 /* CutRaceResultViewController.swift */; };
 		69EF9E0F22D47AFA00BCB928 /* PersonalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EF9E0E22D47AFA00BCB928 /* PersonalViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +60,8 @@
 		693E183E22C7891200A3FF8F /* DecideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecideViewController.swift; sourceTree = "<group>"; };
 		693E184122C7B58D00A3FF8F /* RaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceViewController.swift; sourceTree = "<group>"; };
 		693E184322CB184500A3FF8F /* RaceResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceResultViewController.swift; sourceTree = "<group>"; };
+		69C276D022DB800700C82416 /* tabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tabBarController.swift; sourceTree = "<group>"; };
+		69C276D622DC326100C82416 /* CutRaceResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutRaceResultViewController.swift; sourceTree = "<group>"; };
 		69EF9E0E22D47AFA00BCB928 /* PersonalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PersonalViewController.swift; path = ../PersonalViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -111,6 +115,7 @@
 			children = (
 				693E184022C7893700A3FF8F /* ViewController */,
 				693E180A22C784C200A3FF8F /* AppDelegate.swift */,
+				69C276D022DB800700C82416 /* tabBarController.swift */,
 				693E180E22C784C200A3FF8F /* Main.storyboard */,
 				693E183A22C786C400A3FF8F /* Yacht.swift */,
 				693E181122C784C300A3FF8F /* Assets.xcassets */,
@@ -146,6 +151,7 @@
 				693E183822C7856E00A3FF8F /* SelectViewController.swift */,
 				693E184122C7B58D00A3FF8F /* RaceViewController.swift */,
 				693E184322CB184500A3FF8F /* RaceResultViewController.swift */,
+				69C276D622DC326100C82416 /* CutRaceResultViewController.swift */,
 				69EF9E0E22D47AFA00BCB928 /* PersonalViewController.swift */,
 			);
 			path = ViewController;
@@ -285,10 +291,12 @@
 				693E180D22C784C200A3FF8F /* ViewController.swift in Sources */,
 				693E183922C7856E00A3FF8F /* SelectViewController.swift in Sources */,
 				69EF9E0F22D47AFA00BCB928 /* PersonalViewController.swift in Sources */,
+				69C276D722DC326100C82416 /* CutRaceResultViewController.swift in Sources */,
 				693E183F22C7891200A3FF8F /* DecideViewController.swift in Sources */,
 				693E184422CB184500A3FF8F /* RaceResultViewController.swift in Sources */,
 				693E180B22C784C200A3FF8F /* AppDelegate.swift in Sources */,
 				693E183B22C786C400A3FF8F /* Yacht.swift in Sources */,
+				69C276D122DB800700C82416 /* tabBarController.swift in Sources */,
 				693E184222C7B58D00A3FF8F /* RaceViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

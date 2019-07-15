@@ -129,7 +129,7 @@
                                         <rightBarButtonItems>
                                             <barButtonItem title="次へ" id="pEV-oq-qJA">
                                                 <connections>
-                                                    <segue destination="bV7-bw-g0K" kind="presentation" identifier="toRace" id="aPI-NA-lAp"/>
+                                                    <segue destination="9QQ-ht-pPj" kind="presentation" identifier="toRace" id="h5s-BF-SfR"/>
                                                 </connections>
                                             </barButtonItem>
                                             <barButtonItem title="＋" id="WAA-9r-Zvi">
@@ -167,168 +167,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fpw-Vk-PyL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1494" y="16"/>
-        </scene>
-        <!--Race View Controller-->
-        <scene sceneID="7Ge-lo-377">
-            <objects>
-                <viewController id="bV7-bw-g0K" customClass="RaceViewController" customModule="Yacht_ScoreCalculation" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="H7g-TU-GWk">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n1c-rX-fPX">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="１レース目" id="IFg-J9-N0h">
-                                        <barButtonItem key="leftBarButtonItem" title="戻る" id="gZq-cY-r4k">
-                                            <connections>
-                                                <action selector="backButton:" destination="bV7-bw-g0K" id="kR4-Rm-hEy"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <rightBarButtonItems>
-                                            <barButtonItem title="終了" id="bMV-wJ-mJL">
-                                                <connections>
-                                                    <action selector="degugButoon:" destination="bV7-bw-g0K" id="Uki-FA-WBc"/>
-                                                </connections>
-                                            </barButtonItem>
-                                            <barButtonItem title="更新" id="i9R-Km-lIV">
-                                                <connections>
-                                                    <action selector="updateRaceResult:" destination="bV7-bw-g0K" id="tlk-vh-ZOz"/>
-                                                </connections>
-                                            </barButtonItem>
-                                        </rightBarButtonItems>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                            <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NA7-wg-Epo">
-                                <rect key="frame" x="0.0" y="108" width="189" height="510"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="after" id="JjY-n3-GWD">
-                                        <rect key="frame" x="0.0" y="28" width="189" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JjY-n3-GWD" id="pcw-6u-ldb">
-                                            <rect key="frame" x="0.0" y="0.0" width="189" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                            <tableView clipsSubviews="YES" tag="2" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TdM-YA-vCM">
-                                <rect key="frame" x="184" y="108" width="191" height="510"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="before" id="Don-c4-wxc">
-                                        <rect key="frame" x="0.0" y="28" width="191" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Don-c4-wxc" id="wcc-Ci-abb">
-                                            <rect key="frame" x="0.0" y="0.0" width="191" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PBx-F6-1D3">
-                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem id="6M2-el-tx1">
-                                        <barButtonItem key="leftBarButtonItem" title="前のレース" id="n3b-G5-IFO">
-                                            <connections>
-                                                <action selector="backRaceButton:" destination="bV7-bw-g0K" id="syy-sU-UBZ"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="次のレース" id="Zou-Z5-TXo">
-                                            <connections>
-                                                <action selector="nextRaceButton:" destination="bV7-bw-g0K" id="ume-2U-zgk"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UVW-2P-YsG">
-                                <rect key="frame" x="0.0" y="618" width="375" height="49"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <items>
-                                    <tabBarItem tag="1" title="レース順位" id="69T-EB-Usu"/>
-                                    <tabBarItem tag="2" title="cut順位" id="SOw-ew-hSR"/>
-                                    <tabBarItem tag="3" title="総合順位" id="3lm-oH-uNg"/>
-                                </items>
-                            </tabBar>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="SCC-zz-9Cs"/>
-                    </view>
-                    <connections>
-                        <outlet property="afterTableView" destination="NA7-wg-Epo" id="lI2-G7-CaL"/>
-                        <outlet property="beforeTableView" destination="TdM-YA-vCM" id="O4D-wY-Nkk"/>
-                        <outlet property="tabBar" destination="UVW-2P-YsG" id="XYn-Mp-OFS"/>
-                        <outlet property="titleLabel" destination="IFg-J9-N0h" id="Ryc-9f-fsL"/>
-                        <segue destination="muS-FE-axQ" kind="presentation" identifier="toRaceResult" id="qTG-fz-B2F"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4oh-Zm-koS" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2232.8000000000002" y="26.53673163418291"/>
-        </scene>
-        <!--Race Result View Controller-->
-        <scene sceneID="N2O-s4-zMc">
-            <objects>
-                <viewController id="muS-FE-axQ" customClass="RaceResultViewController" customModule="Yacht_ScoreCalculation" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Nx4-8u-z3u">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mD2-4O-lvu">
-                                <rect key="frame" x="0.0" y="618" width="375" height="49"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <items>
-                                    <tabBarItem tag="1" title="レース順位" id="TSa-VL-5Ir"/>
-                                    <tabBarItem tag="2" title="cut順位" id="8Ey-bs-DWc"/>
-                                    <tabBarItem tag="3" title="総合順位" id="JlU-Ql-1rb"/>
-                                </items>
-                            </tabBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8eZ-5i-YKI">
-                                <rect key="frame" x="0.0" y="68" width="375" height="550"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="cell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="kXJ-LF-n1L">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kXJ-LF-n1L" id="g6k-3y-mvy">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8bF-BY-PYp">
-                                <rect key="frame" x="0.0" y="24" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="Title" id="DoB-Kh-5qI"/>
-                                </items>
-                            </navigationBar>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="f7s-Nd-nb6"/>
-                    </view>
-                    <connections>
-                        <outlet property="tabBar" destination="mD2-4O-lvu" id="xaZ-3g-5UT"/>
-                        <outlet property="tableView" destination="8eZ-5i-YKI" id="bcA-ad-J8X"/>
-                        <outlet property="titleLabel" destination="DoB-Kh-5qI" id="BJV-IW-DGq"/>
-                        <segue destination="4vu-NB-RMt" kind="presentation" identifier="toPersonal" id="j8i-wC-JAl"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nDB-OI-t15" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3068" y="26.53673163418291"/>
         </scene>
         <!--Personal View Controller-->
         <scene sceneID="YFe-67-HM7">
@@ -408,7 +246,227 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iJx-ZQ-D2D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3068" y="-710.19490254872574"/>
+            <point key="canvasLocation" x="4057" y="16"/>
+        </scene>
+        <!--cut順位-->
+        <scene sceneID="Xai-i4-mFP">
+            <objects>
+                <viewController id="7Mc-Hs-IQs" customClass="CutRaceResultViewController" customModule="Yacht_ScoreCalculation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TfJ-sX-Xgj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8eZ-5i-YKI">
+                                <rect key="frame" x="0.0" y="68" width="375" height="550"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="cell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="kXJ-LF-n1L">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kXJ-LF-n1L" id="g6k-3y-mvy">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8bF-BY-PYp">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Title" id="DoB-Kh-5qI">
+                                        <barButtonItem key="rightBarButtonItem" title="Item" id="x0h-LJ-fr7">
+                                            <connections>
+                                                <action selector="debug:" destination="7Mc-Hs-IQs" id="zYl-MR-jAv"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="JAq-Xb-o3e"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" tag="1" title="cut順位" id="s11-QL-md3"/>
+                    <connections>
+                        <outlet property="tableView" destination="8eZ-5i-YKI" id="SZ6-Qd-RYZ"/>
+                        <outlet property="titleLabel" destination="DoB-Kh-5qI" id="jKK-n4-jdI"/>
+                        <segue destination="4vu-NB-RMt" kind="presentation" identifier="toPersonal" id="2xt-aw-jzA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BNf-Bk-Lqu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3180" y="16"/>
+        </scene>
+        <!--レース順位-->
+        <scene sceneID="ogF-mM-ppp">
+            <objects>
+                <viewController id="XmS-Vh-jp2" customClass="RaceViewController" customModule="Yacht_ScoreCalculation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="up3-wT-pDE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NA7-wg-Epo">
+                                <rect key="frame" x="0.0" y="108" width="189" height="510"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="after" id="JjY-n3-GWD">
+                                        <rect key="frame" x="0.0" y="28" width="189" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JjY-n3-GWD" id="pcw-6u-ldb">
+                                            <rect key="frame" x="0.0" y="0.0" width="189" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <tableView clipsSubviews="YES" tag="2" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TdM-YA-vCM">
+                                <rect key="frame" x="184" y="108" width="191" height="510"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="before" id="Don-c4-wxc">
+                                        <rect key="frame" x="0.0" y="28" width="191" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Don-c4-wxc" id="wcc-Ci-abb">
+                                            <rect key="frame" x="0.0" y="0.0" width="191" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PBx-F6-1D3">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem id="6M2-el-tx1">
+                                        <barButtonItem key="leftBarButtonItem" title="前のレース" id="n3b-G5-IFO">
+                                            <connections>
+                                                <action selector="backRaceButton:" destination="XmS-Vh-jp2" id="dER-Ih-S54"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="次のレース" id="Zou-Z5-TXo">
+                                            <connections>
+                                                <action selector="nextRaceButton:" destination="XmS-Vh-jp2" id="7zd-P5-iuT"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n1c-rX-fPX">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="１レース目" id="IFg-J9-N0h">
+                                        <barButtonItem key="leftBarButtonItem" title="戻る" id="gZq-cY-r4k">
+                                            <connections>
+                                                <action selector="backButton:" destination="XmS-Vh-jp2" id="8pX-rq-PPM"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <rightBarButtonItems>
+                                            <barButtonItem title="終了" id="bMV-wJ-mJL">
+                                                <connections>
+                                                    <action selector="degugButoon:" destination="XmS-Vh-jp2" id="m98-Kh-RXE"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="更新" id="i9R-Km-lIV">
+                                                <connections>
+                                                    <action selector="updateRaceResult:" destination="XmS-Vh-jp2" id="vH7-Iv-bCH"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </rightBarButtonItems>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="cJZ-iW-Xgb"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="レース順位" id="PlE-ro-5pd"/>
+                    <connections>
+                        <outlet property="afterTableView" destination="NA7-wg-Epo" id="KLG-tH-ogY"/>
+                        <outlet property="beforeTableView" destination="TdM-YA-vCM" id="mK5-Ni-k65"/>
+                        <outlet property="titleLabel" destination="IFg-J9-N0h" id="dd3-tN-TBh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4ol-Jp-uRF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3180" y="-710"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="Cfs-bY-Idk">
+            <objects>
+                <tabBarController id="9QQ-ht-pPj" customClass="tabBarController" customModule="Yacht_ScoreCalculation" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="515-gz-IB3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="XmS-Vh-jp2" kind="relationship" relationship="viewControllers" id="IfE-zj-j4x"/>
+                        <segue destination="7Mc-Hs-IQs" kind="relationship" relationship="viewControllers" id="jhm-Qd-hSB"/>
+                        <segue destination="Euk-TQ-RtT" kind="relationship" relationship="viewControllers" id="sSP-iR-3rd"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g9L-6y-uWc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2250" y="16"/>
+        </scene>
+        <!--総合順位-->
+        <scene sceneID="X4y-i0-UhZ">
+            <objects>
+                <viewController id="Euk-TQ-RtT" customClass="RaceResultViewController" customModule="Yacht_ScoreCalculation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lTA-sR-Srr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a6c-Fh-WPR">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Title" id="dL6-E6-CJh">
+                                        <barButtonItem key="rightBarButtonItem" title="Item" id="lto-Wm-6C7">
+                                            <connections>
+                                                <action selector="debug:" destination="Euk-TQ-RtT" id="cLC-5E-mUK"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ogM-62-YiK">
+                                <rect key="frame" x="0.0" y="68" width="375" height="550"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="cell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="67P-fJ-jlO">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="67P-fJ-jlO" id="psV-SD-XxH">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="EPl-Iw-WOs"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" tag="2" title="総合順位" id="AZe-jA-ex5"/>
+                    <connections>
+                        <outlet property="tableView" destination="ogM-62-YiK" id="bUf-PS-x3W"/>
+                        <outlet property="titleLabel" destination="dL6-E6-CJh" id="9RU-4W-dbT"/>
+                        <segue destination="4vu-NB-RMt" kind="presentation" identifier="toPersonal" id="PgP-mp-ilo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qFg-Bh-No0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3180" y="795"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="PgP-mp-ilo"/>
+    </inferredMetricsTieBreakers>
 </document>

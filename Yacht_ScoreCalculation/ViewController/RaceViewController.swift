@@ -25,7 +25,6 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         afterTableView.dataSource = self
         beforeTableView.delegate = self
         beforeTableView.dataSource = self
-        tabBar.delegate = self
         //要素を追加する前に配列を作成する
         afterGoalBoat.shared.list.removeAll()
         beforeGoalBoat.shared.list.removeAll()
@@ -35,16 +34,6 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if tableView.tag == 1 {
-            return "レース終了リスト"
-        }
-        if tableView.tag == 2 {
-            return "残っている船リスト"
-        }
-        return nil
     }
     
     //tableviewの表示
@@ -233,31 +222,6 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         raceInformation.shared.raceList.sort{$0.totalPoint < $1.totalPoint}
         for i in 0..<raceInformation.shared.raceList.count {
             raceInformation.shared.raceList[i].result = i + 1
-        }
-    }
-
-    //tabbarの状態
-    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        switch item.tag {
-        case 1: break
-            
-        case 2:
-            //カットレースの順位を計算しソートする
-            cutRaceResult()
-            performSegue(withIdentifier: "toRaceResult", sender: "cutResult")
-        case 3:
-            //レースの順位を計算しソートする
-            raceResult()
-            performSegue(withIdentifier: "toRaceResult", sender: "Result")
-        default:
-            break
-        }
-    }
-    //遷移する前
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toRaceResult" {
-            let raceResultViewController = segue.destination as! RaceResultViewController
-            raceResultViewController.state = sender as! String?
         }
     }
     
