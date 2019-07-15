@@ -29,7 +29,6 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
             snipe.shared.list.append(registerBoat)
         }
 
-        // Do any additional setup after loading the view.
     }
     
 
@@ -80,10 +79,8 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
             for i in 0..<snipe.shared.list.count {
                 if snipe.shared.list[i].selected {
                     raceInformation.shared.raceList.append(snipe.shared.list[i])
-//                    raceInformation.shared.cutResultList.append(snipe.shared.list[i])
                 }
             }
-
         }
     }
 

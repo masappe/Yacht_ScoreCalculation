@@ -113,9 +113,9 @@
 		693E180922C784C200A3FF8F /* Yacht_ScoreCalculation */ = {
 			isa = PBXGroup;
 			children = (
+				69C276D822DC5A6800C82416 /* TabBarController */,
 				693E184022C7893700A3FF8F /* ViewController */,
 				693E180A22C784C200A3FF8F /* AppDelegate.swift */,
-				69C276D022DB800700C82416 /* tabBarController.swift */,
 				693E180E22C784C200A3FF8F /* Main.storyboard */,
 				693E183A22C786C400A3FF8F /* Yacht.swift */,
 				693E181122C784C300A3FF8F /* Assets.xcassets */,
@@ -155,6 +155,14 @@
 				69EF9E0E22D47AFA00BCB928 /* PersonalViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		69C276D822DC5A6800C82416 /* TabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				69C276D022DB800700C82416 /* tabBarController.swift */,
+			);
+			path = TabBarController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

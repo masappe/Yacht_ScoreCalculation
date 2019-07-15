@@ -28,7 +28,7 @@ class raceInformation:NSObject {
     private override init(){}
     
     func initialize() {
-        raceList.removeAll()
+        raceList = []
         raceCount = 1
         currentRaceNumber = 1
     }
