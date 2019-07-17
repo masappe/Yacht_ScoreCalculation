@@ -13,11 +13,19 @@ class RaceResultViewController: UIViewController,UITabBarDelegate,UITableViewDel
 
     @IBOutlet weak var titleLabel: UINavigationItem!
     @IBOutlet weak var tableView: UITableView!
+    //true:カットなし，false:カットあり
+    let state = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        titleLabel.title = "\(raceInformation.shared.raceCount)レースまでの結果"
+        if state {
+            titleLabel.title = "\(raceInformation.shared.raceCount)レースまでの結果"
+        } else {
+            titleLabel.title = "\(raceInformation.shared.raceCount)レースまでの結果(cut有り)"
+
+        }
         
     }
     @IBAction func debug(_ sender: Any) {
@@ -28,7 +36,11 @@ class RaceResultViewController: UIViewController,UITabBarDelegate,UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "カットレースなしの結果"
+        if state {
+            return "カットレースなしの結果"
+        } else {
+            return "カットレースの結果"
+        }
     }
 
     //tableviewのセルの個数
@@ -54,6 +66,8 @@ class RaceResultViewController: UIViewController,UITabBarDelegate,UITableViewDel
             personalViewController.num = sender as! Int?
         }
     }
+    
+    
     
     //レース順位のソート
     //cutレースの時の順位の計算

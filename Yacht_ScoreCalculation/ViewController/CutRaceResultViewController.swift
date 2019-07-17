@@ -11,7 +11,6 @@ import UIKit
 
 class CutRaceResultViewController: UIViewController,UITabBarDelegate,UITableViewDelegate,UITableViewDataSource {
     
-    
     @IBOutlet weak var titleLabel: UINavigationItem!
     @IBOutlet weak var tableView: UITableView!
 //    var state:String!
