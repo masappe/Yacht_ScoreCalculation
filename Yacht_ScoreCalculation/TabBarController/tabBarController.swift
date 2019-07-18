@@ -23,10 +23,19 @@ class tabBarController: UITabBarController,UITabBarControllerDelegate {
         switch viewController {
         case is RaceViewController:
             break
-        case is RaceResultViewController:
-            raceResult()
-            let viewController = viewController as! RaceResultViewController
-            viewController.tableView.reloadData()
+        case is PersonalRaceResultViewController:
+            let viewController = viewController as! PersonalRaceResultViewController
+            if raceInformation.shared.raceCount >= raceInformation.shared.cutRaceNumber {
+                //普通の順位の反映のため
+                raceResult()
+                cutRaceResult()
+                viewController.state = false
+            } else {
+                //cut順位の反映のため
+                cutRaceResult()
+                raceResult()
+                viewController.state = true
+            }
         case is CutRaceResultViewController:
             cutRaceResult()
             let viewController = viewController as! CutRaceResultViewController
@@ -39,16 +48,16 @@ class tabBarController: UITabBarController,UITabBarControllerDelegate {
     //レース順位のソート
     //cutレースの時の順位の計算
     func cutRaceResult() {
-        raceInformation.shared.raceList.sort{ $0.cutPoint < $1.cutPoint }
-        for i in 0..<raceInformation.shared.raceList.count {
-            raceInformation.shared.raceList[i].cutResult = i + 1
+        personal.shared.raceList.sort{ $0.cutPoint < $1.cutPoint }
+        for i in 0..<personal.shared.raceList.count {
+            personal.shared.raceList[i].cutResult = i + 1
         }
     }
     //cutレースがない時の順位の計算
     func raceResult() {
-        raceInformation.shared.raceList.sort{$0.totalPoint < $1.totalPoint}
-        for i in 0..<raceInformation.shared.raceList.count {
-            raceInformation.shared.raceList[i].result = i + 1
+        personal.shared.raceList.sort{$0.totalPoint < $1.totalPoint}
+        for i in 0..<personal.shared.raceList.count {
+            personal.shared.raceList[i].result = i + 1
         }
     }
 

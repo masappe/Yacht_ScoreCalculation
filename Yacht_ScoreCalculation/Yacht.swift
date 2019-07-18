@@ -16,22 +16,72 @@ class raceInformation:NSObject {
     //cutレースがいつからか
     var cutRaceNumber:Int! = 3
     //レースの結果
-    var raceList: [boat] = []
+//    var raceList: [boat] = []
     //英語の種類一覧
     var DNF = 1000
     var black: Int!
-    
 
     //大会名
     var raceName:String!
+    
     static let shared = raceInformation()
     private override init(){}
     
     func initialize() {
-        raceList = []
+//        raceList = []
         raceCount = 1
         currentRaceNumber = 1
     }
+}
+
+class personal:NSObject {
+    var raceList: [boat] = []
+    static let shared = personal()
+    private override init(){}
+    
+    func initialize() {
+        raceList = []
+    }
+}
+//
+
+class alluniv:NSObject {
+    var univList: [universal] = []
+    static let shared = alluniv()
+    private override init(){}
+}
+//大学情報
+class universal:NSObject {
+    var univ: String!
+    var list: [boat] = []
+//    static let shared = universal()
+//    private override init(){}
+    
+}
+//レースに参加する大学一覧
+class group:NSObject {
+    var raceList: [boats] = []
+    static let shared = group()
+    private override init(){}
+}
+//レースに参加する大学情報
+class boats:NSObject {
+    //大学名
+    var univ: String!
+    //各レースの順位
+    var racePoint:[Int] = [0]
+    //どの艇が所属しているか
+    var boat:[boat] = []
+    //合計得点
+    var totalPoint = 1000
+    //cutの点数
+    var cutPoint = 1000
+    //一番悪い点数
+    var badPoint = 0
+    //順位
+    var result:Int!
+    //cut順位
+    var cutResult:Int!
 }
 
 
@@ -42,8 +92,6 @@ class boat:NSObject {
     var skipper: String!
     //クルー
     var crew: String!
-    //現在のレースの順位
-//    var currentRacePoint:Int!
     //各レースのの順位
     var racePoint:[Int] = [0]
     //合計点数
@@ -58,12 +106,15 @@ class boat:NSObject {
     var cutResult:Int!
     //レースに出るかの判断基準，色の選択の判断基準
     var selected:Bool!
+    //大学名
+    var univ:String!
     
     //艇情報の追加
-    func insert(first:Int,second:String,thrid:String){
+    func insert(first:Int,second:String,thrid:String,fourth:String){
         self.boatNumber = first
         self.skipper = second
         self.crew = thrid
+        self.univ = fourth
     }
     //レースの合計点数を計算する
     func calculateRacePoint() {

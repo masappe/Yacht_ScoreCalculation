@@ -34,7 +34,7 @@ class DecideViewController: UIViewController,UITextFieldDelegate {
     
     //登録ボタン
     @IBAction func registerButton(_ sender: Any) {
-        registerBoat.insert(first: Int(boatNumber.text!)!, second: skipper.text!, thrid: crew.text!)
+        registerBoat.insert(first: Int(boatNumber.text!)!, second: skipper.text!, thrid: crew.text!,fourth: "")
         registerBoat.selected = false
         snipe.shared.list.append(registerBoat)
         self.dismiss(animated: true, completion: {

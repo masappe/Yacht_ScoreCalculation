@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="y4p-Nf-kyA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -22,6 +22,9 @@
                                 <rect key="frame" x="208" y="318" width="115" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="snipe"/>
+                                <connections>
+                                    <segue destination="y4p-Nf-kyA" kind="presentation" id="bZM-kH-CJ6"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hDU-H6-9bm">
                                 <rect key="frame" x="54" y="318" width="108" height="50"/>
@@ -328,7 +331,7 @@
             </objects>
             <point key="canvasLocation" x="4056.8000000000002" y="15.742128935532236"/>
         </scene>
-        <!--Item-->
+        <!--団体-->
         <scene sceneID="Xai-i4-mFP">
             <objects>
                 <viewController id="7Mc-Hs-IQs" customClass="CutRaceResultViewController" customModule="Yacht_ScoreCalculation" customModuleProvider="target" sceneMemberID="viewController">
@@ -368,7 +371,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="JAq-Xb-o3e"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="3JV-ZG-oFV"/>
+                    <tabBarItem key="tabBarItem" title="団体" id="3JV-ZG-oFV"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="8eZ-5i-YKI" id="SZ6-Qd-RYZ"/>
@@ -378,7 +381,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BNf-Bk-Lqu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3180" y="15.742128935532236"/>
+            <point key="canvasLocation" x="3214" y="795"/>
         </scene>
         <!--レース順位-->
         <scene sceneID="ogF-mM-ppp">
@@ -487,8 +490,8 @@
                     </tabBar>
                     <connections>
                         <segue destination="XmS-Vh-jp2" kind="relationship" relationship="viewControllers" id="IfE-zj-j4x"/>
-                        <segue destination="7Mc-Hs-IQs" kind="relationship" relationship="viewControllers" id="jhm-Qd-hSB"/>
                         <segue destination="Euk-TQ-RtT" kind="relationship" relationship="viewControllers" id="sSP-iR-3rd"/>
+                        <segue destination="7Mc-Hs-IQs" kind="relationship" relationship="viewControllers" id="jhm-Qd-hSB"/>
                         <segue destination="zNw-b4-YDX" kind="relationship" relationship="viewControllers" id="oqC-IB-eIo"/>
                     </connections>
                 </tabBarController>
@@ -512,10 +515,10 @@
             </objects>
             <point key="canvasLocation" x="2249" y="795"/>
         </scene>
-        <!--総合順位-->
+        <!--個人-->
         <scene sceneID="X4y-i0-UhZ">
             <objects>
-                <viewController id="Euk-TQ-RtT" customClass="RaceResultViewController" customModule="Yacht_ScoreCalculation" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Euk-TQ-RtT" customClass="PersonalRaceResultViewController" customModule="Yacht_ScoreCalculation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lTA-sR-Srr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -525,11 +528,23 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Title" id="dL6-E6-CJh">
-                                        <barButtonItem key="rightBarButtonItem" title="Item" id="lto-Wm-6C7">
+                                        <barButtonItem key="leftBarButtonItem" title="現在" id="Cm1-iC-CZD">
                                             <connections>
-                                                <action selector="debug:" destination="Euk-TQ-RtT" id="cLC-5E-mUK"/>
+                                                <action selector="nowResult:" destination="Euk-TQ-RtT" id="q0I-fV-6Sp"/>
                                             </connections>
                                         </barButtonItem>
+                                        <rightBarButtonItems>
+                                            <barButtonItem title="no Cut" id="ff1-yL-6fC">
+                                                <connections>
+                                                    <action selector="noCutButton:" destination="Euk-TQ-RtT" id="gIs-1F-F9d"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="Cut" id="Urt-bJ-30v">
+                                                <connections>
+                                                    <action selector="cutButton:" destination="Euk-TQ-RtT" id="NTr-pF-Axv"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </rightBarButtonItems>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -552,7 +567,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="EPl-Iw-WOs"/>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="2" title="総合順位" id="AZe-jA-ex5"/>
+                    <tabBarItem key="tabBarItem" tag="2" title="個人" id="AZe-jA-ex5"/>
                     <connections>
                         <outlet property="tableView" destination="ogM-62-YiK" id="bUf-PS-x3W"/>
                         <outlet property="titleLabel" destination="dL6-E6-CJh" id="9RU-4W-dbT"/>
@@ -561,10 +576,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qFg-Bh-No0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3180" y="794.75262368815595"/>
+            <point key="canvasLocation" x="3180" y="16"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="2xt-aw-jzA"/>
+        <segue reference="PgP-mp-ilo"/>
     </inferredMetricsTieBreakers>
 </document>
