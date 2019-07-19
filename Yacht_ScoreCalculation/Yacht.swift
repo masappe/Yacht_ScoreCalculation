@@ -82,6 +82,20 @@ class boats:NSObject {
     var result:Int!
     //cut順位
     var cutResult:Int!
+    //レースの合計点数を計算する
+    func calculateRacePoint() {
+        badPoint = 0
+        let sum = racePoint.reduce(0) {(num1:Int,num2:Int) -> Int in
+            if badPoint < num2 {
+                badPoint = num2
+            }
+            return num1 + num2
+        }
+        totalPoint = sum
+        cutPoint = sum - badPoint
+        
+    }
+
 }
 
 

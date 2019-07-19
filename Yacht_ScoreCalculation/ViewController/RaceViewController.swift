@@ -130,8 +130,13 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                 raceInformation.shared.raceCount = raceInformation.shared.currentRaceNumber
                 afterGoalBoat.shared.list.append([boat]())
                 //次のレースに進むときはアペンドする
+                //個人
                 for i in 0..<personal.shared.raceList.count{
                     personal.shared.raceList[i].racePoint.append(raceInformation.shared.DNF)
+                }
+                //団体
+                for i in 0..<group.shared.raceList.count {
+                    group.shared.raceList[i].racePoint.append(0)
                 }
                 //現在のレース結果を格納
                 //レース結果をソートしてその結果をbeforeに格納
@@ -205,6 +210,17 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             //艇ごとの現在までのレースの合計点を計算
             for i in 0..<personal.shared.raceList.count{
                 personal.shared.raceList[i].calculateRacePoint()
+            }
+            //大学ごとの現在までのレースの合計点を計算
+            for i in 0..<group.shared.raceList.count{
+                var sum = 0
+                //船の合計点を反映させる
+                for j in 0..<group.shared.raceList[i].boat.count{
+                    sum = sum + group.shared.raceList[i].boat[j].racePoint[raceInformation.shared.currentRaceNumber-1]
+                }
+                group.shared.raceList[i].racePoint[raceInformation.shared.currentRaceNumber-1] = sum
+                //total,badpointの計算
+                group.shared.raceList[i].calculateRacePoint()
             }
 
         }

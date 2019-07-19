@@ -36,15 +36,44 @@ class tabBarController: UITabBarController,UITabBarControllerDelegate {
                 raceResult()
                 viewController.state = true
             }
-        case is CutRaceResultViewController:
+            viewController.tableView.reloadData()
+        case is GroupRaceResultViewController:
             cutRaceResult()
-            let viewController = viewController as! CutRaceResultViewController
+            let viewController = viewController as! GroupRaceResultViewController
+            if raceInformation.shared.raceCount >= raceInformation.shared.cutRaceNumber {
+                //普通の順位の反映のため
+                groupRaceResult()
+                groupCutRaceResult()
+                viewController.state = false
+            } else {
+                //cut順位の反映のため
+                groupCutRaceResult()
+                groupRaceResult()
+                viewController.state = true
+            }
+
             viewController.tableView.reloadData()
         default:
             break
         }
     }
     
+    //団体の順位のソート
+    //cutレースの時の順位の計算
+    func groupCutRaceResult(){
+        group.shared.raceList.sort{ $0.cutPoint < $1.cutPoint }
+        for i in 0..<group.shared.raceList.count {
+            group.shared.raceList[i].cutResult = i + 1
+        }
+    }
+    //cutレースがない時の順位の計算
+    func groupRaceResult(){
+        group.shared.raceList.sort{$0.totalPoint < $1.totalPoint}
+        for i in 0..<group.shared.raceList.count {
+            group.shared.raceList[i].result = i + 1
+        }
+    }
+
     //レース順位のソート
     //cutレースの時の順位の計算
     func cutRaceResult() {

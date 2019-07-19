@@ -334,7 +334,7 @@
         <!--団体-->
         <scene sceneID="Xai-i4-mFP">
             <objects>
-                <viewController id="7Mc-Hs-IQs" customClass="CutRaceResultViewController" customModule="Yacht_ScoreCalculation" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="7Mc-Hs-IQs" customClass="GroupRaceResultViewController" customModule="Yacht_ScoreCalculation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TfJ-sX-Xgj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -359,10 +359,22 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Title" id="DoB-Kh-5qI">
-                                        <barButtonItem key="leftBarButtonItem" title="現在" id="kxc-eJ-46p"/>
+                                        <barButtonItem key="leftBarButtonItem" title="現在" id="kxc-eJ-46p">
+                                            <connections>
+                                                <action selector="nowResult:" destination="7Mc-Hs-IQs" id="vI9-U6-wns"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <rightBarButtonItems>
-                                            <barButtonItem title="no Cut" id="gT8-5a-c5q"/>
-                                            <barButtonItem title="cut" id="Cta-1i-B5B"/>
+                                            <barButtonItem title="no Cut" id="gT8-5a-c5q">
+                                                <connections>
+                                                    <action selector="noCutButton:" destination="7Mc-Hs-IQs" id="3Ja-i0-NPM"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="cut" id="Cta-1i-B5B">
+                                                <connections>
+                                                    <action selector="cutButton:" destination="7Mc-Hs-IQs" id="YDz-h0-mLE"/>
+                                                </connections>
+                                            </barButtonItem>
                                         </rightBarButtonItems>
                                     </navigationItem>
                                 </items>
@@ -374,8 +386,8 @@
                     <tabBarItem key="tabBarItem" title="団体" id="3JV-ZG-oFV"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="tableView" destination="8eZ-5i-YKI" id="SZ6-Qd-RYZ"/>
-                        <outlet property="titleLabel" destination="DoB-Kh-5qI" id="jKK-n4-jdI"/>
+                        <outlet property="tableView" destination="8eZ-5i-YKI" id="Arp-ar-8v7"/>
+                        <outlet property="titleLabel" destination="DoB-Kh-5qI" id="9S2-Pn-Pk0"/>
                         <segue destination="4vu-NB-RMt" kind="presentation" identifier="toPersonal" id="2xt-aw-jzA"/>
                     </connections>
                 </viewController>
@@ -580,6 +592,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="PgP-mp-ilo"/>
+        <segue reference="2xt-aw-jzA"/>
     </inferredMetricsTieBreakers>
 </document>

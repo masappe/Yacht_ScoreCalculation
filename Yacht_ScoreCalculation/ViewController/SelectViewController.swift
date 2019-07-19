@@ -122,12 +122,12 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
                 }
             }
             
-            for i in 0..<group.shared.raceList.count{
-                print(group.shared.raceList[i].univ!)
-                for j in 0..<group.shared.raceList[i].boat.count{
-                    print(group.shared.raceList[i].boat[j].boatNumber!)
-                }
-            }
+//            for i in 0..<group.shared.raceList.count{
+//                print(group.shared.raceList[i].univ!)
+//                for j in 0..<group.shared.raceList[i].boat.count{
+//                    print(group.shared.raceList[i].boat[j].boatNumber!)
+//                }
+//            }
 
 //            //レースに追加する船の反映
 //            for i in 0..<snipe.shared.list.count {
