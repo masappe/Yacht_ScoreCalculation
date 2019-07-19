@@ -20,6 +20,7 @@
 		693E184222C7B58D00A3FF8F /* RaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693E184122C7B58D00A3FF8F /* RaceViewController.swift */; };
 		693E184422CB184500A3FF8F /* PersonalRaceResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693E184322CB184500A3FF8F /* PersonalRaceResultViewController.swift */; };
 		693EBD6922E13E9200314251 /* GroupRaceResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693EBD6822E13E9200314251 /* GroupRaceResultViewController.swift */; };
+		693EBD6B22E20B3000314251 /* UniversalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693EBD6A22E20B3000314251 /* UniversalViewController.swift */; };
 		69C276D122DB800700C82416 /* tabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C276D022DB800700C82416 /* tabBarController.swift */; };
 		69EF9E0F22D47AFA00BCB928 /* PersonalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EF9E0E22D47AFA00BCB928 /* PersonalViewController.swift */; };
 /* End PBXBuildFile section */
@@ -61,6 +62,7 @@
 		693E184122C7B58D00A3FF8F /* RaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceViewController.swift; sourceTree = "<group>"; };
 		693E184322CB184500A3FF8F /* PersonalRaceResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalRaceResultViewController.swift; sourceTree = "<group>"; };
 		693EBD6822E13E9200314251 /* GroupRaceResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRaceResultViewController.swift; sourceTree = "<group>"; };
+		693EBD6A22E20B3000314251 /* UniversalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalViewController.swift; sourceTree = "<group>"; };
 		69C276D022DB800700C82416 /* tabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tabBarController.swift; sourceTree = "<group>"; };
 		69EF9E0E22D47AFA00BCB928 /* PersonalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PersonalViewController.swift; path = ../PersonalViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -149,6 +151,7 @@
 				693E183E22C7891200A3FF8F /* DecideViewController.swift */,
 				693E180C22C784C200A3FF8F /* ViewController.swift */,
 				693E183822C7856E00A3FF8F /* SelectViewController.swift */,
+				693EBD6A22E20B3000314251 /* UniversalViewController.swift */,
 				693E184122C7B58D00A3FF8F /* RaceViewController.swift */,
 				693E184322CB184500A3FF8F /* PersonalRaceResultViewController.swift */,
 				693EBD6822E13E9200314251 /* GroupRaceResultViewController.swift */,
@@ -296,6 +299,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				693EBD6B22E20B3000314251 /* UniversalViewController.swift in Sources */,
 				693E180D22C784C200A3FF8F /* ViewController.swift in Sources */,
 				693E183922C7856E00A3FF8F /* SelectViewController.swift in Sources */,
 				69EF9E0F22D47AFA00BCB928 /* PersonalViewController.swift in Sources */,

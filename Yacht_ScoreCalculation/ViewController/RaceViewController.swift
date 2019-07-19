@@ -83,17 +83,21 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     //セルの削除する時の処理
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        //削除の設定
-        let delete = UIContextualAction(style: .destructive, title: "delete", handler: {(action,sourceView,completionHandler) in
-            completionHandler(true)
-            beforeGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1].append(afterGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1][indexPath.row])
-            afterGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1].remove(at: indexPath.row)
-            self.afterTableView.reloadData()
-            self.beforeTableView.reloadData()
-        })
-        delete.backgroundColor = .red
-        
-        return UISwipeActionsConfiguration(actions: [delete])
+        if tableView == afterTableView {
+            //削除の設定
+            let delete = UIContextualAction(style: .destructive, title: "delete", handler: {(action,sourceView,completionHandler) in
+                completionHandler(true)
+                beforeGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1].append(afterGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1][indexPath.row])
+                afterGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1].remove(at: indexPath.row)
+                self.afterTableView.reloadData()
+                self.beforeTableView.reloadData()
+            })
+            delete.backgroundColor = .red
+            
+            return UISwipeActionsConfiguration(actions: [delete])
+
+        }
+        return UISwipeActionsConfiguration(actions: [])
 
     }
     //前のレースへ

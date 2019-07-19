@@ -68,7 +68,25 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
         }
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
-    
+    //左スワイプした時の処理
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        //削除ボタン
+        let delete = UIContextualAction(style: .destructive, title: "削除", handler: {(action, sourceView, complicationHandler) in
+            complicationHandler(true)
+            //削除の設定
+            alluniv.shared.univList[indexPath.section].list.remove(at: indexPath.row)
+            //セルのリロード
+            tableView.deleteRows(at: [indexPath], with: .right)
+
+            })
+        //編集ボタン
+        let edit = UIContextualAction(style: .normal, title: "編集") { (action, sourceView, complicationHandler) in
+            complicationHandler(true)
+            //編集の設定
+        }
+        
+        return UISwipeActionsConfiguration(actions: [delete,edit])
+    }
     //画面遷移する前に呼ばれる
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toDecide" {
@@ -138,6 +156,9 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
         }
     }
 
-
+    @IBAction func backButton(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
 
 }

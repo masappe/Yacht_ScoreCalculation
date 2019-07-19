@@ -33,7 +33,7 @@ class raceInformation:NSObject {
         currentRaceNumber = 1
     }
 }
-
+//レースに参加する船リスト
 class personal:NSObject {
     var raceList: [boat] = []
     static let shared = personal()
@@ -43,14 +43,14 @@ class personal:NSObject {
         raceList = []
     }
 }
-//
 
+//大学情報一覧
 class alluniv:NSObject {
     var univList: [universal] = []
     static let shared = alluniv()
     private override init(){}
 }
-//大学情報
+//大学情報，所有艇の情報も保持
 class universal:NSObject {
     var univ: String!
     var list: [boat] = []
@@ -106,6 +106,8 @@ class boat:NSObject {
     var skipper: String!
     //クルー
     var crew: String!
+    //大学名
+    var univ:String!
     //各レースのの順位
     var racePoint:[Int] = [0]
     //合計点数
@@ -120,8 +122,6 @@ class boat:NSObject {
     var cutResult:Int!
     //レースに出るかの判断基準，色の選択の判断基準
     var selected:Bool!
-    //大学名
-    var univ:String!
     
     //艇情報の追加
     func insert(first:Int,second:String,thrid:String,fourth:String){
@@ -141,7 +141,6 @@ class boat:NSObject {
         }
         totalPoint = sum
         cutPoint = sum - badPoint
-        
     }
     
     
