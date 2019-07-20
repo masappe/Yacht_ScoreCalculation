@@ -15,8 +15,9 @@ class raceInformation:NSObject {
     var currentRaceNumber:Int = 1
     //cutレースがいつからか
     var cutRaceNumber:Int! = 3
-    //レースの結果
-//    var raceList: [boat] = []
+    //レースの状態
+    //470:470レース中，snipe:スナイプレース中,nothing:レースしていない
+    var state = "nothing"
     //英語の種類一覧
     var DNF = 1000
     var black: Int!
@@ -50,10 +51,11 @@ class alluniv:NSObject {
     static let shared = alluniv()
     private override init(){}
 }
-//大学情報，所有艇の情報も保持
+//大学情報，大学ごとの所有艇の情報も保持
 class universal:NSObject {
     var univ: String!
-    var list: [boat] = []
+    var fourList: [boat] = []
+    var snipeList: [boat] = []
 //    static let shared = universal()
 //    private override init(){}
     
@@ -108,6 +110,9 @@ class boat:NSObject {
     var crew: String!
     //大学名
     var univ:String!
+    //艇種
+    //True:470,false:snipe
+    var boatType:Bool!
     //各レースのの順位
     var racePoint:[Int] = [0]
     //合計点数
@@ -124,11 +129,16 @@ class boat:NSObject {
     var selected:Bool!
     
     //艇情報の追加
-    func insert(first:Int,second:String,thrid:String,fourth:String){
+    func insert(first:Int,second:String,thrid:String,fourth:String,fifth:String){
         self.boatNumber = first
         self.skipper = second
         self.crew = thrid
         self.univ = fourth
+        if fifth == "470" {
+            self.boatType = true
+        } else {
+            self.boatType = false
+        }
     }
     //レースの合計点数を計算する
     func calculateRacePoint() {

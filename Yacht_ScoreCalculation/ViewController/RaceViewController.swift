@@ -15,7 +15,6 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     @IBOutlet weak var beforeTableView: UITableView!
     //回航後
     @IBOutlet weak var afterTableView: UITableView!
-    @IBOutlet weak var tabBar: UITabBar!
     
     
     override func viewDidLoad() {

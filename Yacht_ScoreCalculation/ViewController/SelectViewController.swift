@@ -15,6 +15,7 @@ protocol TableViewControllerDelegate {
 class SelectViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,TableViewControllerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
+    var boatType:Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,23 +35,41 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
 
     //tableviewの個数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return alluniv.shared.univList[section].list.count
+        if boatType {
+            return alluniv.shared.univList[section].fourList.count
+        } else {
+            return alluniv.shared.univList[section].snipeList.count
+
+        }
     }
     //tableviewに表示するセルの情報
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-//        cell?.textLabel?.text = String(snipe.shared.list[indexPath.row].boatNumber)
-        cell?.textLabel?.text = String(alluniv.shared.univList[indexPath.section].list[indexPath.row].boatNumber)
-        //選択したのセルのみに色付け
-        if (alluniv.shared.univList[indexPath.section].list[indexPath.row].selected)! {
-            //選択中
-            cell!.backgroundColor = .red
+        if boatType {
+            cell?.textLabel?.text = String(alluniv.shared.univList[indexPath.section].fourList[indexPath.row].boatNumber)
+            //選択したのセルのみに色付け
+            if (alluniv.shared.univList[indexPath.section].fourList[indexPath.row].selected)! {
+                //選択中
+                cell!.backgroundColor = .red
+            } else {
+                //未選択
+                cell!.backgroundColor = .clear
+            }
+            return cell!
+
         } else {
-            //未選択
-            cell!.backgroundColor = .clear
+            cell?.textLabel?.text = String(alluniv.shared.univList[indexPath.section].snipeList[indexPath.row].boatNumber)
+            //選択したのセルのみに色付け
+            if (alluniv.shared.univList[indexPath.section].snipeList[indexPath.row].selected)! {
+                //選択中
+                cell!.backgroundColor = .red
+            } else {
+                //未選択
+                cell!.backgroundColor = .clear
+            }
+            return cell!
+
         }
-        return cell!
     }
 
     func reloadTableView() {
@@ -59,12 +78,23 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
     //タップした時の処理
     //タップした船はレースに出場し色付けされる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (alluniv.shared.univList[indexPath.section].list[indexPath.row].selected)! {
-            //未選択へ
-            alluniv.shared.univList[indexPath.section].list[indexPath.row].selected = false
-        }else {
-            //選択へ
-            alluniv.shared.univList[indexPath.section].list[indexPath.row].selected = true
+        if boatType {
+            if (alluniv.shared.univList[indexPath.section].fourList[indexPath.row].selected)! {
+                //未選択へ
+                alluniv.shared.univList[indexPath.section].fourList[indexPath.row].selected = false
+            }else {
+                //選択へ
+                alluniv.shared.univList[indexPath.section].fourList[indexPath.row].selected = true
+            }
+        } else {
+            if (alluniv.shared.univList[indexPath.section].snipeList[indexPath.row].selected)! {
+                //未選択へ
+                alluniv.shared.univList[indexPath.section].snipeList[indexPath.row].selected = false
+            }else {
+                //選択へ
+                alluniv.shared.univList[indexPath.section].snipeList[indexPath.row].selected = true
+            }
+
         }
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
@@ -74,7 +104,11 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
         let delete = UIContextualAction(style: .destructive, title: "削除", handler: {(action, sourceView, complicationHandler) in
             complicationHandler(true)
             //削除の設定
-            alluniv.shared.univList[indexPath.section].list.remove(at: indexPath.row)
+            if self.boatType {
+                alluniv.shared.univList[indexPath.section].fourList.remove(at: indexPath.row)
+            } else {
+                alluniv.shared.univList[indexPath.section].snipeList.remove(at: indexPath.row)
+            }
             //セルのリロード
             tableView.deleteRows(at: [indexPath], with: .right)
 
@@ -95,14 +129,28 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
             decideViewController.tableViewControllerDelegate = self
         }
         if segue.identifier == "toRace" {
-            //レースに参加する船の反映
-            for i in 0..<alluniv.shared.univList.count {
-                for j in 0..<alluniv.shared.univList[i].list.count {
-                    if alluniv.shared.univList[i].list[j].selected {
-                        //個人の追加
-                        personal.shared.raceList.append(alluniv.shared.univList[i].list[j])
+            if boatType {
+                //レースに参加する船の反映
+                for i in 0..<alluniv.shared.univList.count {
+                    for j in 0..<alluniv.shared.univList[i].fourList.count {
+                        if alluniv.shared.univList[i].fourList[j].selected {
+                            //個人の追加
+                            personal.shared.raceList.append(alluniv.shared.univList[i].fourList[j])
+                        }
                     }
                 }
+
+            } else {
+                //レースに参加する船の反映
+                for i in 0..<alluniv.shared.univList.count {
+                    for j in 0..<alluniv.shared.univList[i].snipeList.count {
+                        if alluniv.shared.univList[i].snipeList[j].selected {
+                            //個人の追加
+                            personal.shared.raceList.append(alluniv.shared.univList[i].snipeList[j])
+                        }
+                    }
+                }
+
             }
             //大学の追加と大学に各船の追加
             for i in 0..<personal.shared.raceList.count {
@@ -147,12 +195,6 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
 //                }
 //            }
 
-//            //レースに追加する船の反映
-//            for i in 0..<snipe.shared.list.count {
-//                if snipe.shared.list[i].selected {
-//                    personal.shared.raceList.append(snipe.shared.list[i])
-//                }
-//            }
         }
     }
 
