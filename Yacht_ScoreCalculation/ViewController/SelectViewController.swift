@@ -78,25 +78,32 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
     //タップした時の処理
     //タップした船はレースに出場し色付けされる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if boatType {
-            if (alluniv.shared.univList[indexPath.section].fourList[indexPath.row].selected)! {
-                //未選択へ
-                alluniv.shared.univList[indexPath.section].fourList[indexPath.row].selected = false
-            }else {
-                //選択へ
-                alluniv.shared.univList[indexPath.section].fourList[indexPath.row].selected = true
+        if raceInformation.shared.state == "no"{
+            if boatType {
+                if (alluniv.shared.univList[indexPath.section].fourList[indexPath.row].selected)! {
+                    //未選択へ
+                    alluniv.shared.univList[indexPath.section].fourList[indexPath.row].selected = false
+                }else {
+                    //選択へ
+                    alluniv.shared.univList[indexPath.section].fourList[indexPath.row].selected = true
+                }
+            } else {
+                if (alluniv.shared.univList[indexPath.section].snipeList[indexPath.row].selected)! {
+                    //未選択へ
+                    alluniv.shared.univList[indexPath.section].snipeList[indexPath.row].selected = false
+                }else {
+                    //選択へ
+                    alluniv.shared.univList[indexPath.section].snipeList[indexPath.row].selected = true
+                }
+                
             }
-        } else {
-            if (alluniv.shared.univList[indexPath.section].snipeList[indexPath.row].selected)! {
-                //未選択へ
-                alluniv.shared.univList[indexPath.section].snipeList[indexPath.row].selected = false
-            }else {
-                //選択へ
-                alluniv.shared.univList[indexPath.section].snipeList[indexPath.row].selected = true
-            }
-
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        }else {
+            let alert = UIAlertController(title: "Stop", message: "レース中に船の変更はできません", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(ok)
+            present(alert, animated: true, completion: nil)
         }
-        tableView.reloadRows(at: [indexPath], with: .automatic)
     }
     //左スワイプした時の処理
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -127,74 +134,6 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
             //delegateの設定
             let decideViewController = segue.destination as! DecideViewController
             decideViewController.tableViewControllerDelegate = self
-        }
-        if segue.identifier == "toRace" {
-            if boatType {
-                //レースに参加する船の反映
-                for i in 0..<alluniv.shared.univList.count {
-                    for j in 0..<alluniv.shared.univList[i].fourList.count {
-                        if alluniv.shared.univList[i].fourList[j].selected {
-                            //個人の追加
-                            personal.shared.raceList.append(alluniv.shared.univList[i].fourList[j])
-                        }
-                    }
-                }
-
-            } else {
-                //レースに参加する船の反映
-                for i in 0..<alluniv.shared.univList.count {
-                    for j in 0..<alluniv.shared.univList[i].snipeList.count {
-                        if alluniv.shared.univList[i].snipeList[j].selected {
-                            //個人の追加
-                            personal.shared.raceList.append(alluniv.shared.univList[i].snipeList[j])
-                        }
-                    }
-                }
-
-            }
-            //大学の追加と大学に各船の追加
-            for i in 0..<personal.shared.raceList.count {
-                if group.shared.raceList.count == 0 {
-                    let new = boats()
-                    new.univ = personal.shared.raceList[i].univ
-                    new.boat.append(personal.shared.raceList[i])
-                    group.shared.raceList.append(new)
-                }else {
-                    var isInsert = false
-                    //既存の大学と一致しなかったら追加する
-                    hantei:for j in 0..<alluniv.shared.univList.count{
-                        if alluniv.shared.univList[j].univ == personal.shared.raceList[i].univ {
-                            //レースに出る団体に追加する
-                            for k in 0..<group.shared.raceList.count {
-                                if group.shared.raceList[k].univ == personal.shared.raceList[i].univ{
-                                    group.shared.raceList[k].boat.append(personal.shared.raceList[i])
-                                    break hantei
-                                }
-                            }
-                        }
-                        //最後まで一致しなかったら
-                        if j == alluniv.shared.univList.count-1{
-                            isInsert = true
-                        }
-                    }
-                    if isInsert {
-                        //一致しなかったら追加する
-                        let new = boats()
-                        new.univ = personal.shared.raceList[i].univ
-                        new.boat.append(personal.shared.raceList[i])
-                        group.shared.raceList.append(new)
-                    }
-
-                }
-            }
-            
-//            for i in 0..<group.shared.raceList.count{
-//                print(group.shared.raceList[i].univ!)
-//                for j in 0..<group.shared.raceList[i].boat.count{
-//                    print(group.shared.raceList[i].boat[j].boatNumber!)
-//                }
-//            }
-
         }
     }
 

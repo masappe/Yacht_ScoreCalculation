@@ -253,18 +253,7 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     //戻るボタン
     //全てのデータを削除する
     @IBAction func backButton(_ sender: Any) {
-        //アラートで確認
-        let alert = UIAlertController(title: "前の画面に戻る", message: "レースの全てのデータが削除されますがよろしいですか？", preferredStyle: .alert)
-        let ok = UIAlertAction(title: "OK", style: .default, handler:{ action in
-            self.dismiss(animated: true, completion: {
-                raceInformation.shared.initialize()
-            })
-
-        })
-        let cancel = UIAlertAction(title: "cancel", style: .cancel, handler: nil)
-        alert.addAction(ok)
-        alert.addAction(cancel)
-        present(alert, animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     //終了ボタン

@@ -30,11 +30,13 @@ class tabBarController: UITabBarController,UITabBarControllerDelegate {
                 raceResult()
                 cutRaceResult()
                 viewController.state = false
+                viewController.titleLabel.title = "\(raceInformation.shared.raceCount)レースまでの結果(cut有り)"
             } else {
                 //cut順位の反映のため
                 cutRaceResult()
                 raceResult()
                 viewController.state = true
+                viewController.titleLabel.title = "\(raceInformation.shared.raceCount)レースまでの結果"
             }
             viewController.tableView.reloadData()
         case is GroupRaceResultViewController:
@@ -45,11 +47,14 @@ class tabBarController: UITabBarController,UITabBarControllerDelegate {
                 groupRaceResult()
                 groupCutRaceResult()
                 viewController.state = false
+                viewController.titleLabel.title = "\(raceInformation.shared.raceCount)レースまでの結果(cut有り)"
+
             } else {
                 //cut順位の反映のため
                 groupCutRaceResult()
                 groupRaceResult()
                 viewController.state = true
+                viewController.titleLabel.title = "\(raceInformation.shared.raceCount)レースまでの結果"
             }
 
             viewController.tableView.reloadData()

@@ -9,7 +9,11 @@
 
 import UIKit
 
-class PersonalRaceResultViewController: UIViewController,UITabBarDelegate,UITableViewDelegate,UITableViewDataSource {
+protocol TableViewPersonalControllerDelegate {
+    func reloadTableView()
+}
+
+class PersonalRaceResultViewController: UIViewController,UITabBarDelegate,UITableViewDelegate,UITableViewDataSource,TableViewPersonalControllerDelegate {
 
     @IBOutlet weak var titleLabel: UINavigationItem!
     @IBOutlet weak var tableView: UITableView!
@@ -20,13 +24,11 @@ class PersonalRaceResultViewController: UIViewController,UITabBarDelegate,UITabl
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        if state {
-            titleLabel.title = "\(raceInformation.shared.raceCount)レースまでの結果"
-        } else {
-            titleLabel.title = "\(raceInformation.shared.raceCount)レースまでの結果(cut有り)"
-
-        }
         
+    }
+    
+    func reloadTableView() {
+        tableView.reloadData()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -49,7 +51,16 @@ class PersonalRaceResultViewController: UIViewController,UITabBarDelegate,UITabl
     //tableviewのセル情報
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-        cell?.textLabel?.text = "\(indexPath.row+1)位 艇番:\(personal.shared.raceList[indexPath.row].boatNumber!) 合計:\(personal.shared.raceList[indexPath.row].totalPoint)点"
+        if state {
+            cell?.textLabel?.text = "\(indexPath.row+1)位 艇番:\(personal.shared.raceList[indexPath.row].boatNumber!) 合計:\(personal.shared.raceList[indexPath.row].totalPoint)点"
+        } else {
+            cell?.textLabel?.text = "\(indexPath.row+1)位 艇番:\(personal.shared.raceList[indexPath.row].boatNumber!) 合計:\(personal.shared.raceList[indexPath.row].cutPoint)点"
+        }
+        if personal.shared.raceList[indexPath.row].color {
+            cell?.backgroundColor = .red
+        }else {
+            cell?.backgroundColor = .clear
+        }
         return cell!
     }
     
@@ -63,6 +74,7 @@ class PersonalRaceResultViewController: UIViewController,UITabBarDelegate,UITabl
             let personalViewController = segue.destination as! PersonalViewController
             personalViewController.num = sender as! Int?
             personalViewController.state = true
+            personalViewController.tableViewPersonalControllerDelegate = self
         }
     }
     
@@ -112,6 +124,4 @@ class PersonalRaceResultViewController: UIViewController,UITabBarDelegate,UITabl
             personal.shared.raceList[i].result = i + 1
         }
     }
-
-
 }

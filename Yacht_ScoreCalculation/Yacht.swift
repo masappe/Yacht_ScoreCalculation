@@ -14,34 +14,28 @@ class raceInformation:NSObject {
     //現在のレース
     var currentRaceNumber:Int = 1
     //cutレースがいつからか
-    var cutRaceNumber:Int! = 3
+    var cutRaceNumber = 3
+    //船の数
+    var boatNum = 0
     //レースの状態
-    //470:470レース中，snipe:スナイプレース中,nothing:レースしていない
-    var state = "nothing"
+    //470:470レース中，snipe:スナイプレース中,no:レースしていない
+    var state = "no"
     //英語の種類一覧
-    var DNF = 1000
+    var DNF = 0
     var black: Int!
-
-    //大会名
-    var raceName:String!
     
     static let shared = raceInformation()
     private override init(){}
-    
+    //レース情報の初期化
     func initialize() {
-//        raceList = []
         raceCount = 1
         currentRaceNumber = 1
+        boatNum = 0
+        DNF = 1 
     }
-}
-//レースに参加する船リスト
-class personal:NSObject {
-    var raceList: [boat] = []
-    static let shared = personal()
-    private override init(){}
-    
-    func initialize() {
-        raceList = []
+    func update() {
+        boatNum = personal.shared.raceList.count
+        DNF = boatNum + 1
     }
 }
 
@@ -56,8 +50,6 @@ class universal:NSObject {
     var univ: String!
     var fourList: [boat] = []
     var snipeList: [boat] = []
-//    static let shared = universal()
-//    private override init(){}
     
 }
 //レースに参加する大学一覧
@@ -75,15 +67,27 @@ class boats:NSObject {
     //どの艇が所属しているか
     var boat:[boat] = []
     //合計得点
-    var totalPoint = 1000
+    var totalPoint = 0
     //cutの点数
-    var cutPoint = 1000
+    var cutPoint = 0
     //一番悪い点数
     var badPoint = 0
     //順位
     var result:Int!
     //cut順位
     var cutResult:Int!
+    //色付け
+    var color = false
+    
+    //大学のレース情報の初期化
+    func initialize(){
+        racePoint.removeAll()
+        racePoint = [0]
+        boat.removeAll()
+        totalPoint = 0
+        cutPoint = 0
+        badPoint = 0
+    }
     //レースの合計点数を計算する
     func calculateRacePoint() {
         badPoint = 0
@@ -95,12 +99,17 @@ class boats:NSObject {
         }
         totalPoint = sum
         cutPoint = sum - badPoint
-        
     }
 
 }
+//レースに参加する船リスト
+class personal:NSObject {
+    var raceList: [boat] = []
+    static let shared = personal()
+    private override init(){}
+}
 
-
+//艇情報
 class boat:NSObject {
     //艇番
     var boatNumber: Int!
@@ -116,18 +125,30 @@ class boat:NSObject {
     //各レースのの順位
     var racePoint:[Int] = [0]
     //合計点数
-    var totalPoint:Int = 1000
+    var totalPoint:Int = 0
     //cutの点数
-    var cutPoint:Int = 1000
+    var cutPoint:Int = 0
     //一番悪い点数
     var badPoint:Int=0
     //順位
-    var result:Int!
+    var result = 1
     //cut順位
-    var cutResult:Int!
+    var cutResult = 1
     //レースに出るかの判断基準，色の選択の判断基準
     var selected:Bool!
+    //色付け
+    var color = false
     
+    //艇のレース情報の初期化
+    func initialize(){
+        racePoint.removeAll()
+        racePoint = [0]
+        totalPoint = 0
+        cutPoint = 0
+        badPoint = 0
+        selected = false
+    }
+
     //艇情報の追加
     func insert(first:Int,second:String,thrid:String,fourth:String,fifth:String){
         self.boatNumber = first

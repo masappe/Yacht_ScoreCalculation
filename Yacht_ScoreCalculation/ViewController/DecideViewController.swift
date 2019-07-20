@@ -47,7 +47,6 @@ class DecideViewController: UIViewController,UITextFieldDelegate,UIPickerViewDat
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-    
     //データ数
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView == univ {
@@ -89,7 +88,6 @@ class DecideViewController: UIViewController,UITextFieldDelegate,UIPickerViewDat
                 break
             }
         }
-//        snipe.shared.list.append(registerBoat)
         self.dismiss(animated: true, completion: {
             //tableViewのreload
             self.tableViewControllerDelegate.reloadTableView()

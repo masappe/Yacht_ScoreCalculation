@@ -10,7 +10,11 @@
 
 import UIKit
 
-class GroupRaceResultViewController: UIViewController,UITabBarDelegate,UITableViewDelegate,UITableViewDataSource {
+protocol TableViewGroupControllerDelegate {
+    func reloadTableView()
+}
+
+class GroupRaceResultViewController: UIViewController,UITabBarDelegate,UITableViewDelegate,UITableViewDataSource,TableViewGroupControllerDelegate {
     
     @IBOutlet weak var titleLabel: UINavigationItem!
     @IBOutlet weak var tableView: UITableView!
@@ -21,19 +25,19 @@ class GroupRaceResultViewController: UIViewController,UITabBarDelegate,UITableVi
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        if state {
-            titleLabel.title = "\(raceInformation.shared.raceCount)レースまでの結果"
-        } else {
-            titleLabel.title = "\(raceInformation.shared.raceCount)レースまでの結果(cut有り)"
-            
-        }
         
     }
     
+    func reloadTableView() {
+        tableView.reloadData()
+    }
+    
+    //セクションの個数
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
+    //タイトルのヘッダー
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if state {
             return "カットレースなしの結果"
@@ -55,7 +59,11 @@ class GroupRaceResultViewController: UIViewController,UITabBarDelegate,UITableVi
 
         } else {
             cell?.textLabel?.text = "\(indexPath.row+1)位 大学名:\(group.shared.raceList[indexPath.row].univ!) 合計:\(group.shared.raceList[indexPath.row].cutPoint)点"
-
+        }
+        if group.shared.raceList[indexPath.row].color {
+            cell?.backgroundColor = .red
+        }else {
+            cell?.backgroundColor = .clear
         }
         return cell!
     }
@@ -70,6 +78,7 @@ class GroupRaceResultViewController: UIViewController,UITabBarDelegate,UITableVi
             let personalViewController = segue.destination as! PersonalViewController
             personalViewController.num = sender as! Int?
             personalViewController.state = false
+            personalViewController.tableViewGroupControllerDelegate = self
         }
     }
     
@@ -118,22 +127,5 @@ class GroupRaceResultViewController: UIViewController,UITabBarDelegate,UITableVi
         for i in 0..<group.shared.raceList.count {
             group.shared.raceList[i].result = i + 1
         }
-    }
-
-//    //レース順位のソート
-//    //cutレースの時の順位の計算
-//    func cutRaceResult() {
-//        personal.shared.raceList.sort{ $0.cutPoint < $1.cutPoint }
-//        for i in 0..<personal.shared.raceList.count {
-//            personal.shared.raceList[i].cutResult = i + 1
-//        }
-//    }
-//    //cutレースがない時の順位の計算
-//    func raceResult() {
-//        personal.shared.raceList.sort{$0.totalPoint < $1.totalPoint}
-//        for i in 0..<personal.shared.raceList.count {
-//            personal.shared.raceList[i].result = i + 1
-//        }
-//    }
-    
+    }    
 }
