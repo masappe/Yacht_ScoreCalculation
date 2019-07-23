@@ -278,6 +278,7 @@
                     <connections>
                         <outlet property="boatNumber" destination="jKk-2o-HGp" id="Oky-RL-jp4"/>
                         <outlet property="boatType" destination="a1x-ta-muO" id="pig-PX-h5k"/>
+                        <outlet property="button" destination="pdL-SV-3YO" id="CTk-6W-cV2"/>
                         <outlet property="crew" destination="w5Y-FE-Cz4" id="tIu-FP-55r"/>
                         <outlet property="skipper" destination="zT9-zD-9Zf" id="yb1-tS-4SP"/>
                         <outlet property="univ" destination="Iy2-gx-Tuj" id="WHN-S7-0Gx"/>
@@ -307,7 +308,7 @@
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="＋" id="WAA-9r-Zvi">
                                             <connections>
-                                                <segue destination="ojh-WC-dbc" kind="presentation" identifier="toDecide" id="mve-5q-KJf"/>
+                                                <action selector="nextButton:" destination="y4p-Nf-kyA" id="XhO-bZ-NvL"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -334,11 +335,13 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="Hsf-52-jMm" id="Gg6-SS-7Mm"/>
+                        <outlet property="titleLabel" destination="5EU-9H-gmj" id="stO-AF-7If"/>
+                        <segue destination="ojh-WC-dbc" kind="presentation" identifier="toDecide" id="JXN-3m-AX0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fpw-Vk-PyL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1308" y="-734"/>
+            <point key="canvasLocation" x="1369" y="-734"/>
         </scene>
         <!--Personal View Controller-->
         <scene sceneID="YFe-67-HM7">
@@ -730,6 +733,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="2xt-aw-jzA"/>
+        <segue reference="PgP-mp-ilo"/>
     </inferredMetricsTieBreakers>
 </document>

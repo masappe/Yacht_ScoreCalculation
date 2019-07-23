@@ -15,13 +15,22 @@ protocol TableViewControllerDelegate {
 class SelectViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,TableViewControllerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
+    //true:470,false:snipe
     var boatType:Bool = true
+    var state = ""
+    @IBOutlet weak var titleLabel: UINavigationItem!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //delegate,datasource
         tableView.delegate = self
         tableView.dataSource = self
+        if boatType {
+            titleLabel.title = "出場艇の決定(470)"
+        } else {
+            titleLabel.title = "出場艇の決定(スナイプ)"
+        }
 
     }
 
@@ -105,28 +114,60 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
             present(alert, animated: true, completion: nil)
         }
     }
+    //セルを編集できるかどうか
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if raceInformation.shared.state == "no" {
+            return true
+        }else {
+            return false
+        }
+    }
+    
     //左スワイプした時の処理
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         //削除ボタン
-        let delete = UIContextualAction(style: .destructive, title: "削除", handler: {(action, sourceView, complicationHandler) in
+        let delete = UIContextualAction(style: .normal, title: "削除", handler: {(action, sourceView, complicationHandler) in
             complicationHandler(true)
-            //削除の設定
-            if self.boatType {
-                alluniv.shared.univList[indexPath.section].fourList.remove(at: indexPath.row)
-            } else {
-                alluniv.shared.univList[indexPath.section].snipeList.remove(at: indexPath.row)
-            }
-            //セルのリロード
-            tableView.deleteRows(at: [indexPath], with: .right)
-
+            action.backgroundColor = .red
+            let alert = UIAlertController(title: "削除", message: "本当に削除してよろしいですか？", preferredStyle: .alert)
+            let delete = UIAlertAction(title: "削除", style: .destructive, handler: { (actions) in
+                //削除の設定
+                if self.boatType {
+                    alluniv.shared.univList[indexPath.section].fourList.remove(at: indexPath.row)
+                } else {
+                    alluniv.shared.univList[indexPath.section].snipeList.remove(at: indexPath.row)
+                }
+                //セルのリロード
+                tableView.deleteRows(at: [indexPath], with: .left)
             })
+            let cancel = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
+            alert.addAction(delete)
+            alert.addAction(cancel)
+            self.present(alert, animated: true, completion: nil)
+            
+        })
         //編集ボタン
         let edit = UIContextualAction(style: .normal, title: "編集") { (action, sourceView, complicationHandler) in
             complicationHandler(true)
             //編集の設定
+            self.state = "update"
+            let boat:boat!
+            //削除の設定
+            if self.boatType {
+                boat = alluniv.shared.univList[indexPath.section].fourList[indexPath.row]
+            } else {
+                boat = alluniv.shared.univList[indexPath.section].snipeList[indexPath.row]
+            }
+            self.performSegue(withIdentifier: "toDecide", sender: boat)
+            
         }
-        
+        delete.backgroundColor = .red
         return UISwipeActionsConfiguration(actions: [delete,edit])
+    }
+    
+    @IBAction func nextButton(_ sender: Any) {
+        state = "add"
+        performSegue(withIdentifier: "toDecide", sender: nil)
     }
     //画面遷移する前に呼ばれる
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -134,6 +175,10 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
             //delegateの設定
             let decideViewController = segue.destination as! DecideViewController
             decideViewController.tableViewControllerDelegate = self
+            decideViewController.state = state
+            if state == "update" {
+                decideViewController.updateBoat = sender as? boat
+            }
         }
     }
 

@@ -10,7 +10,7 @@ import UIKit
 
 class DecideViewController: UIViewController,UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate {
     
-    
+    var updateBoat: boat!
     var registerBoat = boat()
     @IBOutlet weak var boatNumber: UITextField!
     @IBOutlet weak var skipper: UITextField!
@@ -20,6 +20,9 @@ class DecideViewController: UIViewController,UITextFieldDelegate,UIPickerViewDat
     var boatKind:[String] = []
     var tempUniv:String = alluniv.shared.univList[0].univ
     var tempBoat:String = "470"
+    //add:船の追加，update:船の更新
+    var state = ""
+    @IBOutlet weak var button: UIButton!
     
     var tableViewControllerDelegate: TableViewControllerDelegate!
 
@@ -37,8 +40,18 @@ class DecideViewController: UIViewController,UITextFieldDelegate,UIPickerViewDat
         
         boatNumber.keyboardType = .numberPad
         
-        boatKind.append("470")
-        boatKind.append("スナイプ")
+        if state == "add" {
+            boatKind.append("470")
+            boatKind.append("スナイプ")
+            button.setTitle("登録する", for: .normal)
+        }
+        
+        if state == "update" {
+            button.setTitle("更新する", for: .normal)
+            boatNumber.text = String(updateBoat.boatNumber)
+            skipper.text = updateBoat.skipper
+            crew.text = updateBoat.crew
+        }
 
         
     }
@@ -49,49 +62,78 @@ class DecideViewController: UIViewController,UITextFieldDelegate,UIPickerViewDat
     }
     //データ数
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if pickerView == univ {
-            return alluniv.shared.univList.count
+        if state == "add" {
+            if pickerView == univ {
+                return alluniv.shared.univList.count
+            }else {
+                return 2
+            }
         }else {
-            return 2
+            return 1
         }
     }
     //データの表示
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if pickerView == univ {
-            return alluniv.shared.univList[row].univ
+        if state == "add" {
+            if pickerView == univ {
+                return alluniv.shared.univList[row].univ
+            } else {
+                return boatKind[row]
+            }
         } else {
-            return boatKind[row]
+            if pickerView == univ {
+                return updateBoat.univ
+            } else {
+                if updateBoat.boatType {
+                    return "470"
+                } else {
+                    return "スナイプ"
+                }
+            }
         }
     }
     //データが選択された時
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if pickerView == univ {
-            tempUniv = alluniv.shared.univList[row].univ
-        } else {
-            tempBoat = boatKind[row]
+        if state == "add" {
+            if pickerView == univ {
+                tempUniv = alluniv.shared.univList[row].univ
+            } else {
+                tempBoat = boatKind[row]
+            }
         }
     }
     
     //登録ボタン
     @IBAction func registerButton(_ sender: Any) {
-        registerBoat.insert(first: Int(boatNumber.text!)!, second: skipper.text!, thrid: crew.text!,fourth: tempUniv,fifth: tempBoat)
-        registerBoat.selected = false
-        //大学に艇情報の保存
-        for i in 0..<alluniv.shared.univList.count{
-            if tempUniv == alluniv.shared.univList[i].univ{
-                //艇種わけ
-                if tempBoat == "470" {
-                    alluniv.shared.univList[i].fourList.append(registerBoat)
-                } else {
-                    alluniv.shared.univList[i].snipeList.append(registerBoat)
+        if state == "add" {
+            registerBoat.insert(first: Int(boatNumber.text!)!, second: skipper.text!, thrid: crew.text!,fourth: tempUniv,fifth: tempBoat)
+            registerBoat.selected = false
+            //大学に艇情報の保存
+            for i in 0..<alluniv.shared.univList.count{
+                if tempUniv == alluniv.shared.univList[i].univ{
+                    //艇種わけ
+                    if tempBoat == "470" {
+                        alluniv.shared.univList[i].fourList.append(registerBoat)
+                    } else {
+                        alluniv.shared.univList[i].snipeList.append(registerBoat)
+                    }
+                    break
                 }
-                break
             }
+            self.dismiss(animated: true, completion: {
+                //tableViewのreload
+                self.tableViewControllerDelegate.reloadTableView()
+            })
+        } else if state == "update" {
+            updateBoat.boatNumber = Int(boatNumber.text!)!
+            updateBoat.skipper = skipper.text!
+            updateBoat.crew = crew.text!
+            self.dismiss(animated: true, completion: {
+                //tableViewのreload
+                self.tableViewControllerDelegate.reloadTableView()
+            })
+
         }
-        self.dismiss(animated: true, completion: {
-            //tableViewのreload
-            self.tableViewControllerDelegate.reloadTableView()
-        })
     }
     
     //前に戻る

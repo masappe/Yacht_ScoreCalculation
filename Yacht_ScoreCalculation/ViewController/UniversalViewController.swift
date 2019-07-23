@@ -46,21 +46,22 @@ class UniversalViewController: UIViewController,UITextFieldDelegate,UITableViewD
     //左スワイプの設定
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         //削除ボタン
-        let delete = UIContextualAction(style: .destructive, title: "削除", handler: {(action, sourceView, complicationHandler) in
+        let delete = UIContextualAction(style: .normal, title: "削除", handler: {(action, sourceView, complicationHandler) in
             complicationHandler(true)
-            //削除の設定
-            alluniv.shared.univList.remove(at: indexPath.row)
-            //セルのリロード
-            tableView.deleteRows(at: [indexPath], with: .right)
-            
+            let alert = UIAlertController(title: "削除", message: "本当に削除してよろしいですか？", preferredStyle: .alert)
+            let delete = UIAlertAction(title: "削除", style: .destructive, handler: { (action) in
+                //削除の設定
+                alluniv.shared.univList.remove(at: indexPath.row)
+                //セルのリロード
+                tableView.deleteRows(at: [indexPath], with: .left)
+            })
+            let cancel = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
+            alert.addAction(delete)
+            alert.addAction(cancel)
+            self.present(alert, animated: true, completion: nil)
         })
-        //編集ボタン
-        let edit = UIContextualAction(style: .normal, title: "編集") { (action, sourceView, complicationHandler) in
-            complicationHandler(true)
-            //編集の設定
-        }
-        
-        return UISwipeActionsConfiguration(actions: [delete,edit])
+        delete.backgroundColor = .red
+        return UISwipeActionsConfiguration(actions: [delete])
     }
 
 
