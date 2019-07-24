@@ -128,7 +128,6 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
         //削除ボタン
         let delete = UIContextualAction(style: .normal, title: "削除", handler: {(action, sourceView, complicationHandler) in
             complicationHandler(true)
-            action.backgroundColor = .red
             let alert = UIAlertController(title: "削除", message: "本当に削除してよろしいですか？", preferredStyle: .alert)
             let delete = UIAlertAction(title: "削除", style: .destructive, handler: { (actions) in
                 //削除の設定

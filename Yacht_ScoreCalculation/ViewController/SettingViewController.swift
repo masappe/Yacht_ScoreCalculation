@@ -17,6 +17,8 @@ class SettingViewController: UIViewController,UITextFieldDelegate {
         
         cutTextField.delegate = self
         cutTextField.keyboardType = .numberPad
+        
+        cutTextField.text = String(raceInformation.shared.cutRaceNumber)
 
     }
     
@@ -26,6 +28,10 @@ class SettingViewController: UIViewController,UITextFieldDelegate {
             let temp = cutTextField.text
             raceInformation.shared.cutRaceNumber = Int(temp!)!
         }
+        let alert = UIAlertController(title: "更新", message: " カットレースを更新しました", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(ok)
+        present(alert, animated: true, completion: nil)
         
     }
     

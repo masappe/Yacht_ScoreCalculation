@@ -40,7 +40,7 @@ class tabBarController: UITabBarController,UITabBarControllerDelegate {
             }
             viewController.tableView.reloadData()
         case is GroupRaceResultViewController:
-            cutRaceResult()
+//            cutRaceResult()
             let viewController = viewController as! GroupRaceResultViewController
             if raceInformation.shared.raceCount >= raceInformation.shared.cutRaceNumber {
                 //普通の順位の反映のため

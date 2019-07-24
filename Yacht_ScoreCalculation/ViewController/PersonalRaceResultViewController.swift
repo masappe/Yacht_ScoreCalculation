@@ -74,6 +74,7 @@ class PersonalRaceResultViewController: UIViewController,UITabBarDelegate,UITabl
             let personalViewController = segue.destination as! PersonalViewController
             personalViewController.num = sender as! Int?
             personalViewController.state = true
+            personalViewController.noCut = state
             personalViewController.tableViewPersonalControllerDelegate = self
         }
     }
