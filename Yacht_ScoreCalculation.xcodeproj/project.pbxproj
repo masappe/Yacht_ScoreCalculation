@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		693BE80322E7ED3E007568A2 /* EditRaceResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693BE80222E7ED3E007568A2 /* EditRaceResultViewController.swift */; };
+		693BE80522EB4A00007568A2 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693BE80422EB4A00007568A2 /* Extension.swift */; };
 		693E180B22C784C200A3FF8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693E180A22C784C200A3FF8F /* AppDelegate.swift */; };
 		693E180D22C784C200A3FF8F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693E180C22C784C200A3FF8F /* ViewController.swift */; };
 		693E181022C784C200A3FF8F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 693E180E22C784C200A3FF8F /* Main.storyboard */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		693BE80222E7ED3E007568A2 /* EditRaceResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRaceResultViewController.swift; sourceTree = "<group>"; };
+		693BE80422EB4A00007568A2 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		693E180722C784C200A3FF8F /* Yacht_ScoreCalculation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yacht_ScoreCalculation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		693E180A22C784C200A3FF8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		693E180C22C784C200A3FF8F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				693E184022C7893700A3FF8F /* ViewController */,
 				693E180A22C784C200A3FF8F /* AppDelegate.swift */,
 				693E180E22C784C200A3FF8F /* Main.storyboard */,
+				693BE80422EB4A00007568A2 /* Extension.swift */,
 				693E183A22C786C400A3FF8F /* Yacht.swift */,
 				693E181122C784C300A3FF8F /* Assets.xcassets */,
 				693E181322C784C300A3FF8F /* LaunchScreen.storyboard */,
@@ -314,6 +317,7 @@
 				693E183F22C7891200A3FF8F /* DecideViewController.swift in Sources */,
 				693E184422CB184500A3FF8F /* PersonalRaceResultViewController.swift in Sources */,
 				693E180B22C784C200A3FF8F /* AppDelegate.swift in Sources */,
+				693BE80522EB4A00007568A2 /* Extension.swift in Sources */,
 				693E183B22C786C400A3FF8F /* Yacht.swift in Sources */,
 				69C276D122DB800700C82416 /* tabBarController.swift in Sources */,
 				693E184222C7B58D00A3FF8F /* RaceViewController.swift in Sources */,

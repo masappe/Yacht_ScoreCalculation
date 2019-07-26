@@ -35,6 +35,14 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         return 1
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if tableView == afterTableView {
+            return "フィニッシュ"
+        } else {
+            return "レース中"
+        }
+    }
+    
     //tableviewの表示
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView.tag == 1 {
@@ -51,11 +59,18 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         if tableView.tag == 1 {
             let cell = afterTableView.dequeueReusableCell(withIdentifier: "after")
             cell?.textLabel?.text = String(afterGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1][indexPath.row].boatNumber)
+            if indexPath.row % 2 == 0 {
+                cell?.backgroundColor = .clearGreen
+            }
             return cell!
         }
         if tableView.tag ==  2 {
             let cell = beforeTableView.dequeueReusableCell(withIdentifier: "before")
             cell?.textLabel?.text = String(beforeGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1][indexPath.row].boatNumber)
+            if indexPath.row % 2 == 0 {
+                cell?.backgroundColor = .clearGreen
+            }
+
             return cell!
         }
         let cell = afterTableView.dequeueReusableCell(withIdentifier: "after")
@@ -65,11 +80,14 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     //セルをタップした時の処理
     //タップしたらbeforeからafterに移動する
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView.tag == 1 {            beforeGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1].append(afterGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1][indexPath.row])
-            afterGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1].remove(at: indexPath.row)
-            afterTableView.reloadData()
-            beforeTableView.reloadData()
+        if tableView.tag == 1 {
+            tableView.deselectRow(at: indexPath, animated: true)
 
+//            beforeGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1].append(afterGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1][indexPath.row])
+////            afterGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1].remove(at: indexPath.row)
+//            afterTableView.reloadData()
+//            beforeTableView.reloadData()
+//
         }
         if tableView.tag == 2 {
             afterGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1].append(beforeGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1][indexPath.row])

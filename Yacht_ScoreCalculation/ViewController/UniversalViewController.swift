@@ -63,7 +63,11 @@ class UniversalViewController: UIViewController,UITextFieldDelegate,UITableViewD
         delete.backgroundColor = .red
         return UISwipeActionsConfiguration(actions: [delete])
     }
-
+    
+    //タップし終わったら色が消える
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 
     //前画面に戻る
     @IBAction func backButton(_ sender: Any) {

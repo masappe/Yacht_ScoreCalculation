@@ -10,8 +10,20 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var currentLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        switch raceInformation.shared.state {
+        case "no":
+            currentLabel.text = "レースに参加できます"
+        case "470":
+            currentLabel.text = "470レース中"
+        case "snipe":
+            currentLabel.text = "スナイプレース中"
+        default:
+            break
+        }
         // Do any additional setup after loading the view.
         //テストデータで使用中
         let meikou = universal()
@@ -59,11 +71,11 @@ class ViewController: UIViewController {
         }
 
     }
-    
+    //470出場艇決める
     @IBAction func selectFour(_ sender: Any) {
         performSegue(withIdentifier: "toSelect", sender: true)
     }
-    
+    //スナイプ出場艇決める
     @IBAction func selectSnipe(_ sender: Any) {
         performSegue(withIdentifier: "toSelect", sender: false)
     }
@@ -81,6 +93,7 @@ class ViewController: UIViewController {
             let alert = UIAlertController(title: "470のレースに参加する", message: "本当にこの船でよろしいですか？", preferredStyle: .alert)
             let ok = UIAlertAction(title: "ok", style: .default) { (action) in
                 raceInformation.shared.state = "470"
+                self.currentLabel.text = "470レース中"
                 //レースに必要な処理を記入する
                 self.forRace470()
                 //画面遷移
@@ -108,6 +121,7 @@ class ViewController: UIViewController {
             let alert = UIAlertController(title: "スナイプのレースに参加する", message: "本当にこの船でよろしいですか？", preferredStyle: .alert)
             let ok = UIAlertAction(title: "ok", style: .default) { (action) in
                 raceInformation.shared.state = "snipe"
+                self.currentLabel.text = "スナイプレース中"
                 //レースに必要な処理を記入する
                 self.forRaceSnipe()
                 //画面遷移
@@ -121,11 +135,12 @@ class ViewController: UIViewController {
             break
         }
     }
-    
+    //レース結果のリセット
     @IBAction func deleteRace(_ sender: Any) {
         let alert = UIAlertController(title: "終了", message: "レース結果を破棄してもよろしいですか", preferredStyle: .alert)
         let ok = UIAlertAction(title: "OK", style: .default) { (action) in
             raceInformation.shared.state = "no"
+            self.currentLabel.text = "レースに参加できます"
             //レース情報の破棄
             self.deleteAllRaceInformation()
         }
