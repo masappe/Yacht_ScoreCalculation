@@ -38,7 +38,7 @@ class ViewController: UIViewController {
 
         for i in 0...2 {
             let registerBoat = boat()
-            registerBoat.insert(first: Int(i), second: "", thrid: "",fourth: "名工",fifth: "スナイプ")
+            registerBoat.insert(first: Int(i), second: "一郎", thrid: "",fourth: "名工",fifth: "スナイプ")
             registerBoat.selected = false
             snipe.shared.list.append(registerBoat)
             for j in 0..<alluniv.shared.univList.count {
@@ -49,7 +49,7 @@ class ViewController: UIViewController {
         }
         for i in 3...6 {
             let registerBoat = boat()
-            registerBoat.insert(first: Int(i), second: "", thrid: "",fourth: "三重",fifth: "スナイプ")
+            registerBoat.insert(first: Int(i), second: "二郎", thrid: "",fourth: "三重",fifth: "スナイプ")
             registerBoat.selected = false
             snipe.shared.list.append(registerBoat)
             for j in 0..<alluniv.shared.univList.count {
@@ -60,7 +60,7 @@ class ViewController: UIViewController {
         }
         for i in 7...9 {
             let registerBoat = boat()
-            registerBoat.insert(first: Int(i), second: "", thrid: "",fourth: "名城",fifth: "スナイプ")
+            registerBoat.insert(first: Int(i), second: "三郎", thrid: "",fourth: "名城",fifth: "スナイプ")
             registerBoat.selected = false
             snipe.shared.list.append(registerBoat)
             for j in 0..<alluniv.shared.univList.count {

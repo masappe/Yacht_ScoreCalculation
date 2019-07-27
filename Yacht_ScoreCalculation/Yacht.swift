@@ -9,12 +9,18 @@
 import Foundation
 
 class raceInformation:NSObject {
+    //大会名
+    var raceName = ""
+    //大会開始
+    var startRace = ""
+    //大会終了
+    var endRace = ""
     //レース数
     var raceCount:Int = 1
     //現在のレース
     var currentRaceNumber:Int = 1
     //cutレースがいつからか
-    var cutRaceNumber = 3
+    var cutRaceNumber = 0
     //船の数
     var boatNum = 0
     //レースの状態
@@ -77,7 +83,9 @@ class boats:NSObject {
     //cut順位
     var cutResult:Int!
     //色付け
-    var color = false
+//    var color = false
+    //clear:色なし，blue:青色，red:赤色
+    var selectColor = "clear"
     
     //大学のレース情報の初期化
     func initialize(){
@@ -124,6 +132,8 @@ class boat:NSObject {
     var boatType:Bool!
     //各レースのの順位
     var racePoint:[Int] = [0]
+    //カットされるかされないか
+    var cutSelect:[Bool] = [false]
     //合計点数
     var totalPoint:Int = 0
     //cutの点数
@@ -137,7 +147,10 @@ class boat:NSObject {
     //レースに出るかの判断基準，色の選択の判断基準
     var selected:Bool!
     //色付け
-    var color = false
+//    var color = false
+    //clear:色なし，blue:青色，red:赤色
+    var selectColor = "clear"
+
     
     //艇のレース情報の初期化
     func initialize(){
@@ -164,16 +177,35 @@ class boat:NSObject {
     //レースの合計点数を計算する
     func calculateRacePoint() {
         badPoint = 0
-        let sum = racePoint.reduce(0) {(num1:Int,num2:Int) -> Int in
-            if badPoint < num2 {
-                badPoint = num2
+        var temp1:[Int] = []
+        for i in 0..<cutSelect.count {
+            if !cutSelect[i] {
+                temp1.append(i)
             }
-            return num1 + num2
         }
+        print(temp1)
+        var temp:[Int] = []
+        for j in 0..<temp1.count{
+            temp.append(racePoint[temp1[j]])
+        }
+        if let max = temp.max() {
+            badPoint = max
+        }
+//        var temp = racePoint
+//        //cutPointの計算
+//        for _ in 0..<cutSelect.count {
+//            let maxIndex = temp.firstIndex{ $0 == temp.max() }
+//            if !cutSelect[maxIndex!] {
+//                badPoint = temp[maxIndex!]
+//                break
+//            }
+//            temp.remove(at: maxIndex!)
+//        }
+        
+        let sum = racePoint.reduce(0,+)
         totalPoint = sum
         cutPoint = sum - badPoint
     }
-    
     
 }
 
@@ -187,7 +219,7 @@ class snipe:NSObject {
     var list: [boat] = []
     static let shared = snipe()
     private override init(){}
-    
+
 }
 
 

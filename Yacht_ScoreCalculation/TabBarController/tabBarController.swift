@@ -40,7 +40,6 @@ class tabBarController: UITabBarController,UITabBarControllerDelegate {
             }
             viewController.tableView.reloadData()
         case is GroupRaceResultViewController:
-//            cutRaceResult()
             let viewController = viewController as! GroupRaceResultViewController
             if raceInformation.shared.raceCount >= raceInformation.shared.cutRaceNumber {
                 //普通の順位の反映のため
@@ -58,6 +57,14 @@ class tabBarController: UITabBarController,UITabBarControllerDelegate {
             }
 
             viewController.tableView.reloadData()
+        case is SettingViewController:
+            let settingViewController = viewController as! SettingViewController
+            if raceInformation.shared.cutRaceNumber != 0 {
+                settingViewController.cutTextField.text = String(raceInformation.shared.cutRaceNumber)
+                settingViewController.raceNameTextField.text = raceInformation.shared.raceName
+                settingViewController.startTextField.text = raceInformation.shared.startRace
+                settingViewController.endTextField.text = raceInformation.shared.endRace
+            }
         default:
             break
         }

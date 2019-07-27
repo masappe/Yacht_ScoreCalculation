@@ -60,11 +60,23 @@ class GroupRaceResultViewController: UIViewController,UITabBarDelegate,UITableVi
         } else {
             cell?.textLabel?.text = "\(indexPath.row+1)位 大学名:\(group.shared.raceList[indexPath.row].univ!) 合計:\(group.shared.raceList[indexPath.row].cutPoint)点"
         }
-        if group.shared.raceList[indexPath.row].color {
-            cell?.backgroundColor = .red
-        }else {
+        switch group.shared.raceList[indexPath.row].selectColor {
+        case "red":
+            cell?.backgroundColor = .clearRed
+            cell?.textLabel?.backgroundColor = .clear
+        case "blue":
+            cell?.backgroundColor = .clearBlue
+            cell?.textLabel?.backgroundColor = .clear
+        case "clear":
             cell?.backgroundColor = .clear
+        default:
+            break
         }
+//        if group.shared.raceList[indexPath.row].color {
+//            cell?.backgroundColor = .red
+//        }else {
+//            cell?.backgroundColor = .clear
+//        }
         return cell!
     }
     

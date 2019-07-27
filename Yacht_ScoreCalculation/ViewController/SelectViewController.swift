@@ -55,11 +55,12 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
         if boatType {
-            cell?.textLabel?.text = String(alluniv.shared.univList[indexPath.section].fourList[indexPath.row].boatNumber)
+            cell?.textLabel?.text = "艇番:\(String(alluniv.shared.univList[indexPath.section].fourList[indexPath.row].boatNumber))(\(alluniv.shared.univList[indexPath.section].fourList[indexPath.row].skipper!))"
             //選択したのセルのみに色付け
             if (alluniv.shared.univList[indexPath.section].fourList[indexPath.row].selected)! {
                 //選択中
-                cell!.backgroundColor = .red
+                cell!.backgroundColor = .clearGreen
+                cell?.textLabel?.backgroundColor = .clear
             } else {
                 //未選択
                 cell!.backgroundColor = .clear
@@ -67,11 +68,12 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
             return cell!
 
         } else {
-            cell?.textLabel?.text = String(alluniv.shared.univList[indexPath.section].snipeList[indexPath.row].boatNumber)
+            cell?.textLabel?.text = "艇番:\(String(alluniv.shared.univList[indexPath.section].snipeList[indexPath.row].boatNumber))(\(alluniv.shared.univList[indexPath.section].snipeList[indexPath.row].skipper!))"
             //選択したのセルのみに色付け
             if (alluniv.shared.univList[indexPath.section].snipeList[indexPath.row].selected)! {
                 //選択中
-                cell!.backgroundColor = .red
+                cell!.backgroundColor = .clearGreen
+                cell?.textLabel?.backgroundColor = .clear
             } else {
                 //未選択
                 cell!.backgroundColor = .clear
@@ -87,6 +89,7 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
     //タップした時の処理
     //タップした船はレースに出場し色付けされる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
         if raceInformation.shared.state == "no"{
             if boatType {
                 if (alluniv.shared.univList[indexPath.section].fourList[indexPath.row].selected)! {

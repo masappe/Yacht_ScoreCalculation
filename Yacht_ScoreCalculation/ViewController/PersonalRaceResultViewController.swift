@@ -52,15 +52,28 @@ class PersonalRaceResultViewController: UIViewController,UITabBarDelegate,UITabl
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
         if state {
-            cell?.textLabel?.text = "\(indexPath.row+1)位 艇番:\(personal.shared.raceList[indexPath.row].boatNumber!) 合計:\(personal.shared.raceList[indexPath.row].totalPoint)点"
+            cell?.textLabel?.text = "\(indexPath.row+1)位 艇番:\(personal.shared.raceList[indexPath.row].boatNumber!)(\(personal.shared.raceList[indexPath.row].skipper!)) 合計:\(personal.shared.raceList[indexPath.row].totalPoint)点"
         } else {
-            cell?.textLabel?.text = "\(indexPath.row+1)位 艇番:\(personal.shared.raceList[indexPath.row].boatNumber!) 合計:\(personal.shared.raceList[indexPath.row].cutPoint)点"
+            cell?.textLabel?.text = "\(indexPath.row+1)位 艇番:\(personal.shared.raceList[indexPath.row].boatNumber!)(\(personal.shared.raceList[indexPath.row].skipper!)) 合計:\(personal.shared.raceList[indexPath.row].cutPoint)点"
         }
-        if personal.shared.raceList[indexPath.row].color {
-            cell?.backgroundColor = .red
-        }else {
+        switch personal.shared.raceList[indexPath.row].selectColor {
+        case "red":
+            cell?.backgroundColor = .clearRed
+            cell?.textLabel?.backgroundColor = .clear
+        case "blue":
+            cell?.backgroundColor = .clearBlue
+            cell?.textLabel?.backgroundColor = .clear
+        case "clear":
             cell?.backgroundColor = .clear
+        default:
+            break
         }
+
+//        if personal.shared.raceList[indexPath.row].color {
+//            cell?.backgroundColor = .red
+//        }else {
+//            cell?.backgroundColor = .clear
+//        }
         return cell!
     }
     

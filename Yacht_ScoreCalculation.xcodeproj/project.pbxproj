@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		693BE80322E7ED3E007568A2 /* EditRaceResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693BE80222E7ED3E007568A2 /* EditRaceResultViewController.swift */; };
 		693BE80522EB4A00007568A2 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693BE80422EB4A00007568A2 /* Extension.swift */; };
+		693BE81C22EBE4F6007568A2 /* 一人-30.png in Resources */ = {isa = PBXBuildFile; fileRef = 693BE81B22EBE4F6007568A2 /* 一人-30.png */; };
+		693BE82022EBE575007568A2 /* 20097.png in Resources */ = {isa = PBXBuildFile; fileRef = 693BE81D22EBE574007568A2 /* 20097.png */; };
+		693BE82122EBE575007568A2 /* 設定-30.png in Resources */ = {isa = PBXBuildFile; fileRef = 693BE81E22EBE575007568A2 /* 設定-30.png */; };
+		693BE82222EBE575007568A2 /* レース順位-30.png in Resources */ = {isa = PBXBuildFile; fileRef = 693BE81F22EBE575007568A2 /* レース順位-30.png */; };
+		693BE82422EBE57A007568A2 /* 複数-30.png in Resources */ = {isa = PBXBuildFile; fileRef = 693BE82322EBE57A007568A2 /* 複数-30.png */; };
+		693BE82622EC24D8007568A2 /* FinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693BE82522EC24D8007568A2 /* FinishViewController.swift */; };
 		693E180B22C784C200A3FF8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693E180A22C784C200A3FF8F /* AppDelegate.swift */; };
 		693E180D22C784C200A3FF8F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693E180C22C784C200A3FF8F /* ViewController.swift */; };
 		693E181022C784C200A3FF8F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 693E180E22C784C200A3FF8F /* Main.storyboard */; };
@@ -48,6 +54,12 @@
 /* Begin PBXFileReference section */
 		693BE80222E7ED3E007568A2 /* EditRaceResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRaceResultViewController.swift; sourceTree = "<group>"; };
 		693BE80422EB4A00007568A2 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		693BE81B22EBE4F6007568A2 /* 一人-30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "一人-30.png"; path = "../../../../アイコン/一人-30.png"; sourceTree = "<group>"; };
+		693BE81D22EBE574007568A2 /* 20097.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 20097.png; path = "../../../../アイコン/20097.png"; sourceTree = "<group>"; };
+		693BE81E22EBE575007568A2 /* 設定-30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "設定-30.png"; path = "../../../../アイコン/設定-30.png"; sourceTree = "<group>"; };
+		693BE81F22EBE575007568A2 /* レース順位-30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "レース順位-30.png"; path = "../../../../アイコン/レース順位-30.png"; sourceTree = "<group>"; };
+		693BE82322EBE57A007568A2 /* 複数-30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "複数-30.png"; path = "../../../../アイコン/複数-30.png"; sourceTree = "<group>"; };
+		693BE82522EC24D8007568A2 /* FinishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FinishViewController.swift; path = ../FinishViewController.swift; sourceTree = "<group>"; };
 		693E180722C784C200A3FF8F /* Yacht_ScoreCalculation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yacht_ScoreCalculation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		693E180A22C784C200A3FF8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		693E180C22C784C200A3FF8F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -98,6 +110,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		693BE80622EB50DF007568A2 /* image */ = {
+			isa = PBXGroup;
+			children = (
+				693BE81F22EBE575007568A2 /* レース順位-30.png */,
+				693BE81D22EBE574007568A2 /* 20097.png */,
+				693BE82322EBE57A007568A2 /* 複数-30.png */,
+				693BE81E22EBE575007568A2 /* 設定-30.png */,
+				693BE81B22EBE4F6007568A2 /* 一人-30.png */,
+			);
+			path = image;
+			sourceTree = "<group>";
+		};
 		693E17FE22C784C200A3FF8F = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +145,7 @@
 		693E180922C784C200A3FF8F /* Yacht_ScoreCalculation */ = {
 			isa = PBXGroup;
 			children = (
+				693BE80622EB50DF007568A2 /* image */,
 				69C276D822DC5A6800C82416 /* TabBarController */,
 				693E184022C7893700A3FF8F /* ViewController */,
 				693E180A22C784C200A3FF8F /* AppDelegate.swift */,
@@ -165,6 +190,7 @@
 				69EF9E0E22D47AFA00BCB928 /* PersonalViewController.swift */,
 				693EBD6C22E33FE000314251 /* SettingViewController.swift */,
 				693BE80222E7ED3E007568A2 /* EditRaceResultViewController.swift */,
+				693BE82522EC24D8007568A2 /* FinishViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -283,7 +309,12 @@
 			files = (
 				693E181522C784C300A3FF8F /* LaunchScreen.storyboard in Resources */,
 				693E181222C784C300A3FF8F /* Assets.xcassets in Resources */,
+				693BE81C22EBE4F6007568A2 /* 一人-30.png in Resources */,
+				693BE82022EBE575007568A2 /* 20097.png in Resources */,
+				693BE82122EBE575007568A2 /* 設定-30.png in Resources */,
 				693E181022C784C200A3FF8F /* Main.storyboard in Resources */,
+				693BE82222EBE575007568A2 /* レース順位-30.png in Resources */,
+				693BE82422EBE57A007568A2 /* 複数-30.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +344,7 @@
 				693E180D22C784C200A3FF8F /* ViewController.swift in Sources */,
 				693E183922C7856E00A3FF8F /* SelectViewController.swift in Sources */,
 				69EF9E0F22D47AFA00BCB928 /* PersonalViewController.swift in Sources */,
+				693BE82622EC24D8007568A2 /* FinishViewController.swift in Sources */,
 				693EBD6922E13E9200314251 /* GroupRaceResultViewController.swift in Sources */,
 				693E183F22C7891200A3FF8F /* DecideViewController.swift in Sources */,
 				693E184422CB184500A3FF8F /* PersonalRaceResultViewController.swift in Sources */,

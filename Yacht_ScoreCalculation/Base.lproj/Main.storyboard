@@ -387,12 +387,24 @@
                                     <action selector="updateButton:" destination="gUe-nz-lik" eventType="touchUpInside" id="OZJ-xT-yq1"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="カットされない" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HaR-cs-s4c">
+                                <rect key="frame" x="30" y="302" width="122" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3ca-8d-hKK">
+                                <rect key="frame" x="243" y="292" width="49" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="h3z-An-5U3"/>
                     </view>
                     <connections>
                         <outlet property="boatNumberLabel" destination="0uA-c3-bMe" id="NdU-cf-joD"/>
+                        <outlet property="cutSwitch" destination="3ca-8d-hKK" id="zaG-Jl-aRF"/>
                         <outlet property="editTextField" destination="6dw-Sf-LD0" id="jBn-fH-Rph"/>
                         <outlet property="raceNumberLabel" destination="ml6-u9-1OQ" id="lMb-P7-oUq"/>
                     </connections>
@@ -465,13 +477,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Gev-xo-blC">
-                                <rect key="frame" x="209" y="208" width="49" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="colorSwitch:" destination="4vu-NB-RMt" eventType="valueChanged" id="qK5-I2-WhK"/>
-                                </connections>
-                            </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="色付け" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VDl-3V-U18">
                                 <rect key="frame" x="46" y="200" width="105" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -479,13 +484,17 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nNr-Aw-VIc">
+                                <rect key="frame" x="208" y="202" width="135" height="43"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="IyB-2V-OKU"/>
                     </view>
                     <connections>
                         <outlet property="boatNumber" destination="Z8d-BA-Bo9" id="kQ3-pC-hKS"/>
-                        <outlet property="colorSwitch" destination="Gev-xo-blC" id="rtZ-BS-7gF"/>
+                        <outlet property="colorPickerView" destination="nNr-Aw-VIc" id="7EX-sD-24V"/>
                         <outlet property="cutRaceLabel" destination="xoN-3R-nUc" id="rme-xh-n48"/>
                         <outlet property="raceLabel" destination="uJ8-HD-WAH" id="oRi-6o-0Rr"/>
                         <outlet property="tableView" destination="yr8-YS-2Pb" id="6fP-IN-LG7"/>
@@ -549,7 +558,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="JAq-Xb-o3e"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="団体" id="3JV-ZG-oFV"/>
+                    <tabBarItem key="tabBarItem" title="団体" image="複数-30.png" id="3JV-ZG-oFV"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="8eZ-5i-YKI" id="Arp-ar-8v7"/>
@@ -635,7 +644,7 @@
                                         <rightBarButtonItems>
                                             <barButtonItem title="終了" id="bMV-wJ-mJL">
                                                 <connections>
-                                                    <action selector="degugButoon:" destination="XmS-Vh-jp2" id="m98-Kh-RXE"/>
+                                                    <action selector="endRaceButoon:" destination="XmS-Vh-jp2" id="Hbu-jU-CSe"/>
                                                 </connections>
                                             </barButtonItem>
                                             <barButtonItem title="更新" id="i9R-Km-lIV">
@@ -651,11 +660,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="cJZ-iW-Xgb"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="レース順位" id="PlE-ro-5pd"/>
+                    <tabBarItem key="tabBarItem" title="レース順位" image="レース順位-30.png" id="PlE-ro-5pd"/>
                     <connections>
                         <outlet property="afterTableView" destination="NA7-wg-Epo" id="KLG-tH-ogY"/>
                         <outlet property="beforeTableView" destination="TdM-YA-vCM" id="mK5-Ni-k65"/>
                         <outlet property="titleLabel" destination="IFg-J9-N0h" id="dd3-tN-TBh"/>
+                        <segue destination="dtN-2g-nqK" kind="presentation" identifier="toFinish" id="J35-Xz-Vvx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4ol-Jp-uRF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -691,19 +701,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="カットレース" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KTE-Tj-bZv">
-                                <rect key="frame" x="55" y="138" width="104" height="38"/>
+                                <rect key="frame" x="56" y="338" width="104" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pjq-eO-FZt">
-                                <rect key="frame" x="221" y="142" width="97" height="30"/>
+                                <rect key="frame" x="199" y="342" width="120" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="大会名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGs-zF-2ca">
+                                <rect key="frame" x="56" y="149" width="52" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="es8-u0-ZlE">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -719,13 +736,51 @@
                                     <action selector="updateButton:" destination="zNw-b4-YDX" eventType="touchUpInside" id="epa-hf-Q38"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hgN-5K-flI">
+                                <rect key="frame" x="199" y="140" width="120" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b0W-Fe-gSL" customClass="DatePickerKeyboard" customModule="Yacht_ScoreCalculation" customModuleProvider="target">
+                                <rect key="frame" x="199" y="270" width="120" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="開始日" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3vZ-dC-L7G">
+                                <rect key="frame" x="56" y="223" width="52" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="終了日" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Flk-Ia-4mY">
+                                <rect key="frame" x="56" y="279" width="52" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="F6u-SK-TR2" customClass="DatePickerKeyboard" customModule="Yacht_ScoreCalculation" customModuleProvider="target">
+                                <rect key="frame" x="199" y="219" width="120" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="NBK-DM-h8s"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="設定" id="miF-u3-EKC"/>
+                    <tabBarItem key="tabBarItem" title="設定" image="設定-30.png" id="miF-u3-EKC"/>
                     <connections>
                         <outlet property="cutTextField" destination="Pjq-eO-FZt" id="gFO-sj-7jg"/>
+                        <outlet property="endTextField" destination="b0W-Fe-gSL" id="noN-t3-WSr"/>
+                        <outlet property="raceNameTextField" destination="hgN-5K-flI" id="C3A-aU-BdU"/>
+                        <outlet property="startTextField" destination="F6u-SK-TR2" id="Ocr-1I-rvj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9T1-Qq-vl0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -784,7 +839,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="EPl-Iw-WOs"/>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="2" title="個人" id="AZe-jA-ex5"/>
+                    <tabBarItem key="tabBarItem" tag="2" title="個人" image="一人-30.png" id="AZe-jA-ex5"/>
                     <connections>
                         <outlet property="tableView" destination="ogM-62-YiK" id="bUf-PS-x3W"/>
                         <outlet property="titleLabel" destination="dL6-E6-CJh" id="9RU-4W-dbT"/>
@@ -795,7 +850,108 @@
             </objects>
             <point key="canvasLocation" x="3180" y="16"/>
         </scene>
+        <!--Title-->
+        <scene sceneID="XkS-bu-hlh">
+            <objects>
+                <viewController id="dtN-2g-nqK" customClass="FinishViewController" customModule="Yacht_ScoreCalculation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OQj-zN-WNv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TZ2-m2-Zs1">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="レース結果" id="0of-Ul-6Rh">
+                                        <barButtonItem key="rightBarButtonItem" title="タイトルへ" id="qqm-Zf-AOF">
+                                            <connections>
+                                                <action selector="gotoTitle:" destination="dtN-2g-nqK" id="41j-fb-Qb8"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="大会名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jKB-Yo-0yR">
+                                <rect key="frame" x="42" y="72" width="290" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="日時" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SPH-gL-CNx">
+                                <rect key="frame" x="42" y="100" width="290" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="レース数，カットレース" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wN4-5e-WIS">
+                                <rect key="frame" x="42" y="129" width="269" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0zg-F6-7xA">
+                                <rect key="frame" x="245" y="158" width="128" height="509"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="groupCell" id="Fen-g0-yRX">
+                                        <rect key="frame" x="0.0" y="28" width="128" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Fen-g0-yRX" id="wGn-HL-p3i">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mXS-iH-WlC">
+                                <rect key="frame" x="245" y="158" width="1" height="510"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZOd-MD-uwu">
+                                <rect key="frame" x="0.0" y="158" width="245" height="509"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="personalCell" id="ggE-NA-QKV">
+                                        <rect key="frame" x="0.0" y="28" width="245" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ggE-NA-QKV" id="kfc-38-aqC">
+                                            <rect key="frame" x="0.0" y="0.0" width="245" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="pNd-sY-eg3"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="fOO-B5-p7o"/>
+                    <connections>
+                        <outlet property="dateLabel" destination="SPH-gL-CNx" id="ALQ-7d-HVg"/>
+                        <outlet property="groupTableView" destination="0zg-F6-7xA" id="2nx-3m-UfW"/>
+                        <outlet property="personalTableView" destination="ZOd-MD-uwu" id="asx-Ch-FU9"/>
+                        <outlet property="raceNameLabel" destination="jKB-Yo-0yR" id="bSE-0D-RoZ"/>
+                        <outlet property="raceNumberLabel" destination="wN4-5e-WIS" id="U1H-qZ-Igg"/>
+                        <outlet property="titleLabel" destination="0of-Ul-6Rh" id="JK5-aE-zUg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lM4-w0-sfy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3981.5999999999999" y="-710.19490254872574"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="レース順位-30.png" width="6.1714286804199219" height="4.114285945892334"/>
+        <image name="一人-30.png" width="6.1714286804199219" height="6"/>
+        <image name="複数-30.png" width="6.1714286804199219" height="4.7314286231994629"/>
+        <image name="設定-30.png" width="6.1714286804199219" height="6.1714286804199219"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="PgP-mp-ilo"/>
     </inferredMetricsTieBreakers>

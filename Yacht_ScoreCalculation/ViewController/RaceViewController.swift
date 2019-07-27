@@ -58,7 +58,7 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView.tag == 1 {
             let cell = afterTableView.dequeueReusableCell(withIdentifier: "after")
-            cell?.textLabel?.text = String(afterGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1][indexPath.row].boatNumber)
+            cell?.textLabel?.text = "\(String(afterGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1][indexPath.row].boatNumber))(\(afterGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1][indexPath.row].skipper!))"
             if indexPath.row % 2 == 0 {
                 cell?.backgroundColor = .clearGreen
             }
@@ -66,7 +66,7 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }
         if tableView.tag ==  2 {
             let cell = beforeTableView.dequeueReusableCell(withIdentifier: "before")
-            cell?.textLabel?.text = String(beforeGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1][indexPath.row].boatNumber)
+            cell?.textLabel?.text = "\(String(beforeGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1][indexPath.row].boatNumber))(\(beforeGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1][indexPath.row].skipper!))"
             if indexPath.row % 2 == 0 {
                 cell?.backgroundColor = .clearGreen
             }
@@ -154,6 +154,7 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                 //個人
                 for i in 0..<personal.shared.raceList.count{
                     personal.shared.raceList[i].racePoint.append(raceInformation.shared.DNF)
+                    personal.shared.raceList[i].cutSelect.append(false)
                 }
                 //団体
                 for i in 0..<group.shared.raceList.count {
@@ -275,36 +276,15 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     
     //終了ボタン
-    @IBAction func degugButoon(_ sender: Any) {
-//        for i in 0..<group.shared.raceList.count{
-        for i in 0..<1{
-            print(group.shared.raceList[i].univ!)
-            for j in 0..<group.shared.raceList[i].boat.count{
-                print(group.shared.raceList[i].boat[j].racePoint)
-            }
+    @IBAction func endRaceButoon(_ sender: Any) {
+        let alert = UIAlertController(title: "終了", message: "レースを終了させてよろしいですか", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .default) { (action) in
+            self.performSegue(withIdentifier: "toFinish", sender: nil)
         }
-        
-        
-//        raceResult()
-//        print("-----------------------MNo cut")
-//
-//        for i in 0..<personal.shared.raceList.count{
-//            //艇番　何点　レースの順位
-//            print("\(i+1)位 \(personal.shared.raceList[i].boatNumber!)番  \(personal.shared.raceList[i].totalPoint)点  \(personal.shared.raceList[i].racePoint)")
-//        }
-//        print("-----------------------end")
-//        cutRaceResult()
-//        print("-----------------------cut")
-//
-//        for i in 0..<personal.shared.raceList.count{
-//            //艇番　何点　レースの順位
-//            print("\(i+1)位\(personal.shared.raceList[i].boatNumber!)番  \(personal.shared.raceList[i].cutPoint)点  \(personal.shared.raceList[i].racePoint)")
-//
-//        }
-//        print("-----------------------end")
-//        print("----------------------finish")
-
-
+        let cancel = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
+        alert.addAction(ok)
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil)
     }
     
 }

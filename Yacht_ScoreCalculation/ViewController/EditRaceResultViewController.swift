@@ -14,10 +14,12 @@ import UIKit
 
 class EditRaceResultViewController: UIViewController,UITextFieldDelegate {
 
+    @IBOutlet weak var cutSwitch: UISwitch!
     @IBOutlet weak var boatNumberLabel: UILabel!
     @IBOutlet weak var raceNumberLabel: UILabel!
     @IBOutlet weak var editTextField: UITextField!
     var boat: boat!
+    //配列の何番めか
     var boatNum: Int!
     //raceNum+1レース目
     var raceNum: Int!
@@ -33,8 +35,7 @@ class EditRaceResultViewController: UIViewController,UITextFieldDelegate {
         boatNumberLabel.text = "艇番:\(String(boat.boatNumber))"
         raceNumberLabel.text = "第\(String(raceNum+1))レース目"
         editTextField.text = String(boat.racePoint[raceNum])
-        
-        
+        cutSwitch.isOn = boat.cutSelect[raceNum]
     }
     
     //更新ボタン
@@ -45,6 +46,7 @@ class EditRaceResultViewController: UIViewController,UITextFieldDelegate {
             alert.addAction(ok)
             present(alert, animated: true, completion: nil)
         }else {
+            boat.cutSelect[raceNum] = cutSwitch.isOn
             let point = Int(editTextField.text!)
             //船の点数の更新
             boat.racePoint[raceNum] = point!

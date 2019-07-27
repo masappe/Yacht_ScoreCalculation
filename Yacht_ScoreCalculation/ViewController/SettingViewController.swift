@@ -11,27 +11,50 @@ import UIKit
 class SettingViewController: UIViewController,UITextFieldDelegate {
 
     @IBOutlet weak var cutTextField: UITextField!
+    @IBOutlet weak var raceNameTextField: UITextField!
+    @IBOutlet weak var startTextField: DatePickerKeyboard!
+    @IBOutlet weak var endTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        raceNameTextField.placeholder = "ex.〇〇大会"
+        cutTextField.placeholder = "ex.4"
+        
+        
+        raceNameTextField.delegate = self
         cutTextField.delegate = self
         cutTextField.keyboardType = .numberPad
         
-        cutTextField.text = String(raceInformation.shared.cutRaceNumber)
 
     }
     
     @IBAction func updateButton(_ sender: Any) {
-        //カットレース情報の更新
-        if cutTextField.text != "" {
+        //情報の更新
+        if cutTextField.text != "" && raceNameTextField.text != "" {
+            //開始日と終了日
+            raceInformation.shared.startRace = startTextField.text!
+            raceInformation.shared.endRace = endTextField.text!
+            //大会名
+            raceInformation.shared.raceName = raceNameTextField.text!
+            //カットレース
             let temp = cutTextField.text
             raceInformation.shared.cutRaceNumber = Int(temp!)!
+            //レース情報の更新
+            let alert = UIAlertController(title: "更新", message: " レース情報を更新しました", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(ok)
+            present(alert, animated: true, completion: nil)
+
+        } else {
+            //エラー
+            let alert = UIAlertController(title: "エラー", message: "全ての情報を記載してください", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(ok)
+            present(alert, animated: true, completion: nil)
+
+            
         }
-        let alert = UIAlertController(title: "更新", message: " カットレースを更新しました", preferredStyle: .alert)
-        let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alert.addAction(ok)
-        present(alert, animated: true, completion: nil)
         
     }
     
