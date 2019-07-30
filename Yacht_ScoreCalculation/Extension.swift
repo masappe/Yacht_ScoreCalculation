@@ -25,7 +25,20 @@ extension UIColor {
     }
     
 }
+class CustomUITextField: UITextField {
+    
+    // コピーとペーストを禁止にする
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        return false
+    }
+    //カーソルの非表示
+    override func caretRect(for position: UITextPosition) -> CGRect {
+        return CGRect(x: 0, y: 0, width: 0, height: 0)
+    }
 
+}
+
+//日付用のクラス
 class DatePickerKeyboard: UITextField {
     private var datePicker: UIDatePicker!
     
