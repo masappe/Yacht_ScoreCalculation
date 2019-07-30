@@ -19,16 +19,26 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         afterTableView.delegate = self
         afterTableView.dataSource = self
         beforeTableView.delegate = self
         beforeTableView.dataSource = self
         //要素を追加する前に配列を作成する
-        afterGoalBoat.shared.list.removeAll()
-        beforeGoalBoat.shared.list.removeAll()
-        afterGoalBoat.shared.list.append([boat]())
-        beforeGoalBoat.shared.list.append(personal.shared.raceList)
+//        afterGoalBoat.shared.list.removeAll()
+//        beforeGoalBoat.shared.list.removeAll()
+        //最初だけ追加
+        //なんかよくわからん
+        if raceInformation.shared.raceCount == 1 {
+            afterGoalBoat.shared.list.append([boat]())
+            beforeGoalBoat.shared.list.append(personal.shared.raceList)
+        }
+        //cutレースかどうかでタイトルを変える
+        if raceInformation.shared.currentRaceNumber >= raceInformation.shared.cutRaceNumber {
+            titleLabel.title = "\(raceInformation.shared.currentRaceNumber)レース目(cut有り)"
+        }else {
+            titleLabel.title = "\(raceInformation.shared.currentRaceNumber)レース目"
+        }
+
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -82,12 +92,6 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView.tag == 1 {
             tableView.deselectRow(at: indexPath, animated: true)
-
-//            beforeGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1].append(afterGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1][indexPath.row])
-////            afterGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1].remove(at: indexPath.row)
-//            afterTableView.reloadData()
-//            beforeTableView.reloadData()
-//
         }
         if tableView.tag == 2 {
             afterGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1].append(beforeGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1][indexPath.row])
@@ -270,7 +274,6 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     
     //戻るボタン
-    //全てのデータを削除する
     @IBAction func backButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }

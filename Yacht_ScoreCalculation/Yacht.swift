@@ -183,7 +183,6 @@ class boat:NSObject {
                 temp1.append(i)
             }
         }
-        print(temp1)
         var temp:[Int] = []
         for j in 0..<temp1.count{
             temp.append(racePoint[temp1[j]])

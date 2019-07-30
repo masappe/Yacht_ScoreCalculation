@@ -14,7 +14,12 @@ class tabBarController: UITabBarController,UITabBarControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
-        selectedIndex = 0
+        //最初の画面をどこにするか
+        if raceInformation.shared.raceCount == 1 {
+            selectedIndex = 3
+        }else {
+            selectedIndex = 0
+        }
         // Do any additional setup after loading the view.
     }
     
@@ -59,6 +64,7 @@ class tabBarController: UITabBarController,UITabBarControllerDelegate {
             viewController.tableView.reloadData()
         case is SettingViewController:
             let settingViewController = viewController as! SettingViewController
+            //設定が変更されていたらその設定を反映させる
             if raceInformation.shared.cutRaceNumber != 0 {
                 settingViewController.cutTextField.text = String(raceInformation.shared.cutRaceNumber)
                 settingViewController.raceNameTextField.text = raceInformation.shared.raceName

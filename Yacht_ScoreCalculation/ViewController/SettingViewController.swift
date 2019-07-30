@@ -57,6 +57,9 @@ class SettingViewController: UIViewController,UITextFieldDelegate {
         }
         
     }
+    @IBAction func backButton(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     
     //キーボードを閉じる
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
