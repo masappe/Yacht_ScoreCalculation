@@ -71,6 +71,11 @@ class ViewController: UIViewController {
         }
 
     }
+    
+    
+    @IBAction func addBoatButton(_ sender: Any) {
+        performSegue(withIdentifier: "toDecide", sender: nil)
+    }
     //470出場艇決める
     @IBAction func selectFour(_ sender: Any) {
         performSegue(withIdentifier: "toSelect", sender: true)
@@ -154,6 +159,10 @@ class ViewController: UIViewController {
         if segue.identifier == "toSelect" {
             let viewController = segue.destination as! SelectViewController
             viewController.boatType = sender as! Bool
+        }
+        if segue.identifier == "toDecide" {
+            let decideViewController = segue.destination as! DecideViewController
+            decideViewController.state = "add"
         }
     }
     

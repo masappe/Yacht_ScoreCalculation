@@ -101,6 +101,14 @@
                                     <segue destination="J00-os-ayW" kind="presentation" id="A45-TG-zy7"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kSS-XQ-w45">
+                                <rect key="frame" x="226" y="204" width="92" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="船を追加する"/>
+                                <connections>
+                                    <action selector="addBoatButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QOr-uF-mb6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -109,11 +117,12 @@
                         <outlet property="currentLabel" destination="HdT-8R-Jjh" id="6ys-cm-9PW"/>
                         <segue destination="y4p-Nf-kyA" kind="presentation" identifier="toSelect" id="R9F-dK-3ii"/>
                         <segue destination="9QQ-ht-pPj" kind="presentation" identifier="toRace" id="Sqc-nk-Ua6"/>
+                        <segue destination="ojh-WC-dbc" kind="presentation" identifier="toDecide" id="R2n-X0-T12"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1308" y="15.742128935532236"/>
+            <point key="canvasLocation" x="1385" y="16"/>
         </scene>
         <!--Universal View Controller-->
         <scene sceneID="foR-aY-Q5O">
@@ -311,11 +320,6 @@
                                         <barButtonItem key="leftBarButtonItem" title="戻る" id="jnV-iK-fcc">
                                             <connections>
                                                 <action selector="backButton:" destination="y4p-Nf-kyA" id="ZEw-nb-6bf"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="＋" id="WAA-9r-Zvi">
-                                            <connections>
-                                                <action selector="nextButton:" destination="y4p-Nf-kyA" id="XhO-bZ-NvL"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -970,5 +974,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="PgP-mp-ilo"/>
+        <segue reference="JXN-3m-AX0"/>
     </inferredMetricsTieBreakers>
 </document>

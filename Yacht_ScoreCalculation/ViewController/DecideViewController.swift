@@ -154,11 +154,16 @@ class DecideViewController: UIViewController,UITextFieldDelegate,UIPickerViewDat
                         break
                     }
                 }
-                self.dismiss(animated: true, completion: {
-                    //tableViewのreload
-                    self.tableViewControllerDelegate.reloadTableView()
-                })
-
+                let alert = UIAlertController(title: "完了", message: "船を追加しました", preferredStyle: .alert)
+                let ok = UIAlertAction(title: "OK", style: .default) { (action) in
+                    self.boatNumber.text = ""
+                    self.skipper.text = ""
+                    self.crew.text = ""
+                    self.univTextField.text = ""
+                    self.boatTypeTextField.text = ""
+                }
+                alert.addAction(ok)
+                present(alert, animated: true, completion: nil)
             }
         } else if state == "update" {
             updateBoat.boatNumber = Int(boatNumber.text!)!

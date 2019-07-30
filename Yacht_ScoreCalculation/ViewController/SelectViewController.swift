@@ -152,7 +152,6 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
         let edit = UIContextualAction(style: .normal, title: "編集") { (action, sourceView, complicationHandler) in
             complicationHandler(true)
             //編集の設定
-            self.state = "update"
             let boat:boat!
             //削除の設定
             if self.boatType {
@@ -167,20 +166,14 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
         return UISwipeActionsConfiguration(actions: [delete,edit])
     }
     
-    @IBAction func nextButton(_ sender: Any) {
-        state = "add"
-        performSegue(withIdentifier: "toDecide", sender: nil)
-    }
     //画面遷移する前に呼ばれる
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toDecide" {
             //delegateの設定
             let decideViewController = segue.destination as! DecideViewController
             decideViewController.tableViewControllerDelegate = self
-            decideViewController.state = state
-            if state == "update" {
-                decideViewController.updateBoat = sender as? boat
-            }
+            decideViewController.state = "update"
+            decideViewController.updateBoat = sender as? boat
         }
     }
 
