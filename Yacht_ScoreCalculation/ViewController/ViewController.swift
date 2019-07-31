@@ -11,6 +11,13 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var currentLabel: UILabel!
+    @IBOutlet weak var raceFourButton: UIButton!
+    @IBOutlet weak var raceSnipeButton: UIButton!
+    @IBOutlet weak var decideFourButton: UIButton!
+    @IBOutlet weak var decideSnipeButton: UIButton!
+    @IBOutlet weak var univListButton: UIButton!
+    @IBOutlet weak var addBoatButton: UIButton!
+    @IBOutlet weak var resetButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -180,7 +187,10 @@ class ViewController: UIViewController {
         personal.shared.raceList.removeAll()
         //レース情報の初期化
         raceInformation.shared.initialize()
-        
+        //beforeGoalBoatの初期化
+        beforeGoalBoat.shared.list.removeAll()
+        //afterGoalBoatの初期化
+        afterGoalBoat.shared.list.removeAll()
     }
     //470のレースに参加する船の反映
     func forRace470(){

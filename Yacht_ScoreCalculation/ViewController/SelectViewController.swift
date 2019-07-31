@@ -162,6 +162,7 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
             self.performSegue(withIdentifier: "toDecide", sender: boat)
             
         }
+        edit.backgroundColor = .lightGray
         delete.backgroundColor = .red
         return UISwipeActionsConfiguration(actions: [delete,edit])
     }

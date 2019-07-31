@@ -23,8 +23,23 @@ extension UIColor {
     class var clearRed:UIColor {
         return UIColor(red: 250/255, green: 160/255, blue: 122/255, alpha: 0.4)
     }
+    class var backgroundBlue:UIColor {
+        return UIColor(red: 135/255, green: 206/255, blue: 250/255, alpha: 0.2)
+
+    }
     
 }
+class CustomUIButton: UIButton {
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+        layer.cornerRadius = 15
+        layer.borderWidth = 1
+        layer.borderColor = UIColor.blue.cgColor
+        tintColor = .black
+        backgroundColor = .backgroundBlue
+    }
+}
+//TextField
 class CustomUITextField: UITextField {
     
     // コピーとペーストを禁止にする
