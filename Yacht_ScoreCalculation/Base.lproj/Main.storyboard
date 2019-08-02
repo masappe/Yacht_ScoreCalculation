@@ -793,7 +793,7 @@
                                                     <action selector="noCutButton:" destination="7Mc-Hs-IQs" id="3Ja-i0-NPM"/>
                                                 </connections>
                                             </barButtonItem>
-                                            <barButtonItem title="cut" id="Cta-1i-B5B">
+                                            <barButtonItem title="Cut" id="Cta-1i-B5B">
                                                 <connections>
                                                     <action selector="cutButton:" destination="7Mc-Hs-IQs" id="YDz-h0-mLE"/>
                                                 </connections>
@@ -1334,7 +1334,7 @@
         <image name="設定-30.png" width="6.1714286804199219" height="6.1714286804199219"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="PgP-mp-ilo"/>
+        <segue reference="2xt-aw-jzA"/>
         <segue reference="R2n-X0-T12"/>
     </inferredMetricsTieBreakers>
 </document>
