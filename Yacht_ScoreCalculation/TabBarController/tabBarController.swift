@@ -46,21 +46,23 @@ class tabBarController: UITabBarController,UITabBarControllerDelegate {
             viewController.tableView.reloadData()
         case is GroupRaceResultViewController:
             let viewController = viewController as! GroupRaceResultViewController
-            if raceInformation.shared.raceCount >= raceInformation.shared.cutRaceNumber {
-                //普通の順位の反映のため
-                groupRaceResult()
-                groupCutRaceResult()
-                viewController.state = false
-                viewController.titleLabel.title = "\(raceInformation.shared.raceCount)レースまでの結果(cut有り)"
-
-            } else {
-                //cut順位の反映のため
-                groupCutRaceResult()
-                groupRaceResult()
-                viewController.state = true
-                viewController.titleLabel.title = "\(raceInformation.shared.raceCount)レースまでの結果"
-            }
-
+            
+//            if raceInformation.shared.raceCount >= raceInformation.shared.cutRaceNumber {
+//                //普通の順位の反映のため
+//                groupRaceResult()
+//                groupCutRaceResult()
+//                viewController.state = false
+//                viewController.titleLabel.title = "\(raceInformation.shared.raceCount)レースまでの結果(cut有り)"
+//
+//            } else {
+//                //cut順位の反映のため
+//                groupCutRaceResult()
+//                groupRaceResult()
+//                viewController.state = true
+//                viewController.titleLabel.title = "\(raceInformation.shared.raceCount)レースまでの結果"
+//            }
+            groupRaceResult()
+            viewController.titleLabel.title = "\(raceInformation.shared.raceCount)レースまでの結果"
             viewController.tableView.reloadData()
         case is SettingViewController:
             let settingViewController = viewController as! SettingViewController
@@ -77,13 +79,13 @@ class tabBarController: UITabBarController,UITabBarControllerDelegate {
     }
     
     //団体の順位のソート
-    //cutレースの時の順位の計算
-    func groupCutRaceResult(){
-        group.shared.raceList.sort{ $0.cutPoint < $1.cutPoint }
-        for i in 0..<group.shared.raceList.count {
-            group.shared.raceList[i].cutResult = i + 1
-        }
-    }
+//    //cutレースの時の順位の計算
+//    func groupCutRaceResult(){
+//        group.shared.raceList.sort{ $0.cutPoint < $1.cutPoint }
+//        for i in 0..<group.shared.raceList.count {
+//            group.shared.raceList[i].cutResult = i + 1
+//        }
+//    }
     //cutレースがない時の順位の計算
     func groupRaceResult(){
         group.shared.raceList.sort{$0.totalPoint < $1.totalPoint}

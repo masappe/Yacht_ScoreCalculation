@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lej-l7-WeD" customClass="CustomUIButton" customModule="Yacht_ScoreCalculation" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lej-l7-WeD" customClass="BlueUIButton" customModule="Yacht_ScoreCalculation" customModuleProvider="target">
                                 <rect key="frame" x="202.5" y="285" width="120" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="GLY-gP-gNW"/>
@@ -29,7 +29,7 @@
                                     <action selector="selectSnipe:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zVh-zw-4e9"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hDU-H6-9bm" customClass="CustomUIButton" customModule="Yacht_ScoreCalculation" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hDU-H6-9bm" customClass="BlueUIButton" customModule="Yacht_ScoreCalculation" customModuleProvider="target">
                                 <rect key="frame" x="52.5" y="285" width="120" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="513-wA-U43"/>
@@ -40,7 +40,7 @@
                                     <action selector="selectFour:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dLt-L7-bC9"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="thm-hU-k30" customClass="CustomUIButton" customModule="Yacht_ScoreCalculation" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="thm-hU-k30" customClass="BlueUIButton" customModule="Yacht_ScoreCalculation" customModuleProvider="target">
                                 <rect key="frame" x="52.5" y="405" width="120" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="Ayh-ar-jU3"/>
@@ -51,7 +51,7 @@
                                     <action selector="raceFour:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gqr-cS-Pxx"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zck-hU-iar" customClass="CustomUIButton" customModule="Yacht_ScoreCalculation" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zck-hU-iar" customClass="BlueUIButton" customModule="Yacht_ScoreCalculation" customModuleProvider="target">
                                 <rect key="frame" x="202.5" y="405" width="120" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="37m-FL-yMr"/>
@@ -62,7 +62,7 @@
                                     <action selector="raceSnipe:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gTu-W1-eM7"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G3x-XF-Rb8" customClass="CustomUIButton" customModule="Yacht_ScoreCalculation" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G3x-XF-Rb8" customClass="BlueUIButton" customModule="Yacht_ScoreCalculation" customModuleProvider="target">
                                 <rect key="frame" x="127.5" y="525" width="120" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="1EW-bb-Ygd"/>
@@ -123,7 +123,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aeS-pE-vXN" customClass="CustomUIButton" customModule="Yacht_ScoreCalculation" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aeS-pE-vXN" customClass="BlueUIButton" customModule="Yacht_ScoreCalculation" customModuleProvider="target">
                                 <rect key="frame" x="52.5" y="165" width="120" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="GoU-Gm-ozd"/>
@@ -134,7 +134,7 @@
                                     <segue destination="J00-os-ayW" kind="presentation" id="A45-TG-zy7"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kSS-XQ-w45" customClass="CustomUIButton" customModule="Yacht_ScoreCalculation" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kSS-XQ-w45" customClass="BlueUIButton" customModule="Yacht_ScoreCalculation" customModuleProvider="target">
                                 <rect key="frame" x="202.5" y="165" width="120" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="k99-oq-GKA"/>
@@ -225,7 +225,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b5h-BH-M6G">
-                                <rect key="frame" x="0.0" y="20" width="0.0" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
                                     <navigationItem title="大学登録画面" id="Zta-HI-85K">
                                         <barButtonItem key="leftBarButtonItem" title="戻る" id="qvT-vN-Ggk">
@@ -281,7 +281,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3AZ-1b-u8u">
-                                <rect key="frame" x="0.0" y="20" width="0.0" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="hrm-ac-53V"/>
                                 </constraints>
@@ -536,7 +536,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="odw-85-4qk">
-                                <rect key="frame" x="0.0" y="20" width="0.0" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="uko-Iv-lrz"/>
                                 </constraints>
@@ -550,7 +550,7 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vo3-OJ-30u" customClass="CustomUIButton" customModule="Yacht_ScoreCalculation" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vo3-OJ-30u" customClass="BlueUIButton" customModule="Yacht_ScoreCalculation" customModuleProvider="target">
                                 <rect key="frame" x="127.5" y="350" width="120" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="3aV-Xz-YUv"/>
@@ -663,7 +663,7 @@
                                 </prototypes>
                             </tableView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gs3-Uh-UtW">
-                                <rect key="frame" x="0.0" y="20" width="0.0" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="q7X-OR-28m"/>
                                 </constraints>
@@ -781,25 +781,7 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8bF-BY-PYp">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
-                                    <navigationItem title="Title" id="DoB-Kh-5qI">
-                                        <barButtonItem key="leftBarButtonItem" title="現在" id="kxc-eJ-46p">
-                                            <connections>
-                                                <action selector="nowResult:" destination="7Mc-Hs-IQs" id="vI9-U6-wns"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <rightBarButtonItems>
-                                            <barButtonItem title="no Cut" id="gT8-5a-c5q">
-                                                <connections>
-                                                    <action selector="noCutButton:" destination="7Mc-Hs-IQs" id="3Ja-i0-NPM"/>
-                                                </connections>
-                                            </barButtonItem>
-                                            <barButtonItem title="Cut" id="Cta-1i-B5B">
-                                                <connections>
-                                                    <action selector="cutButton:" destination="7Mc-Hs-IQs" id="YDz-h0-mLE"/>
-                                                </connections>
-                                            </barButtonItem>
-                                        </rightBarButtonItems>
-                                    </navigationItem>
+                                    <navigationItem title="Title" id="DoB-Kh-5qI"/>
                                 </items>
                             </navigationBar>
                         </subviews>
@@ -1011,7 +993,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="es8-u0-ZlE">
-                                <rect key="frame" x="0.0" y="20" width="0.0" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="PC4-Kp-E9g"/>
                                 </constraints>
@@ -1065,7 +1047,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FXe-mn-OgH" customClass="CustomUIButton" customModule="Yacht_ScoreCalculation" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FXe-mn-OgH" customClass="BlueUIButton" customModule="Yacht_ScoreCalculation" customModuleProvider="target">
                                 <rect key="frame" x="127.5" y="430" width="120" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="Xbj-fg-daV"/>
@@ -1207,7 +1189,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TZ2-m2-Zs1">
-                                <rect key="frame" x="0.0" y="20" width="0.0" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="fgi-A3-AMr"/>
                                 </constraints>

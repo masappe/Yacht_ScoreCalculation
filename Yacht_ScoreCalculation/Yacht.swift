@@ -74,14 +74,14 @@ class boats:NSObject {
     var boat:[boat] = []
     //合計得点
     var totalPoint = 0
-    //cutの点数
-    var cutPoint = 0
-    //一番悪い点数
-    var badPoint = 0
+//    //cutの点数
+//    var cutPoint = 0
+//    //一番悪い点数
+//    var badPoint = 0
     //順位
     var result:Int!
-    //cut順位
-    var cutResult:Int!
+//    //cut順位
+//    var cutResult:Int!
     //色付け
 //    var color = false
     //clear:色なし，blue:青色，red:赤色
@@ -93,20 +93,23 @@ class boats:NSObject {
         racePoint = [0]
         boat.removeAll()
         totalPoint = 0
-        cutPoint = 0
-        badPoint = 0
+//        cutPoint = 0
+//        badPoint = 0
     }
     //レースの合計点数を計算する
     func calculateRacePoint() {
-        badPoint = 0
-        let sum = racePoint.reduce(0) {(num1:Int,num2:Int) -> Int in
-            if badPoint < num2 {
-                badPoint = num2
-            }
-            return num1 + num2
-        }
+        let sum = racePoint.reduce(0,+)
         totalPoint = sum
-        cutPoint = sum - badPoint
+
+//        badPoint = 0
+//        let sum = racePoint.reduce(0) {(num1:Int,num2:Int) -> Int in
+//            if badPoint < num2 {
+//                badPoint = num2
+//            }
+//            return num1 + num2
+//        }
+//        totalPoint = sum
+//        cutPoint = sum - badPoint
     }
 
 }

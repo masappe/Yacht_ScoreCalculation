@@ -18,8 +18,8 @@ class GroupRaceResultViewController: UIViewController,UITabBarDelegate,UITableVi
     
     @IBOutlet weak var titleLabel: UINavigationItem!
     @IBOutlet weak var tableView: UITableView!
-    //true:カットなし，false:カットあり
-    var state = true
+//    //true:カットなし，false:カットあり
+//    var state = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,11 +39,12 @@ class GroupRaceResultViewController: UIViewController,UITabBarDelegate,UITableVi
     
     //タイトルのヘッダー
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if state {
-            return "カットレースなしの結果"
-        } else {
-            return "カットレースの結果"
-        }
+        return "カットレースなしの結果"
+//        if state {
+//            return "カットレースなしの結果"
+//        } else {
+//            return "カットレースの結果"
+//        }
     }
     
     //tableviewのセルの個数
@@ -54,12 +55,14 @@ class GroupRaceResultViewController: UIViewController,UITabBarDelegate,UITableVi
     //tableviewのセル情報
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-        if state {
-            cell?.textLabel?.text = "\(indexPath.row+1)位 大学名:\(group.shared.raceList[indexPath.row].univ!) 合計:\(group.shared.raceList[indexPath.row].totalPoint)点"
-
-        } else {
-            cell?.textLabel?.text = "\(indexPath.row+1)位 大学名:\(group.shared.raceList[indexPath.row].univ!) 合計:\(group.shared.raceList[indexPath.row].cutPoint)点"
-        }
+        cell?.textLabel?.text = "\(indexPath.row+1)位 大学名:\(group.shared.raceList[indexPath.row].univ!) 合計:\(group.shared.raceList[indexPath.row].totalPoint)点"
+//
+//        if state {
+//            cell?.textLabel?.text = "\(indexPath.row+1)位 大学名:\(group.shared.raceList[indexPath.row].univ!) 合計:\(group.shared.raceList[indexPath.row].totalPoint)点"
+//
+//        } else {
+//            cell?.textLabel?.text = "\(indexPath.row+1)位 大学名:\(group.shared.raceList[indexPath.row].univ!) 合計:\(group.shared.raceList[indexPath.row].cutPoint)点"
+//        }
         switch group.shared.raceList[indexPath.row].selectColor {
         case "red":
             cell?.backgroundColor = .clearRed
@@ -72,11 +75,6 @@ class GroupRaceResultViewController: UIViewController,UITabBarDelegate,UITableVi
         default:
             break
         }
-//        if group.shared.raceList[indexPath.row].color {
-//            cell?.backgroundColor = .red
-//        }else {
-//            cell?.backgroundColor = .clear
-//        }
         return cell!
     }
     
@@ -94,45 +92,45 @@ class GroupRaceResultViewController: UIViewController,UITabBarDelegate,UITableVi
         }
     }
     
-    //noCutResult
-    @IBAction func noCutButton(_ sender: Any) {
-        groupRaceResult()
-        state = true
-        tableView.reloadData()
-        titleLabel.title = "\(raceInformation.shared.raceCount)レースまでの結果"
-        
-    }
-    //cutResult
-    @IBAction func cutButton(_ sender: Any) {
-        groupCutRaceResult()
-        state = false
-        tableView.reloadData()
-        titleLabel.title = "\(raceInformation.shared.raceCount)レースまでの結果(cut有り)"
-        
-    }
-    //Result
-    @IBAction func nowResult(_ sender: Any) {
-        if raceInformation.shared.raceCount >= raceInformation.shared.cutRaceNumber {
-            groupCutRaceResult()
-            state = false
-            tableView.reloadData()
-            titleLabel.title = "\(raceInformation.shared.raceCount)レースまでの結果(cut有り)"
-        } else {
-            groupRaceResult()
-            state = true
-            tableView.reloadData()
-            titleLabel.title = "\(raceInformation.shared.raceCount)レースまでの結果"
-        }
-    }
+//    //noCutResult
+//    @IBAction func noCutButton(_ sender: Any) {
+//        groupRaceResult()
+//        state = true
+//        tableView.reloadData()
+//        titleLabel.title = "\(raceInformation.shared.raceCount)レースまでの結果"
+//
+//    }
+//    //cutResult
+//    @IBAction func cutButton(_ sender: Any) {
+//        groupCutRaceResult()
+//        state = false
+//        tableView.reloadData()
+//        titleLabel.title = "\(raceInformation.shared.raceCount)レースまでの結果(cut有り)"
+//
+//    }
+//    //Result
+//    @IBAction func nowResult(_ sender: Any) {
+//        if raceInformation.shared.raceCount >= raceInformation.shared.cutRaceNumber {
+//            groupCutRaceResult()
+//            state = false
+//            tableView.reloadData()
+//            titleLabel.title = "\(raceInformation.shared.raceCount)レースまでの結果(cut有り)"
+//        } else {
+//            groupRaceResult()
+//            state = true
+//            tableView.reloadData()
+//            titleLabel.title = "\(raceInformation.shared.raceCount)レースまでの結果"
+//        }
+//    }
     
     //団体の順位のソート
-    //cutレースの時の順位の計算
-    func groupCutRaceResult(){
-        group.shared.raceList.sort{ $0.cutPoint < $1.cutPoint }
-        for i in 0..<group.shared.raceList.count {
-            group.shared.raceList[i].cutResult = i + 1
-        }
-    }
+//    //cutレースの時の順位の計算
+//    func groupCutRaceResult(){
+//        group.shared.raceList.sort{ $0.cutPoint < $1.cutPoint }
+//        for i in 0..<group.shared.raceList.count {
+//            group.shared.raceList[i].cutResult = i + 1
+//        }
+//    }
     //cutレースがない時の順位の計算
     func groupRaceResult(){
         group.shared.raceList.sort{$0.totalPoint < $1.totalPoint}

@@ -27,9 +27,15 @@ extension UIColor {
         return UIColor(red: 135/255, green: 206/255, blue: 250/255, alpha: 0.2)
 
     }
-    
+    class var backgroundRed:UIColor {
+        return UIColor(red: 250/255, green: 160/255, blue: 122/255, alpha: 0.2)
+    }
+    class var backgroundGreen:UIColor {
+        return UIColor(red: 124/255, green: 252/255, blue: 0, alpha: 0.2)
+    }
+
 }
-class CustomUIButton: UIButton {
+class BlueUIButton: UIButton {
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
         layer.cornerRadius = 15
@@ -37,6 +43,26 @@ class CustomUIButton: UIButton {
         layer.borderColor = UIColor.blue.cgColor
         tintColor = .black
         backgroundColor = .backgroundBlue
+    }
+}
+class RedUIButton: UIButton {
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+        layer.cornerRadius = 15
+        layer.borderWidth = 1
+        layer.borderColor = UIColor.red.cgColor
+        tintColor = .black
+        backgroundColor = .backgroundRed
+    }
+}
+class GreenUIButton: UIButton {
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+        layer.cornerRadius = 15
+        layer.borderWidth = 1
+        layer.borderColor = UIColor.green.cgColor
+        tintColor = .black
+        backgroundColor = .backgroundGreen
     }
 }
 //TextField

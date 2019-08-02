@@ -103,7 +103,7 @@ class ViewController: UIViewController {
             present(alert, animated: true, completion: nil)
         case "no":
             let alert = UIAlertController(title: "470のレースに参加する", message: "本当にこの船でよろしいですか？", preferredStyle: .alert)
-            let ok = UIAlertAction(title: "ok", style: .default) { (action) in
+            let ok = UIAlertAction(title: "Ok", style: .default) { (action) in
                 raceInformation.shared.state = "470"
                 self.currentLabel.text = "470レース中"
                 //レースに必要な処理を記入する
@@ -131,7 +131,7 @@ class ViewController: UIViewController {
             performSegue(withIdentifier: "toRace", sender: nil)
         case "no":
             let alert = UIAlertController(title: "スナイプのレースに参加する", message: "本当にこの船でよろしいですか？", preferredStyle: .alert)
-            let ok = UIAlertAction(title: "ok", style: .default) { (action) in
+            let ok = UIAlertAction(title: "Ok", style: .default) { (action) in
                 raceInformation.shared.state = "snipe"
                 self.currentLabel.text = "スナイプレース中"
                 //レースに必要な処理を記入する

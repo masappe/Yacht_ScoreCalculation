@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6573E5EDD85C64F7A7297A08 /* Pods_Yacht_ScoreCalculation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B56B9FF6DBF6D68865219DEF /* Pods_Yacht_ScoreCalculation.framework */; };
 		693BE80322E7ED3E007568A2 /* EditRaceResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693BE80222E7ED3E007568A2 /* EditRaceResultViewController.swift */; };
 		693BE80522EB4A00007568A2 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693BE80422EB4A00007568A2 /* Extension.swift */; };
 		693BE82622EC24D8007568A2 /* FinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693BE82522EC24D8007568A2 /* FinishViewController.swift */; };
@@ -52,6 +53,8 @@
 		693EBD6D22E33FE000314251 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693EBD6C22E33FE000314251 /* SettingViewController.swift */; };
 		69C276D122DB800700C82416 /* tabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C276D022DB800700C82416 /* tabBarController.swift */; };
 		69EF9E0F22D47AFA00BCB928 /* PersonalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EF9E0E22D47AFA00BCB928 /* PersonalViewController.swift */; };
+		78FCCD7E2A5D2283D18BEA3E /* Pods_Yacht_ScoreCalculationUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8926018BB27B0EC495D11A71 /* Pods_Yacht_ScoreCalculationUITests.framework */; };
+		D8E428401BA6645AB320E4F1 /* Pods_Yacht_ScoreCalculationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5F2F0959648E61E5A8529B3 /* Pods_Yacht_ScoreCalculationTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +75,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		17048659C84DF5A94EC4CBE9 /* Pods-Yacht_ScoreCalculation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yacht_ScoreCalculation.debug.xcconfig"; path = "Target Support Files/Pods-Yacht_ScoreCalculation/Pods-Yacht_ScoreCalculation.debug.xcconfig"; sourceTree = "<group>"; };
+		1B373D24373EF3A14EF74C7E /* Pods-Yacht_ScoreCalculationUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yacht_ScoreCalculationUITests.debug.xcconfig"; path = "Target Support Files/Pods-Yacht_ScoreCalculationUITests/Pods-Yacht_ScoreCalculationUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		2928AD178B49A1BC83ED35B7 /* Pods-Yacht_ScoreCalculation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yacht_ScoreCalculation.release.xcconfig"; path = "Target Support Files/Pods-Yacht_ScoreCalculation/Pods-Yacht_ScoreCalculation.release.xcconfig"; sourceTree = "<group>"; };
+		3D2EBA518746D4018F9EB837 /* Pods-Yacht_ScoreCalculationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yacht_ScoreCalculationTests.debug.xcconfig"; path = "Target Support Files/Pods-Yacht_ScoreCalculationTests/Pods-Yacht_ScoreCalculationTests.debug.xcconfig"; sourceTree = "<group>"; };
+		523496B46C8FBC08977C910C /* Pods-Yacht_ScoreCalculationUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yacht_ScoreCalculationUITests.release.xcconfig"; path = "Target Support Files/Pods-Yacht_ScoreCalculationUITests/Pods-Yacht_ScoreCalculationUITests.release.xcconfig"; sourceTree = "<group>"; };
 		693BE80222E7ED3E007568A2 /* EditRaceResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRaceResultViewController.swift; sourceTree = "<group>"; };
 		693BE80422EB4A00007568A2 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		693BE82522EC24D8007568A2 /* FinishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FinishViewController.swift; path = ../FinishViewController.swift; sourceTree = "<group>"; };
@@ -123,6 +131,10 @@
 		693EBD6C22E33FE000314251 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		69C276D022DB800700C82416 /* tabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tabBarController.swift; sourceTree = "<group>"; };
 		69EF9E0E22D47AFA00BCB928 /* PersonalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PersonalViewController.swift; path = ../PersonalViewController.swift; sourceTree = "<group>"; };
+		8926018BB27B0EC495D11A71 /* Pods_Yacht_ScoreCalculationUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yacht_ScoreCalculationUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B56B9FF6DBF6D68865219DEF /* Pods_Yacht_ScoreCalculation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yacht_ScoreCalculation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5F2F0959648E61E5A8529B3 /* Pods_Yacht_ScoreCalculationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yacht_ScoreCalculationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF0141375F6476936CEF95BD /* Pods-Yacht_ScoreCalculationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yacht_ScoreCalculationTests.release.xcconfig"; path = "Target Support Files/Pods-Yacht_ScoreCalculationTests/Pods-Yacht_ScoreCalculationTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6573E5EDD85C64F7A7297A08 /* Pods_Yacht_ScoreCalculation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +150,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8E428401BA6645AB320E4F1 /* Pods_Yacht_ScoreCalculationTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,6 +158,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78FCCD7E2A5D2283D18BEA3E /* Pods_Yacht_ScoreCalculationUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +219,8 @@
 				693E181E22C784C300A3FF8F /* Yacht_ScoreCalculationTests */,
 				693E182922C784C300A3FF8F /* Yacht_ScoreCalculationUITests */,
 				693E180822C784C200A3FF8F /* Products */,
+				828C26045F125CC122D82B56 /* Pods */,
+				E5027A910DF3092A8030C852 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -279,6 +296,30 @@
 			path = TabBarController;
 			sourceTree = "<group>";
 		};
+		828C26045F125CC122D82B56 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				17048659C84DF5A94EC4CBE9 /* Pods-Yacht_ScoreCalculation.debug.xcconfig */,
+				2928AD178B49A1BC83ED35B7 /* Pods-Yacht_ScoreCalculation.release.xcconfig */,
+				3D2EBA518746D4018F9EB837 /* Pods-Yacht_ScoreCalculationTests.debug.xcconfig */,
+				EF0141375F6476936CEF95BD /* Pods-Yacht_ScoreCalculationTests.release.xcconfig */,
+				1B373D24373EF3A14EF74C7E /* Pods-Yacht_ScoreCalculationUITests.debug.xcconfig */,
+				523496B46C8FBC08977C910C /* Pods-Yacht_ScoreCalculationUITests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		E5027A910DF3092A8030C852 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B56B9FF6DBF6D68865219DEF /* Pods_Yacht_ScoreCalculation.framework */,
+				C5F2F0959648E61E5A8529B3 /* Pods_Yacht_ScoreCalculationTests.framework */,
+				8926018BB27B0EC495D11A71 /* Pods_Yacht_ScoreCalculationUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -286,9 +327,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 693E182F22C784C300A3FF8F /* Build configuration list for PBXNativeTarget "Yacht_ScoreCalculation" */;
 			buildPhases = (
+				5D4B8067D6A89C27F50A975B /* [CP] Check Pods Manifest.lock */,
 				693E180322C784C200A3FF8F /* Sources */,
 				693E180422C784C200A3FF8F /* Frameworks */,
 				693E180522C784C200A3FF8F /* Resources */,
+				E9350E3E550E9C0CC0EA6E6C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -303,6 +346,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 693E183222C784C300A3FF8F /* Build configuration list for PBXNativeTarget "Yacht_ScoreCalculationTests" */;
 			buildPhases = (
+				8E27A4706812DC8451D708EA /* [CP] Check Pods Manifest.lock */,
 				693E181722C784C300A3FF8F /* Sources */,
 				693E181822C784C300A3FF8F /* Frameworks */,
 				693E181922C784C300A3FF8F /* Resources */,
@@ -321,6 +365,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 693E183522C784C300A3FF8F /* Build configuration list for PBXNativeTarget "Yacht_ScoreCalculationUITests" */;
 			buildPhases = (
+				1AA63C4962229351C0A2C14E /* [CP] Check Pods Manifest.lock */,
 				693E182222C784C300A3FF8F /* Sources */,
 				693E182322C784C300A3FF8F /* Frameworks */,
 				693E182422C784C300A3FF8F /* Resources */,
@@ -429,6 +474,99 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1AA63C4962229351C0A2C14E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Yacht_ScoreCalculationUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5D4B8067D6A89C27F50A975B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Yacht_ScoreCalculation-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8E27A4706812DC8451D708EA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Yacht_ScoreCalculationTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E9350E3E550E9C0CC0EA6E6C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Yacht_ScoreCalculation/Pods-Yacht_ScoreCalculation-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Yacht_ScoreCalculation/Pods-Yacht_ScoreCalculation-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		693E180322C784C200A3FF8F /* Sources */ = {
@@ -622,6 +760,7 @@
 		};
 		693E183022C784C300A3FF8F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 17048659C84DF5A94EC4CBE9 /* Pods-Yacht_ScoreCalculation.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -640,6 +779,7 @@
 		};
 		693E183122C784C300A3FF8F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2928AD178B49A1BC83ED35B7 /* Pods-Yacht_ScoreCalculation.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -658,6 +798,7 @@
 		};
 		693E183322C784C300A3FF8F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3D2EBA518746D4018F9EB837 /* Pods-Yacht_ScoreCalculationTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -679,6 +820,7 @@
 		};
 		693E183422C784C300A3FF8F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EF0141375F6476936CEF95BD /* Pods-Yacht_ScoreCalculationTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -700,6 +842,7 @@
 		};
 		693E183622C784C300A3FF8F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1B373D24373EF3A14EF74C7E /* Pods-Yacht_ScoreCalculationUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -720,6 +863,7 @@
 		};
 		693E183722C784C300A3FF8F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 523496B46C8FBC08977C910C /* Pods-Yacht_ScoreCalculationUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
