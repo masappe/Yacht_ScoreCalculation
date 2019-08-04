@@ -146,51 +146,62 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     @IBAction func nextRaceButton(_ sender: Any) {
         //レース数の更新
         raceInformation.shared.currentRaceNumber = raceInformation.shared.currentRaceNumber + 1
+        //次のレースに進むかどうか
         if raceInformation.shared.raceCount < raceInformation.shared.currentRaceNumber {
-            //アラートで次のレースに進むかの確認
-            let alert = UIAlertController(title: "次のレースへ進む", message: "第\(raceInformation.shared.currentRaceNumber)レースに進みますか？", preferredStyle: .alert)
-            //OKボタンの時の処理
-            let ok = UIAlertAction(title: "OK", style: .default) { (action) in
-                //１回のみ行われる
-                raceInformation.shared.raceCount = raceInformation.shared.currentRaceNumber
-                afterGoalBoat.shared.list.append([boat]())
-                //次のレースに進むときはアペンドする
-                //個人
-                for i in 0..<personal.shared.raceList.count{
-                    personal.shared.raceList[i].racePoint.append(raceInformation.shared.DNF)
-                    personal.shared.raceList[i].cutSelect.append(false)
+            //レースの更新をしているかどうかの確認
+            if raceInformation.shared.raceCount == raceInformation.shared.doneUpdateCount {
+                //アラートで次のレースに進むかの確認
+                let alert = UIAlertController(title: "次のレースへ進む", message: "第\(raceInformation.shared.currentRaceNumber)レースに進みますか？", preferredStyle: .alert)
+                //OKボタンの時の処理
+                let ok = UIAlertAction(title: "OK", style: .default) { (action) in
+                    //１回のみ行われる
+                    raceInformation.shared.raceCount = raceInformation.shared.currentRaceNumber
+                    afterGoalBoat.shared.list.append([boat]())
+                    //次のレースに進むときはアペンドする
+                    //個人
+                    for i in 0..<personal.shared.raceList.count{
+                        personal.shared.raceList[i].racePoint.append(raceInformation.shared.DNF)
+                        personal.shared.raceList[i].cutSelect.append(false)
+                    }
+                    //団体
+                    for i in 0..<group.shared.raceList.count {
+                        group.shared.raceList[i].racePoint.append(0)
+                    }
+                    //現在のレース結果を格納
+                    //レース結果をソートしてその結果をbeforeに格納
+                    //cutレースかどうかで格納するものを変える
+                    if raceInformation.shared.raceCount >= raceInformation.shared.cutRaceNumber {
+                        self.cutRaceResult()
+                    }else {
+                        self.raceResult()
+                    }
+                    beforeGoalBoat.shared.list.append(personal.shared.raceList)
+                    //cutレースかどうかでタイトルを変える
+                    if raceInformation.shared.currentRaceNumber >= raceInformation.shared.cutRaceNumber {
+                        self.titleLabel.title = "\(raceInformation.shared.currentRaceNumber)レース目(cut有り)"
+                    }else {
+                        self.titleLabel.title = "\(raceInformation.shared.currentRaceNumber)レース目"
+                    }
+                    self.afterTableView.reloadData()
+                    self.beforeTableView.reloadData()
+                    
                 }
-                //団体
-                for i in 0..<group.shared.raceList.count {
-                    group.shared.raceList[i].racePoint.append(0)
-                }
-                //現在のレース結果を格納
-                //レース結果をソートしてその結果をbeforeに格納
-                //cutレースかどうかで格納するものを変える
-                if raceInformation.shared.raceCount >= raceInformation.shared.cutRaceNumber {
-                    self.cutRaceResult()
-                }else {
-                    self.raceResult()
-                }
-                beforeGoalBoat.shared.list.append(personal.shared.raceList)
-                //cutレースかどうかでタイトルを変える
-                if raceInformation.shared.currentRaceNumber >= raceInformation.shared.cutRaceNumber {
-                    self.titleLabel.title = "\(raceInformation.shared.currentRaceNumber)レース目(cut有り)"
-                }else {
-                    self.titleLabel.title = "\(raceInformation.shared.currentRaceNumber)レース目"
-                }
-                self.afterTableView.reloadData()
-                self.beforeTableView.reloadData()
+                //cancelならひく１
+                let cancel = UIAlertAction(title: "cancel", style: .cancel, handler: {(action) in
+                    raceInformation.shared.currentRaceNumber = raceInformation.shared.currentRaceNumber - 1
+                    
+                })
+                alert.addAction(ok)
+                alert.addAction(cancel)
+                present(alert, animated: true, completion: nil)
 
-            }
-            //cancelならひく１
-            let cancel = UIAlertAction(title: "cancel", style: .cancel, handler: {(action) in
+            } else {
                 raceInformation.shared.currentRaceNumber = raceInformation.shared.currentRaceNumber - 1
-
-            })
-            alert.addAction(ok)
-            alert.addAction(cancel)
-            present(alert, animated: true, completion: nil)
+                let alert = UIAlertController(title: "エラー", message: "レースの更新をしてください", preferredStyle: .alert)
+                let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(ok)
+                present(alert, animated: true, completion: nil)
+            }
         } else {
             //cutレースかどうかでタイトルを変える
             if raceInformation.shared.currentRaceNumber >= raceInformation.shared.cutRaceNumber {
@@ -209,6 +220,10 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         let alert = UIAlertController(title: "更新", message: "第\(raceInformation.shared.currentRaceNumber)レースのレース結果を更新してもよろしいですか？", preferredStyle: .alert)
         //OKボタンの時の処理
         let ok = UIAlertAction(title: "OK", style: .default) { (action) in
+            //更新ボタンを押したことを更新
+            if raceInformation.shared.doneUpdateCount + 1 == raceInformation.shared.raceCount {
+                raceInformation.shared.doneUpdateCount += 1
+            }
             //全ての船のレース結果の更新
             //beforeGoalだったら英語がつく
             //afterGoalだったら得点がつく

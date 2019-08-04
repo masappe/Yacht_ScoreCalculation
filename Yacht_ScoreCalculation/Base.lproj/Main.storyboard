@@ -236,7 +236,7 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gpp-Xt-yNu">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gpp-Xt-yNu">
                                 <rect key="frame" x="276" y="110" width="55" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="979-RJ-0vO"/>
@@ -255,6 +255,7 @@
                             <constraint firstItem="FJg-p6-ipl" firstAttribute="trailing" secondItem="n2T-5V-je9" secondAttribute="trailing" id="Aqd-4b-Bgg"/>
                             <constraint firstItem="gYM-Vf-Bi4" firstAttribute="centerX" secondItem="sX4-YC-trb" secondAttribute="centerX" id="U7s-c9-Ru2"/>
                             <constraint firstItem="FJg-p6-ipl" firstAttribute="top" secondItem="gYM-Vf-Bi4" secondAttribute="bottom" constant="40" id="YKa-l6-o0i"/>
+                            <constraint firstItem="gpp-Xt-yNu" firstAttribute="top" secondItem="b5h-BH-M6G" secondAttribute="bottom" constant="46" id="cyp-N6-F92"/>
                             <constraint firstItem="FJg-p6-ipl" firstAttribute="bottom" secondItem="n2T-5V-je9" secondAttribute="bottom" id="g7p-1g-Ne2"/>
                             <constraint firstItem="b5h-BH-M6G" firstAttribute="trailing" secondItem="n2T-5V-je9" secondAttribute="trailing" id="ilv-0f-qTg"/>
                             <constraint firstItem="b5h-BH-M6G" firstAttribute="leading" secondItem="n2T-5V-je9" secondAttribute="leading" id="l3s-g8-R6D"/>
@@ -395,7 +396,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pdL-SV-3YO" customClass="CustomUIButton" customModule="Yacht_ScoreCalculation" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pdL-SV-3YO" customClass="BlueUIButton" customModule="Yacht_ScoreCalculation" customModuleProvider="target">
                                 <rect key="frame" x="127.5" y="510" width="120" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="LYC-7s-t1X"/>

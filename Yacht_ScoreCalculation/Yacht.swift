@@ -26,6 +26,9 @@ class raceInformation:NSObject {
     //レースの状態
     //470:470レース中，snipe:スナイプレース中,no:レースしていない
     var state = "no"
+    //レースを更新したかどうか
+    var doneUpdateCount = 0
+
     //英語の種類一覧
     var DNF = 0
     var black: Int!
@@ -37,7 +40,8 @@ class raceInformation:NSObject {
         raceCount = 1
         currentRaceNumber = 1
         boatNum = 0
-        DNF = 1 
+        DNF = 1
+        doneUpdateCount = 0
     }
     func update() {
         boatNum = personal.shared.raceList.count

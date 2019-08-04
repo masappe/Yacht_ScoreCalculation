@@ -34,6 +34,8 @@ class DecideViewController: UIViewController,UITextFieldDelegate,UIPickerViewDat
         boatNumber.delegate = self
         skipper.delegate = self
         crew.delegate = self
+        univTextField.delegate = self
+        boatTypeTextField.delegate = self
         
         boatNumber.keyboardType = .numberPad
         boatNumber.placeholder = "入力してください"
@@ -129,6 +131,16 @@ class DecideViewController: UIViewController,UITextFieldDelegate,UIPickerViewDat
         }
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if state == "add" {
+            if textField == univTextField {
+                univTextField.text = alluniv.shared.univList[0].univ
+            } else if textField == boatTypeTextField {
+                boatTypeTextField.text = boatKind[0]
+            }
+        }
+    }
+    
     //登録ボタン
     @IBAction func registerButton(_ sender: Any) {
         if state == "add" {
@@ -139,9 +151,12 @@ class DecideViewController: UIViewController,UITextFieldDelegate,UIPickerViewDat
                 let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
                 alert.addAction(ok)
                 present(alert, animated: true, completion: nil)
-            }else {
+            } else {
+                
+                let registerBoat = boat()
                 registerBoat.insert(first: Int(boatNumber.text!)!, second: skipper.text!, thrid: crew.text!,fourth: tempUniv,fifth: tempBoat)
                 registerBoat.selected = false
+
                 //大学に艇情報の保存
                 for i in 0..<alluniv.shared.univList.count{
                     if tempUniv == alluniv.shared.univList[i].univ{
@@ -169,10 +184,15 @@ class DecideViewController: UIViewController,UITextFieldDelegate,UIPickerViewDat
             updateBoat.boatNumber = Int(boatNumber.text!)!
             updateBoat.skipper = skipper.text!
             updateBoat.crew = crew.text!
-            self.dismiss(animated: true, completion: {
-                //tableViewのreload
-                self.tableViewControllerDelegate.reloadTableView()
-            })
+            let alert = UIAlertController(title: "更新", message: "艇の情報を更新しました", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "OK", style: .default) { (action) in
+                self.dismiss(animated: true, completion: {
+                    //tableViewのreload
+                    self.tableViewControllerDelegate.reloadTableView()
+                })
+            }
+            alert.addAction(ok)
+            present(alert, animated: true, completion: nil)
 
         }
     }

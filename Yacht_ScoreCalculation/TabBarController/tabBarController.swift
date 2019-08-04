@@ -17,6 +17,15 @@ class tabBarController: UITabBarController,UITabBarControllerDelegate {
         //最初の画面をどこにするか
         if raceInformation.shared.raceCount == 1 {
             selectedIndex = 3
+            let settingViewController = selectedViewController as! SettingViewController
+            //設定が変更されていたらその設定を反映させる
+            if raceInformation.shared.cutRaceNumber != 0 {
+                settingViewController.cutTextField.text = String(raceInformation.shared.cutRaceNumber)
+                settingViewController.raceNameTextField.text = raceInformation.shared.raceName
+                settingViewController.startTextField.text = raceInformation.shared.startRace
+                settingViewController.endTextField.text = raceInformation.shared.endRace
+            }
+            
         }else {
             selectedIndex = 0
         }
