@@ -7,23 +7,35 @@
 //
 
 import UIKit
+import RealmSwift
 
 class tabBarController: UITabBarController,UITabBarControllerDelegate {
+
+    //realm
+    let realm = try! Realm()
+    var Group: Results<group>!
+    var Personal: Results<personal>!
+    var RaceInformation: Results<raceInformation>!
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
+        //realm
+        Group = realm.objects(group.self)
+        Personal = realm.objects(personal.self)
+        RaceInformation = realm.objects(raceInformation.self)
+
         //最初の画面をどこにするか
-        if raceInformation.shared.raceCount == 1 {
+        if RaceInformation[0].raceCount == 1 {
             selectedIndex = 3
             let settingViewController = selectedViewController as! SettingViewController
             //設定が変更されていたらその設定を反映させる
-            if raceInformation.shared.cutRaceNumber != 0 {
-                settingViewController.cutTextField.text = String(raceInformation.shared.cutRaceNumber)
-                settingViewController.raceNameTextField.text = raceInformation.shared.raceName
-                settingViewController.startTextField.text = raceInformation.shared.startRace
-                settingViewController.endTextField.text = raceInformation.shared.endRace
+            if RaceInformation[0].cutRaceNumber != 0 {
+                settingViewController.cutTextField.text = String(RaceInformation[0].cutRaceNumber)
+                settingViewController.raceNameTextField.text = RaceInformation[0].raceName
+                settingViewController.startTextField.text = RaceInformation[0].startRace
+                settingViewController.endTextField.text = RaceInformation[0].endRace
             }
             
         }else {
@@ -39,48 +51,37 @@ class tabBarController: UITabBarController,UITabBarControllerDelegate {
             break
         case is PersonalRaceResultViewController:
             let viewController = viewController as! PersonalRaceResultViewController
-            if raceInformation.shared.raceCount >= raceInformation.shared.cutRaceNumber {
-                //普通の順位の反映のため
-                raceResult()
-                cutRaceResult()
-                viewController.state = false
-                viewController.titleLabel.title = "\(raceInformation.shared.raceCount)レースまでの結果(cut有り)"
-            } else {
-                //cut順位の反映のため
-                cutRaceResult()
-                raceResult()
-                viewController.state = true
-                viewController.titleLabel.title = "\(raceInformation.shared.raceCount)レースまでの結果"
+            try! realm.write {
+                if RaceInformation[0].raceCount >= RaceInformation[0].cutRaceNumber {
+                    //普通の順位の反映のため
+                    raceResult()
+                    cutRaceResult()
+                    viewController.state = false
+                    viewController.titleLabel.title = "\(RaceInformation[0].raceCount)レースまでの結果(cut有り)"
+                } else {
+                    //cut順位の反映のため
+                    cutRaceResult()
+                    raceResult()
+                    viewController.state = true
+                    viewController.titleLabel.title = "\(RaceInformation[0].raceCount)レースまでの結果"
+                }
             }
             viewController.tableView.reloadData()
         case is GroupRaceResultViewController:
             let viewController = viewController as! GroupRaceResultViewController
-            
-//            if raceInformation.shared.raceCount >= raceInformation.shared.cutRaceNumber {
-//                //普通の順位の反映のため
-//                groupRaceResult()
-//                groupCutRaceResult()
-//                viewController.state = false
-//                viewController.titleLabel.title = "\(raceInformation.shared.raceCount)レースまでの結果(cut有り)"
-//
-//            } else {
-//                //cut順位の反映のため
-//                groupCutRaceResult()
-//                groupRaceResult()
-//                viewController.state = true
-//                viewController.titleLabel.title = "\(raceInformation.shared.raceCount)レースまでの結果"
-//            }
-            groupRaceResult()
-            viewController.titleLabel.title = "\(raceInformation.shared.raceCount)レースまでの結果"
+            try! realm.write {
+                groupRaceResult()
+            }
+            viewController.titleLabel.title = "\(RaceInformation[0].raceCount)レースまでの結果"
             viewController.tableView.reloadData()
         case is SettingViewController:
             let settingViewController = viewController as! SettingViewController
             //設定が変更されていたらその設定を反映させる
-            if raceInformation.shared.cutRaceNumber != 0 {
-                settingViewController.cutTextField.text = String(raceInformation.shared.cutRaceNumber)
-                settingViewController.raceNameTextField.text = raceInformation.shared.raceName
-                settingViewController.startTextField.text = raceInformation.shared.startRace
-                settingViewController.endTextField.text = raceInformation.shared.endRace
+            if RaceInformation[0].cutRaceNumber != 0 {
+                settingViewController.cutTextField.text = String(RaceInformation[0].cutRaceNumber)
+                settingViewController.raceNameTextField.text = RaceInformation[0].raceName
+                settingViewController.startTextField.text = RaceInformation[0].startRace
+                settingViewController.endTextField.text = RaceInformation[0].endRace
             }
         default:
             break
@@ -90,32 +91,32 @@ class tabBarController: UITabBarController,UITabBarControllerDelegate {
     //団体の順位のソート
 //    //cutレースの時の順位の計算
 //    func groupCutRaceResult(){
-//        group.shared.raceList.sort{ $0.cutPoint < $1.cutPoint }
-//        for i in 0..<group.shared.raceList.count {
-//            group.shared.raceList[i].cutResult = i + 1
+//        Group[0].raceList.sort{ $0.cutPoint < $1.cutPoint }
+//        for i in 0..<Group[0].raceList.count {
+//            Group[0].raceList[i].cutResult = i + 1
 //        }
 //    }
     //cutレースがない時の順位の計算
     func groupRaceResult(){
-        group.shared.raceList.sort{$0.totalPoint < $1.totalPoint}
-        for i in 0..<group.shared.raceList.count {
-            group.shared.raceList[i].result = i + 1
+        Group[0].raceList.sort{$0.totalPoint < $1.totalPoint}
+        for i in 0..<Group[0].raceList.count {
+            Group[0].raceList[i].result = i + 1
         }
     }
 
     //レース順位のソート
     //cutレースの時の順位の計算
     func cutRaceResult() {
-        personal.shared.raceList.sort{ $0.cutPoint < $1.cutPoint }
-        for i in 0..<personal.shared.raceList.count {
-            personal.shared.raceList[i].cutResult = i + 1
+        Personal[0].raceList.sort{ $0.cutPoint < $1.cutPoint }
+        for i in 0..<Personal[0].raceList.count {
+            Personal[0].raceList[i].cutResult = i + 1
         }
     }
     //cutレースがない時の順位の計算
     func raceResult() {
-        personal.shared.raceList.sort{$0.totalPoint < $1.totalPoint}
-        for i in 0..<personal.shared.raceList.count {
-            personal.shared.raceList[i].result = i + 1
+        Personal[0].raceList.sort{$0.totalPoint < $1.totalPoint}
+        for i in 0..<Personal[0].raceList.count {
+            Personal[0].raceList[i].result = i + 1
         }
     }
 

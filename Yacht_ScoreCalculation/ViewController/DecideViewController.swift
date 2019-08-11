@@ -7,25 +7,32 @@
 //
 
 import UIKit
+import RealmSwift
 
 class DecideViewController: UIViewController,UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate {
     
     var updateBoat: boat!
-    var registerBoat = boat()
+//    var registerBoat = boat()
     @IBOutlet weak var boatNumber: UITextField!
     @IBOutlet weak var skipper: UITextField!
     @IBOutlet weak var crew: UITextField!
     var boatKind:[String] = []
-    var tempUniv:String = alluniv.shared.univList[0].univ
+    //登録する大学名
+    var tempUniv:String!
+    //登録する艇種
     var tempBoat:String = "470"
     //add:船の追加，update:船の更新
     var state = ""
+    //pickerViewに関すること
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var univTextField: UITextField!
     var univPickerView = UIPickerView()
     @IBOutlet weak var boatTypeTextField: UITextField!
     var boatTypePickerView = UIPickerView()
     var tableViewControllerDelegate: TableViewControllerDelegate!
+    //realm
+    let realm = try! Realm()
+    var AllUniv: Results<universal>!
 
     
     override func viewDidLoad() {
@@ -39,6 +46,10 @@ class DecideViewController: UIViewController,UITextFieldDelegate,UIPickerViewDat
         
         boatNumber.keyboardType = .numberPad
         boatNumber.placeholder = "入力してください"
+        
+        //realmデータの取り出し
+        AllUniv = realm.objects(universal.self)
+        tempUniv = AllUniv[0].univ
 
         if state == "add" {
             univTextField.placeholder = "選択してください"
@@ -100,7 +111,8 @@ class DecideViewController: UIViewController,UITextFieldDelegate,UIPickerViewDat
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if state == "add" {
             if pickerView == univPickerView {
-                return alluniv.shared.univList.count
+                return AllUniv.count
+//                return alluniv.shared.univList.count
             }else {
                 return 2
             }
@@ -111,7 +123,8 @@ class DecideViewController: UIViewController,UITextFieldDelegate,UIPickerViewDat
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if state == "add" {
             if pickerView == univPickerView {
-                return alluniv.shared.univList[row].univ
+                return AllUniv[row].univ
+//                return alluniv.shared.univList[row].univ
             } else {
                 return boatKind[row]
             }
@@ -122,7 +135,8 @@ class DecideViewController: UIViewController,UITextFieldDelegate,UIPickerViewDat
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if state == "add" {
             if pickerView == univPickerView {
-                tempUniv = alluniv.shared.univList[row].univ
+                tempUniv = AllUniv[row].univ
+//                tempUniv = alluniv.shared.univList[row].univ
                 univTextField.text = tempUniv
             } else {
                 tempBoat = boatKind[row]
@@ -131,10 +145,12 @@ class DecideViewController: UIViewController,UITextFieldDelegate,UIPickerViewDat
         }
     }
     
+    //最初に現れるものの選択
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if state == "add" {
             if textField == univTextField {
-                univTextField.text = alluniv.shared.univList[0].univ
+                univTextField.text = AllUniv[0].univ
+//                univTextField.text = alluniv.shared.univList[0].univ
             } else if textField == boatTypeTextField {
                 boatTypeTextField.text = boatKind[0]
             }
@@ -158,17 +174,42 @@ class DecideViewController: UIViewController,UITextFieldDelegate,UIPickerViewDat
                 registerBoat.selected = false
 
                 //大学に艇情報の保存
-                for i in 0..<alluniv.shared.univList.count{
-                    if tempUniv == alluniv.shared.univList[i].univ{
+                for i in 0..<AllUniv.count{
+                    if tempUniv == AllUniv[i].univ{
                         //艇種わけ
                         if tempBoat == "470" {
-                            alluniv.shared.univList[i].fourList.append(registerBoat)
+                            try! realm.write {
+                                AllUniv[i].fourList.append(registerBoat)
+                            }
+//                            alluniv.shared.univList[i].fourList.append(registerBoat)
                         } else {
-                            alluniv.shared.univList[i].snipeList.append(registerBoat)
+                            try! realm.write {
+                                AllUniv[i].snipeList.append(registerBoat)
+                                print(AllUniv[i].snipeList)
+//                                print(registerBoat.boatNumber)
+//                                print(AllUniv[i].snipeList.count)
+//                                for j in 0..<AllUniv[i].snipeList.count{
+//                                    print(AllUniv[i].snipeList[j].boatNumber)
+//                                }
+                            }
+//                            alluniv.shared.univList[i].snipeList.append(registerBoat)
                         }
                         break
                     }
                 }
+
+//                //大学に艇情報の保存
+//                for i in 0..<alluniv.shared.univList.count{
+//                    if tempUniv == alluniv.shared.univList[i].univ{
+//                        //艇種わけ
+//                        if tempBoat == "470" {
+//                            alluniv.shared.univList[i].fourList.append(registerBoat)
+//                        } else {
+//                            alluniv.shared.univList[i].snipeList.append(registerBoat)
+//                        }
+//                        break
+//                    }
+//                }
                 let alert = UIAlertController(title: "完了", message: "船を追加しました", preferredStyle: .alert)
                 let ok = UIAlertAction(title: "OK", style: .default) { (action) in
                     self.boatNumber.text = ""
@@ -181,9 +222,11 @@ class DecideViewController: UIViewController,UITextFieldDelegate,UIPickerViewDat
                 present(alert, animated: true, completion: nil)
             }
         } else if state == "update" {
-            updateBoat.boatNumber = Int(boatNumber.text!)!
-            updateBoat.skipper = skipper.text!
-            updateBoat.crew = crew.text!
+            try! realm.write {
+                updateBoat.boatNumber = Int(boatNumber.text!)!
+                updateBoat.skipper = skipper.text!
+                updateBoat.crew = crew.text!
+            }
             let alert = UIAlertController(title: "更新", message: "艇の情報を更新しました", preferredStyle: .alert)
             let ok = UIAlertAction(title: "OK", style: .default) { (action) in
                 self.dismiss(animated: true, completion: {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 protocol TableViewControllerDelegate {
     func reloadTableView()
@@ -19,10 +20,18 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
     var boatType:Bool = true
     var state = ""
     @IBOutlet weak var titleLabel: UINavigationItem!
-    
+    //realm
+    let realm = try! Realm()
+    var AllUniv: Results<universal>!
+    var RaceInformation: Results<raceInformation>!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //realm
+        AllUniv = realm.objects(universal.self)
+        RaceInformation = realm.objects(raceInformation.self)
+
         //delegate,datasource
         tableView.delegate = self
         tableView.dataSource = self
@@ -35,19 +44,23 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return alluniv.shared.univList.count
+        return AllUniv.count
+//        return alluniv.shared.univList.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return alluniv.shared.univList[section].univ
+        return AllUniv[section].univ
+//        return alluniv.shared.univList[section].univ
     }
 
     //tableviewの個数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if boatType {
-            return alluniv.shared.univList[section].fourList.count
+            return AllUniv[section].fourList.count
+//            return alluniv.shared.univList[section].fourList.count
         } else {
-            return alluniv.shared.univList[section].snipeList.count
+            return AllUniv[section].snipeList.count
+//            return alluniv.shared.univList[section].snipeList.count
 
         }
     }
@@ -55,9 +68,9 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
         if boatType {
-            cell?.textLabel?.text = "艇番:\(String(alluniv.shared.univList[indexPath.section].fourList[indexPath.row].boatNumber))(\(alluniv.shared.univList[indexPath.section].fourList[indexPath.row].skipper!))"
+            cell?.textLabel?.text = "艇番:\(String(AllUniv[indexPath.section].fourList[indexPath.row].boatNumber))(\(AllUniv[indexPath.section].fourList[indexPath.row].skipper))"
             //選択したのセルのみに色付け
-            if (alluniv.shared.univList[indexPath.section].fourList[indexPath.row].selected)! {
+            if (AllUniv[indexPath.section].fourList[indexPath.row].selected) {
                 //選択中
                 cell!.backgroundColor = .clearGreen
                 cell?.textLabel?.backgroundColor = .clear
@@ -68,9 +81,9 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
             return cell!
 
         } else {
-            cell?.textLabel?.text = "艇番:\(String(alluniv.shared.univList[indexPath.section].snipeList[indexPath.row].boatNumber))(\(alluniv.shared.univList[indexPath.section].snipeList[indexPath.row].skipper!))"
+            cell?.textLabel?.text = "艇番:\(String(AllUniv[indexPath.section].snipeList[indexPath.row].boatNumber))(\(AllUniv[indexPath.section].snipeList[indexPath.row].skipper))"
             //選択したのセルのみに色付け
-            if (alluniv.shared.univList[indexPath.section].snipeList[indexPath.row].selected)! {
+            if (AllUniv[indexPath.section].snipeList[indexPath.row].selected) {
                 //選択中
                 cell!.backgroundColor = .clearGreen
                 cell?.textLabel?.backgroundColor = .clear
@@ -90,24 +103,25 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
     //タップした船はレースに出場し色付けされる
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        if raceInformation.shared.state == "no"{
-            if boatType {
-                if (alluniv.shared.univList[indexPath.section].fourList[indexPath.row].selected)! {
-                    //未選択へ
-                    alluniv.shared.univList[indexPath.section].fourList[indexPath.row].selected = false
-                }else {
-                    //選択へ
-                    alluniv.shared.univList[indexPath.section].fourList[indexPath.row].selected = true
+        if RaceInformation[0].state == "no"{
+            try! realm.write {
+                if boatType {
+                    if (AllUniv[indexPath.section].fourList[indexPath.row].selected) {
+                        //未選択へ
+                        AllUniv[indexPath.section].fourList[indexPath.row].selected = false
+                    }else {
+                        //選択へ
+                        AllUniv[indexPath.section].fourList[indexPath.row].selected = true
+                    }
+                } else {
+                    if (AllUniv[indexPath.section].snipeList[indexPath.row].selected) {
+                        //未選択へ
+                        AllUniv[indexPath.section].snipeList[indexPath.row].selected = false
+                    }else {
+                        //選択へ
+                        AllUniv[indexPath.section].snipeList[indexPath.row].selected = true
+                    }
                 }
-            } else {
-                if (alluniv.shared.univList[indexPath.section].snipeList[indexPath.row].selected)! {
-                    //未選択へ
-                    alluniv.shared.univList[indexPath.section].snipeList[indexPath.row].selected = false
-                }else {
-                    //選択へ
-                    alluniv.shared.univList[indexPath.section].snipeList[indexPath.row].selected = true
-                }
-                
             }
             tableView.reloadRows(at: [indexPath], with: .automatic)
         }else {
@@ -119,7 +133,7 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
     }
     //セルを編集できるかどうか
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if raceInformation.shared.state == "no" {
+        if RaceInformation[0].state == "no" {
             return true
         }else {
             return false
@@ -135,9 +149,17 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
             let delete = UIAlertAction(title: "削除", style: .destructive, handler: { (actions) in
                 //削除の設定
                 if self.boatType {
-                    alluniv.shared.univList[indexPath.section].fourList.remove(at: indexPath.row)
+                    let deleteData = self.AllUniv[indexPath.section].fourList[indexPath.row]
+                    try! self.realm.write {
+                        self.realm.delete(deleteData)
+                    }
+//                    alluniv.shared.univList[indexPath.section].fourList.remove(at: indexPath.row)
                 } else {
-                    alluniv.shared.univList[indexPath.section].snipeList.remove(at: indexPath.row)
+                    let deleteData = self.AllUniv[indexPath.section].snipeList[indexPath.row]
+                    try! self.realm.write {
+                        self.realm.delete(deleteData)
+                    }
+//                    alluniv.shared.univList[indexPath.section].snipeList.remove(at: indexPath.row)
                 }
                 //セルのリロード
                 tableView.deleteRows(at: [indexPath], with: .left)
@@ -155,9 +177,9 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
             let boat:boat!
             //削除の設定
             if self.boatType {
-                boat = alluniv.shared.univList[indexPath.section].fourList[indexPath.row]
+                boat = self.AllUniv[indexPath.section].fourList[indexPath.row]
             } else {
-                boat = alluniv.shared.univList[indexPath.section].snipeList[indexPath.row]
+                boat = self.AllUniv[indexPath.section].snipeList[indexPath.row]
             }
             self.performSegue(withIdentifier: "toDecide", sender: boat)
             

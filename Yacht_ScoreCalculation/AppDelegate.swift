@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        //Realmのクラス構造を変更したらschemaVersionを変更する
+        let config = Realm.Configuration(schemaVersion: 4)
+        Realm.Configuration.defaultConfiguration = config
+        //Personal,Gorupの作成
+        let realm = try! Realm()
+        
+//        try! realm.write {
+//            realm.deleteAll()
+//        }
+
+        let test = realm.objects(personal.self)
+        if test.count == 0{
+            let Personal = personal()
+            let Group = group()
+            let Inf = raceInformation()
+            try! realm.write {
+                realm.add(Personal)
+                realm.add(Group)
+                realm.add(Inf)
+            }
+        }
+
         return true
     }
 

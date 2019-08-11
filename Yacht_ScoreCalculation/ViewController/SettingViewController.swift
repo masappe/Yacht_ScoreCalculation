@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class SettingViewController: UIViewController,UITextFieldDelegate {
 
@@ -14,10 +15,15 @@ class SettingViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var raceNameTextField: UITextField!
     @IBOutlet weak var startTextField: DatePickerKeyboard!
     @IBOutlet weak var endTextField: UITextField!
-    
+    //realm
+    let realm = try! Realm()
+    var RaceInformation: Results<raceInformation>!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //realm
+        RaceInformation = realm.objects(raceInformation.self)
+
         raceNameTextField.placeholder = "ex.〇〇大会"
         cutTextField.placeholder = "ex.4"
         
@@ -26,20 +32,23 @@ class SettingViewController: UIViewController,UITextFieldDelegate {
         cutTextField.delegate = self
         cutTextField.keyboardType = .numberPad
         
+        
 
     }
     
     @IBAction func updateButton(_ sender: Any) {
         //情報の更新
         if cutTextField.text != "" && raceNameTextField.text != "" {
-            //開始日と終了日
-            raceInformation.shared.startRace = startTextField.text!
-            raceInformation.shared.endRace = endTextField.text!
-            //大会名
-            raceInformation.shared.raceName = raceNameTextField.text!
-            //カットレース
-            let temp = cutTextField.text
-            raceInformation.shared.cutRaceNumber = Int(temp!)!
+            try! realm.write {
+                //開始日と終了日
+                RaceInformation[0].startRace = startTextField.text!
+                RaceInformation[0].endRace = endTextField.text!
+                //大会名
+                RaceInformation[0].raceName = raceNameTextField.text!
+                //カットレース
+                let temp = cutTextField.text
+                RaceInformation[0].cutRaceNumber = Int(temp!)!
+            }
             //レース情報の更新
             let alert = UIAlertController(title: "更新", message: " レース情報を更新しました", preferredStyle: .alert)
             let ok = UIAlertAction(title: "OK", style: .default, handler: nil)

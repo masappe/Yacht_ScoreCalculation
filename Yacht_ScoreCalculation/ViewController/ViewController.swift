@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ViewController: UIViewController {
 
@@ -18,10 +19,23 @@ class ViewController: UIViewController {
     @IBOutlet weak var univListButton: UIButton!
     @IBOutlet weak var addBoatButton: UIButton!
     @IBOutlet weak var resetButton: UIButton!
-    
+    //realm
+//    let realm = try! Realm()
+    var AllUniv: Results<universal>!
+    var Personal: Results<personal>!
+    var Group: Results<group>!
+    var RaceInformation: Results<raceInformation>!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        switch raceInformation.shared.state {
+        let realm = try! Realm()
+        //realm
+        AllUniv = realm.objects(universal.self)
+        Personal = realm.objects(personal.self)
+        Group = realm.objects(group.self)
+        RaceInformation = realm.objects(raceInformation.self)
+
+        switch RaceInformation[0].state {
         case "no":
             currentLabel.text = "レースに参加できます"
         case "470":
@@ -31,57 +45,18 @@ class ViewController: UIViewController {
         default:
             break
         }
-        // Do any additional setup after loading the view.
-        //テストデータで使用中
-        let meikou = universal()
-        meikou.univ = "名工"
-        let mie = universal()
-        mie.univ = "三重"
-        let meizyou = universal()
-        meizyou.univ = "名城"
-        alluniv.shared.univList.append(meikou)
-        alluniv.shared.univList.append(mie)
-        alluniv.shared.univList.append(meizyou)
-
-        for i in 0...2 {
-            let registerBoat = boat()
-            registerBoat.insert(first: Int(i), second: "一郎", thrid: "",fourth: "名工",fifth: "スナイプ")
-            registerBoat.selected = false
-            snipe.shared.list.append(registerBoat)
-            for j in 0..<alluniv.shared.univList.count {
-                if registerBoat.univ == alluniv.shared.univList[j].univ{
-                    alluniv.shared.univList[j].snipeList.append(registerBoat)
-                }
-            }
-        }
-        for i in 3...6 {
-            let registerBoat = boat()
-            registerBoat.insert(first: Int(i), second: "二郎", thrid: "",fourth: "三重",fifth: "スナイプ")
-            registerBoat.selected = false
-            snipe.shared.list.append(registerBoat)
-            for j in 0..<alluniv.shared.univList.count {
-                if registerBoat.univ == alluniv.shared.univList[j].univ{
-                    alluniv.shared.univList[j].snipeList.append(registerBoat)
-                }
-            }
-        }
-        for i in 7...9 {
-            let registerBoat = boat()
-            registerBoat.insert(first: Int(i), second: "三郎", thrid: "",fourth: "名城",fifth: "スナイプ")
-            registerBoat.selected = false
-            snipe.shared.list.append(registerBoat)
-            for j in 0..<alluniv.shared.univList.count {
-                if registerBoat.univ == alluniv.shared.univList[j].univ{
-                    alluniv.shared.univList[j].snipeList.append(registerBoat)
-                }
-            }
-        }
 
     }
     
-    
     @IBAction func addBoatButton(_ sender: Any) {
-        performSegue(withIdentifier: "toDecide", sender: nil)
+        if AllUniv.count != 0{
+            performSegue(withIdentifier: "toDecide", sender: nil)
+        } else {
+            let alert = UIAlertController(title: "エラー", message: "大学を追加して下さい", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(ok)
+            present(alert, animated: true, completion: nil)
+        }
     }
     //470出場艇決める
     @IBAction func selectFour(_ sender: Any) {
@@ -93,7 +68,7 @@ class ViewController: UIViewController {
     }
     //470レースへ
     @IBAction func raceFour(_ sender: Any) {
-        switch raceInformation.shared.state {
+        switch RaceInformation[0].state {
         case "470":
             performSegue(withIdentifier: "toRace", sender: nil)
         case "snipe":
@@ -104,8 +79,11 @@ class ViewController: UIViewController {
         case "no":
             let alert = UIAlertController(title: "470のレースに参加する", message: "本当にこの船でよろしいですか？", preferredStyle: .alert)
             let ok = UIAlertAction(title: "Ok", style: .default) { (action) in
-                raceInformation.shared.state = "470"
-                self.currentLabel.text = "470レース中"
+                let realm = try! Realm()
+                try! realm.write{
+                    self.RaceInformation[0].state = "470"
+                    self.currentLabel.text = "470レース中"
+                }
                 //レースに必要な処理を記入する
                 self.forRace470()
                 //画面遷移
@@ -121,7 +99,7 @@ class ViewController: UIViewController {
     }
     //スナイプレースへ
     @IBAction func raceSnipe(_ sender: Any) {
-        switch raceInformation.shared.state {
+        switch RaceInformation[0].state {
         case "470":
             let alert = UIAlertController(title: "STOP", message: "470がレース中です", preferredStyle: .alert)
             let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -131,9 +109,12 @@ class ViewController: UIViewController {
             performSegue(withIdentifier: "toRace", sender: nil)
         case "no":
             let alert = UIAlertController(title: "スナイプのレースに参加する", message: "本当にこの船でよろしいですか？", preferredStyle: .alert)
-            let ok = UIAlertAction(title: "Ok", style: .default) { (action) in
-                raceInformation.shared.state = "snipe"
-                self.currentLabel.text = "スナイプレース中"
+            let ok = UIAlertAction(title: "OK", style: .default) { (action) in
+                let realm = try! Realm()
+                try! realm.write{
+                    self.RaceInformation[0].state = "snipe"
+                    self.currentLabel.text = "スナイプレース中"
+                }
                 //レースに必要な処理を記入する
                 self.forRaceSnipe()
                 //画面遷移
@@ -151,8 +132,11 @@ class ViewController: UIViewController {
     @IBAction func deleteRace(_ sender: Any) {
         let alert = UIAlertController(title: "終了", message: "レース結果を破棄してもよろしいですか", preferredStyle: .alert)
         let ok = UIAlertAction(title: "OK", style: .default) { (action) in
-            raceInformation.shared.state = "no"
-            self.currentLabel.text = "レースに参加できます"
+            let realm = try! Realm()
+            try! realm.write {
+                self.RaceInformation[0].state = "no"
+                self.currentLabel.text = "レースに参加できます"
+            }
             //レース情報の破棄
             self.deleteAllRaceInformation()
         }
@@ -175,88 +159,166 @@ class ViewController: UIViewController {
     
     //レースの全ての情報を破棄する
     func deleteAllRaceInformation(){
-        //団体の初期化
-        for i in 0..<group.shared.raceList.count {
-            group.shared.raceList[i].initialize()
+        let realm = try! Realm()
+
+        try! realm.write {
+            //団体の初期化
+            for i in 0..<Group[0].raceList.count {
+                Group[0].raceList[i].initialize()
+            }
+            Group[0].raceList.removeAll()
+            //艇の初期化
+            for i in 0..<Personal[0].raceList.count{
+                Personal[0].raceList[i].initialize()
+            }
+            Personal[0].raceList.removeAll()
+            //レース情報の初期化
+            RaceInformation[0].initialize()
+            //beforeGoalBoatの初期化
+            //afterGoalBoatの初期化
+            let BeforeGoalBoat = realm.objects(beforeGoalBoat.self)
+            let AfterGoalBoat = realm.objects(afterGoalBoat.self)
+            for i in 0..<BeforeGoalBoat.count{
+                try! realm.write {
+                    if BeforeGoalBoat[i].list.count >= 1 {
+                        BeforeGoalBoat[i].list.removeAll()
+                    }
+                    if AfterGoalBoat[i].list.count >= 1{
+                        AfterGoalBoat[i].list.removeAll()
+
+                    }
+                }
+            }
+            
+//            beforeGoalBoat.shared.list.removeAll()
+//            afterGoalBoat.shared.list.removeAll()
         }
-        group.shared.raceList.removeAll()
-        //艇の初期化
-        for i in 0..<personal.shared.raceList.count{
-            personal.shared.raceList[i].initialize()
-        }
-        personal.shared.raceList.removeAll()
-        //レース情報の初期化
-        raceInformation.shared.initialize()
-        //beforeGoalBoatの初期化
-        beforeGoalBoat.shared.list.removeAll()
-        //afterGoalBoatの初期化
-        afterGoalBoat.shared.list.removeAll()
     }
     //470のレースに参加する船の反映
     func forRace470(){
-        for i in 0..<alluniv.shared.univList.count {
-            for j in 0..<alluniv.shared.univList[i].fourList.count {
-                if alluniv.shared.univList[i].fourList[j].selected {
-                    //個人の追加
-                    personal.shared.raceList.append(alluniv.shared.univList[i].fourList[j])
+        let realm = try! Realm()
+        try! realm.write{
+            for i in 0..<AllUniv.count {
+                for j in 0..<AllUniv[i].fourList.count {
+                    if AllUniv[i].fourList[j].selected {
+                        print(AllUniv[i].fourList[j])
+                        //個人の追加
+                        Personal[0].raceList.append(AllUniv[i].fourList[j])
+                    }
                 }
             }
+            //1レースの目の情報の付与
+            for i in 0..<Personal[0].raceList.count {
+                Personal[0].raceList[i].cutSelect.append(false)
+                Personal[0].raceList[i].racePoint.append(0)
+            }
+
         }
         aboutUniv()
-        raceInformation.shared.update()
+        settingRaceInf()
+
     }
     //スナイプのレースに参加する船の反映
     func forRaceSnipe(){
-        for i in 0..<alluniv.shared.univList.count {
-            for j in 0..<alluniv.shared.univList[i].snipeList.count {
-                if alluniv.shared.univList[i].snipeList[j].selected {
-                    //個人の追加
-                    personal.shared.raceList.append(alluniv.shared.univList[i].snipeList[j])
+        let realm = try! Realm()
+        try! realm.write{
+            for i in 0..<AllUniv.count {
+                for j in 0..<AllUniv[i].snipeList.count {
+                    if AllUniv[i].snipeList[j].selected {
+                        //個人の追加
+                        Personal[0].raceList.append(AllUniv[i].snipeList[j])
+                    }
                 }
+            }
+            //1レースの目の情報の付与
+            for i in 0..<Personal[0].raceList.count {
+                Personal[0].raceList[i].cutSelect.append(false)
+                Personal[0].raceList[i].racePoint.append(0)
             }
         }
         aboutUniv()
-        raceInformation.shared.update()
+        settingRaceInf()
 
+    }
+    //レースを始めるための準備
+    func settingRaceInf(){
+        let realm = try! Realm()
+        try! realm.write {
+            //レース情報の初期化
+            RaceInformation[0].boatNum = Personal[0].raceList.count
+            RaceInformation[0].DNF = RaceInformation[0].boatNum + 1
+            //beforeGaolBoat,afterGoalBoatの設定
+            let after = afterGoalBoat()
+            let before = beforeGoalBoat()
+            realm.add(after)
+            realm.add(before)
+            let BeforeGoalBoat = realm.objects(beforeGoalBoat.self)
+            for i in Personal[0].raceList{
+                BeforeGoalBoat[0].list.append(i)
+            }
+
+        }
     }
     
     //どの大学が参加するかと大学に船情報の追加
     func aboutUniv(){
         //大学の追加と大学に各船の追加
-        for i in 0..<personal.shared.raceList.count {
-            if group.shared.raceList.count == 0 {
+        for i in 0..<Personal[0].raceList.count {
+            if Group[0].raceList.count == 0 {
                 let new = boats()
-                new.univ = personal.shared.raceList[i].univ
-                new.boat.append(personal.shared.raceList[i])
-                group.shared.raceList.append(new)
+                new.univ = Personal[0].raceList[i].univ
+                new.boat.append(Personal[0].raceList[i])
+                let realm = try! Realm()
+
+                try! realm.write {
+                    Group[0].raceList.append(new)
+                    Group[0].raceList[0].racePoint.append(0)
+                }
             }else {
                 var isInsert = false
                 //既存の大学と一致しなかったら追加する
-                hantei:for j in 0..<alluniv.shared.univList.count{
-                    if alluniv.shared.univList[j].univ == personal.shared.raceList[i].univ {
-                        //レースに出る団体に追加する
-                        for k in 0..<group.shared.raceList.count {
-                            if group.shared.raceList[k].univ == personal.shared.raceList[i].univ{
-                                group.shared.raceList[k].boat.append(personal.shared.raceList[i])
+                hantei:for j in 0..<AllUniv.count{
+                    if AllUniv[j].univ == Personal[0].raceList[i].univ {
+                        //レースに出る団体に個人を追加する
+                        for k in 0..<Group[0].raceList.count {
+                            if Group[0].raceList[k].univ == Personal[0].raceList[i].univ{
+                                let realm = try! Realm()
+
+                                try! realm.write {
+                                    Group[0].raceList[k].boat.append(Personal[0].raceList[i])
+                                }
                                 break hantei
                             }
                         }
                     }
                     //最後まで一致しなかったら
-                    if j == alluniv.shared.univList.count-1{
+                    if j == AllUniv.count-1{
                         isInsert = true
                     }
                 }
                 if isInsert {
                     //一致しなかったら追加する
                     let new = boats()
-                    new.univ = personal.shared.raceList[i].univ
-                    new.boat.append(personal.shared.raceList[i])
-                    group.shared.raceList.append(new)
+                    new.univ = Personal[0].raceList[i].univ
+                    new.boat.append(Personal[0].raceList[i])
+                    let realm = try! Realm()
+
+                    try! realm.write {
+                        Group[0].raceList.append(new)
+                    }
                 }
                 
             }
         }
+        let realm = try! Realm()
+        
+        try! realm.write {
+            //1レースの目の情報の付与
+            for i in 0..<Group[0].raceList.count {
+                Group[0].raceList[i].racePoint.append(0)
+            }
+        }
+
     }
     
 

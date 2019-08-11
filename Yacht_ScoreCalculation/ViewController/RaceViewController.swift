@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UITabBarDelegate {
     
@@ -15,10 +16,24 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     @IBOutlet weak var beforeTableView: UITableView!
     //回航後
     @IBOutlet weak var afterTableView: UITableView!
-    
+    //realm
+    let realm = try! Realm()
+    var Personal: Results<personal>!
+    var Group: Results<group>!
+    var RaceInformation: Results<raceInformation>!
+    var BeforeGoalBoat: Results<beforeGoalBoat>!
+    var AfterGoalBoat: Results<afterGoalBoat>!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //realm
+        Personal = realm.objects(personal.self)
+        Group = realm.objects(group.self)
+        RaceInformation = realm.objects(raceInformation.self)
+        BeforeGoalBoat = realm.objects(beforeGoalBoat.self)
+        AfterGoalBoat = realm.objects(afterGoalBoat.self)
+
         afterTableView.delegate = self
         afterTableView.dataSource = self
         beforeTableView.delegate = self
@@ -28,15 +43,25 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
 //        beforeGoalBoat.shared.list.removeAll()
         //最初だけ追加
         //なんかよくわからん
-        if raceInformation.shared.raceCount == 1 {
-            afterGoalBoat.shared.list.append([boat]())
-            beforeGoalBoat.shared.list.append(personal.shared.raceList)
-        }
+//        if RaceInformation[0].raceCount == 1 {
+//            let after = afterGoalBoat()
+//            let before = beforeGoalBoat()
+//
+//            try! realm.write {
+//                realm.add(after)
+//                realm.add(before)
+////                AfterGoalBoat[0].list.append(boat())
+//                for i in Personal[0].raceList{
+//                    BeforeGoalBoat[0].list.append(i)
+//                }
+//            }
+//
+//        }
         //cutレースかどうかでタイトルを変える
-        if raceInformation.shared.currentRaceNumber >= raceInformation.shared.cutRaceNumber {
-            titleLabel.title = "\(raceInformation.shared.currentRaceNumber)レース目(cut有り)"
+        if RaceInformation[0].currentRaceNumber >= RaceInformation[0].cutRaceNumber {
+            titleLabel.title = "\(RaceInformation[0].currentRaceNumber)レース目(cut有り)"
         }else {
-            titleLabel.title = "\(raceInformation.shared.currentRaceNumber)レース目"
+            titleLabel.title = "\(RaceInformation[0].currentRaceNumber)レース目"
         }
 
     }
@@ -56,10 +81,10 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     //tableviewの表示
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView.tag == 1 {
-            return afterGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1].count
+            return AfterGoalBoat[RaceInformation[0].currentRaceNumber-1].list.count
         }
         if tableView.tag ==  2 {
-            return beforeGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1].count
+            return BeforeGoalBoat[RaceInformation[0].currentRaceNumber-1].list.count
         }
         return 0
     }
@@ -68,7 +93,7 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView.tag == 1 {
             let cell = afterTableView.dequeueReusableCell(withIdentifier: "after")
-            cell?.textLabel?.text = "\(String(afterGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1][indexPath.row].boatNumber))(\(afterGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1][indexPath.row].skipper!))"
+            cell?.textLabel?.text = "\(String(AfterGoalBoat[RaceInformation[0].currentRaceNumber-1].list[indexPath.row].boatNumber))(\(AfterGoalBoat[RaceInformation[0].currentRaceNumber-1].list[indexPath.row].skipper))"
             if indexPath.row % 2 == 0 {
                 cell?.backgroundColor = .clearGreen
             }
@@ -76,7 +101,7 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }
         if tableView.tag ==  2 {
             let cell = beforeTableView.dequeueReusableCell(withIdentifier: "before")
-            cell?.textLabel?.text = "\(String(beforeGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1][indexPath.row].boatNumber))(\(beforeGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1][indexPath.row].skipper!))"
+            cell?.textLabel?.text = "\(String(BeforeGoalBoat[RaceInformation[0].currentRaceNumber-1].list[indexPath.row].boatNumber))(\(BeforeGoalBoat[RaceInformation[0].currentRaceNumber-1].list[indexPath.row].skipper))"
             if indexPath.row % 2 == 0 {
                 cell?.backgroundColor = .clearGreen
             }
@@ -94,8 +119,10 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             tableView.deselectRow(at: indexPath, animated: true)
         }
         if tableView.tag == 2 {
-            afterGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1].append(beforeGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1][indexPath.row])
-            beforeGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1].remove(at: indexPath.row)
+            try! realm.write {
+                AfterGoalBoat[RaceInformation[0].currentRaceNumber-1].list.append(BeforeGoalBoat[RaceInformation[0].currentRaceNumber-1].list[indexPath.row])
+                BeforeGoalBoat[RaceInformation[0].currentRaceNumber-1].list.remove(at: indexPath.row)
+            }
             afterTableView.reloadData()
             beforeTableView.reloadData()
             
@@ -108,8 +135,10 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             //削除の設定
             let delete = UIContextualAction(style: .destructive, title: "delete", handler: {(action,sourceView,completionHandler) in
                 completionHandler(true)
-                beforeGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1].append(afterGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1][indexPath.row])
-                afterGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1].remove(at: indexPath.row)
+                try! self.realm.write {
+                    self.BeforeGoalBoat[self.RaceInformation[0].currentRaceNumber-1].list.append(self.AfterGoalBoat[self.RaceInformation[0].currentRaceNumber-1].list[indexPath.row])
+                    self.AfterGoalBoat[self.RaceInformation[0].currentRaceNumber-1].list.remove(at: indexPath.row)
+                }
                 self.afterTableView.reloadData()
                 self.beforeTableView.reloadData()
             })
@@ -124,8 +153,10 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     //前のレースへ
     @IBAction func backRaceButton(_ sender: Any) {
         //レース数の更新
-        if raceInformation.shared.currentRaceNumber >= 2{
-            raceInformation.shared.currentRaceNumber = raceInformation.shared.currentRaceNumber - 1
+        if RaceInformation[0].currentRaceNumber >= 2{
+            try! realm.write {
+                RaceInformation[0].currentRaceNumber = RaceInformation[0].currentRaceNumber - 1
+            }
         } else {
             let alert = UIAlertController(title: "無理", message: "これ以上前に戻れません", preferredStyle: .alert)
             let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -133,10 +164,10 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             present(alert, animated: true, completion: nil)
         }
         //cutレースかどうかでタイトルを変える
-        if raceInformation.shared.currentRaceNumber >= raceInformation.shared.cutRaceNumber {
-            titleLabel.title = "\(raceInformation.shared.currentRaceNumber)レース目(cut有り)"
+        if RaceInformation[0].currentRaceNumber >= RaceInformation[0].cutRaceNumber {
+            titleLabel.title = "\(RaceInformation[0].currentRaceNumber)レース目(cut有り)"
         }else {
-            titleLabel.title = "\(raceInformation.shared.currentRaceNumber)レース目"
+            titleLabel.title = "\(RaceInformation[0].currentRaceNumber)レース目"
         }
         afterTableView.reloadData()
         beforeTableView.reloadData()
@@ -144,43 +175,56 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     //次のレースへ
     @IBAction func nextRaceButton(_ sender: Any) {
-        //レース数の更新
-        raceInformation.shared.currentRaceNumber = raceInformation.shared.currentRaceNumber + 1
+        try! realm.write {
+            //レース数の更新
+            RaceInformation[0].currentRaceNumber = RaceInformation[0].currentRaceNumber + 1
+        }
         //次のレースに進むかどうか
-        if raceInformation.shared.raceCount < raceInformation.shared.currentRaceNumber {
+        if RaceInformation[0].raceCount < RaceInformation[0].currentRaceNumber {
             //レースの更新をしているかどうかの確認
-            if raceInformation.shared.raceCount == raceInformation.shared.doneUpdateCount {
+            if RaceInformation[0].raceCount == RaceInformation[0].doneUpdateCount {
                 //アラートで次のレースに進むかの確認
-                let alert = UIAlertController(title: "次のレースへ進む", message: "第\(raceInformation.shared.currentRaceNumber)レースに進みますか？", preferredStyle: .alert)
+                let alert = UIAlertController(title: "次のレースへ進む", message: "第\(RaceInformation[0].currentRaceNumber)レースに進みますか？", preferredStyle: .alert)
                 //OKボタンの時の処理
                 let ok = UIAlertAction(title: "OK", style: .default) { (action) in
-                    //１回のみ行われる
-                    raceInformation.shared.raceCount = raceInformation.shared.currentRaceNumber
-                    afterGoalBoat.shared.list.append([boat]())
-                    //次のレースに進むときはアペンドする
-                    //個人
-                    for i in 0..<personal.shared.raceList.count{
-                        personal.shared.raceList[i].racePoint.append(raceInformation.shared.DNF)
-                        personal.shared.raceList[i].cutSelect.append(false)
+                    try! self.realm.write {
+                        //１回のみ行われる
+                        self.RaceInformation[0].raceCount = self.RaceInformation[0].currentRaceNumber
+                        let after = afterGoalBoat()
+                        self.realm.add(after)
+//                        self.AfterGoalBoat[self.RaceInformation[0].currentRaceNumber-1].list.append(boat())
+                        //次のレースに進むときはアペンドする
+                        //個人
+                        for i in 0..<self.Personal[0].raceList.count{
+                            self.Personal[0].raceList[i].racePoint.append(self.RaceInformation[0].DNF)
+                            self.Personal[0].raceList[i].cutSelect.append(false)
+                        }
+                        //団体
+                        for i in 0..<self.Group[0].raceList.count {
+                            self.Group[0].raceList[i].racePoint.append(0)
+                        }
+                        //現在のレース結果を格納
+                        //レース結果をソートしてその結果をbeforeに格納
+                        //cutレースかどうかで格納するものを変える
+                        if self.RaceInformation[0].raceCount >= self.RaceInformation[0].cutRaceNumber {
+                            self.cutRaceResult()
+                        }else {
+                            self.raceResult()
+                        }
+                        let before = beforeGoalBoat()
+                        self.realm.add(before)
+                        for i in self.Personal[0].raceList{
+                            self.BeforeGoalBoat[self.RaceInformation[0].currentRaceNumber-1].list.append(i)
+                        }
                     }
-                    //団体
-                    for i in 0..<group.shared.raceList.count {
-                        group.shared.raceList[i].racePoint.append(0)
-                    }
-                    //現在のレース結果を格納
-                    //レース結果をソートしてその結果をbeforeに格納
-                    //cutレースかどうかで格納するものを変える
-                    if raceInformation.shared.raceCount >= raceInformation.shared.cutRaceNumber {
-                        self.cutRaceResult()
-                    }else {
-                        self.raceResult()
-                    }
-                    beforeGoalBoat.shared.list.append(personal.shared.raceList)
+                    
+
+//                    beforeGoalBoat.shared.list.append(Personal[0].raceList)
                     //cutレースかどうかでタイトルを変える
-                    if raceInformation.shared.currentRaceNumber >= raceInformation.shared.cutRaceNumber {
-                        self.titleLabel.title = "\(raceInformation.shared.currentRaceNumber)レース目(cut有り)"
+                    if self.RaceInformation[0].currentRaceNumber >= self.RaceInformation[0].cutRaceNumber {
+                        self.titleLabel.title = "\(self.RaceInformation[0].currentRaceNumber)レース目(cut有り)"
                     }else {
-                        self.titleLabel.title = "\(raceInformation.shared.currentRaceNumber)レース目"
+                        self.titleLabel.title = "\(self.RaceInformation[0].currentRaceNumber)レース目"
                     }
                     self.afterTableView.reloadData()
                     self.beforeTableView.reloadData()
@@ -188,7 +232,9 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                 }
                 //cancelならひく１
                 let cancel = UIAlertAction(title: "cancel", style: .cancel, handler: {(action) in
-                    raceInformation.shared.currentRaceNumber = raceInformation.shared.currentRaceNumber - 1
+                    try! self.realm.write {
+                        self.RaceInformation[0].currentRaceNumber = self.RaceInformation[0].currentRaceNumber - 1
+                    }
                     
                 })
                 alert.addAction(ok)
@@ -196,7 +242,9 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                 present(alert, animated: true, completion: nil)
 
             } else {
-                raceInformation.shared.currentRaceNumber = raceInformation.shared.currentRaceNumber - 1
+                try! realm.write {
+                    RaceInformation[0].currentRaceNumber = RaceInformation[0].currentRaceNumber - 1
+                }
                 let alert = UIAlertController(title: "エラー", message: "レースの更新をしてください", preferredStyle: .alert)
                 let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
                 alert.addAction(ok)
@@ -204,10 +252,10 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             }
         } else {
             //cutレースかどうかでタイトルを変える
-            if raceInformation.shared.currentRaceNumber >= raceInformation.shared.cutRaceNumber {
-                titleLabel.title = "\(raceInformation.shared.currentRaceNumber)レース目(cut有り)"
+            if RaceInformation[0].currentRaceNumber >= RaceInformation[0].cutRaceNumber {
+                titleLabel.title = "\(RaceInformation[0].currentRaceNumber)レース目(cut有り)"
             }else {
-                titleLabel.title = "\(raceInformation.shared.currentRaceNumber)レース目"
+                titleLabel.title = "\(RaceInformation[0].currentRaceNumber)レース目"
             }
             afterTableView.reloadData()
             beforeTableView.reloadData()
@@ -217,51 +265,55 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     //レースの結果を更新する
     @IBAction func updateRaceResult(_ sender: Any) {
-        let alert = UIAlertController(title: "更新", message: "第\(raceInformation.shared.currentRaceNumber)レースのレース結果を更新してもよろしいですか？", preferredStyle: .alert)
+        let alert = UIAlertController(title: "更新", message: "第\(RaceInformation[0].currentRaceNumber)レースのレース結果を更新してもよろしいですか？", preferredStyle: .alert)
         //OKボタンの時の処理
         let ok = UIAlertAction(title: "OK", style: .default) { (action) in
-            //更新ボタンを押したことを更新
-            if raceInformation.shared.doneUpdateCount + 1 == raceInformation.shared.raceCount {
-                raceInformation.shared.doneUpdateCount += 1
-            }
-            //全ての船のレース結果の更新
-            //beforeGoalだったら英語がつく
-            //afterGoalだったら得点がつく
-            for i in 0..<personal.shared.raceList.count {
-                var find = false
-                //Goalした船の得点計算
-                for j in 0..<afterGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1].count {
-                    if afterGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1][j].boatNumber == personal.shared.raceList[i].boatNumber {
-                        personal.shared.raceList[i].racePoint[raceInformation.shared.currentRaceNumber-1] = j + 1
-                        find = true
-                        break
-                    }
+            try! self.realm.write {
+                //更新ボタンを押したことを更新
+                if self.RaceInformation[0].doneUpdateCount + 1 == self.RaceInformation[0].raceCount {
+                    self.RaceInformation[0].doneUpdateCount += 1
                 }
-                //Goalしてない船の得点計算
-                if !find {
-                    for k in 0..<beforeGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1].count {
-                        if beforeGoalBoat.shared.list[raceInformation.shared.currentRaceNumber-1][k].boatNumber == personal.shared.raceList[i].boatNumber {
-                            personal.shared.raceList[i].racePoint[raceInformation.shared.currentRaceNumber-1] = raceInformation.shared.DNF
-                            break
+                //全ての船のレース結果の更新
+                //beforeGoalだったら英語がつく
+                //afterGoalだったら得点がつく
+                for i in 0..<self.Personal[0].raceList.count {
+                    var find = false
+                    //Goalした船の得点計算
+                    for j in 0..<self.AfterGoalBoat[self.RaceInformation[0].currentRaceNumber-1].list.count {
+                        if self.AfterGoalBoat[self.RaceInformation[0].currentRaceNumber-1].list[j].boatNumber == self.Personal[0].raceList[i].boatNumber {
+                            self.Personal[0].raceList[i].racePoint[self.RaceInformation[0].currentRaceNumber-1] = j + 1
                             
+                            find = true
+                            break
                         }
                     }
+                    //Goalしてない船の得点計算
+                    if !find {
+                        for k in 0..<self.BeforeGoalBoat[self.RaceInformation[0].currentRaceNumber-1].list.count {
+                            if self.BeforeGoalBoat[self.RaceInformation[0].currentRaceNumber-1].list[k].boatNumber == self.Personal[0].raceList[i].boatNumber {
+                                self.Personal[0].raceList[i].racePoint[self.RaceInformation[0].currentRaceNumber-1] = self.RaceInformation[0].DNF
+                                break
+                                
+                            }
+                        }
+                    }
+
                 }
-            }
-            //艇ごとの現在までのレースの合計点を計算
-            for i in 0..<personal.shared.raceList.count{
-                personal.shared.raceList[i].calculateRacePoint()
-            }
-            //大学ごとの現在までのレースの合計点を計算
-            for i in 0..<group.shared.raceList.count{
-                var sum = 0
-                //船の合計点を反映させる
-                for j in 0..<group.shared.raceList[i].boat.count{
-                    sum = sum + group.shared.raceList[i].boat[j].racePoint[raceInformation.shared.currentRaceNumber-1]
+                //艇ごとの現在までのレースの合計点を計算
+                for i in 0..<self.Personal[0].raceList.count{
+                    self.Personal[0].raceList[i].calculateRacePoint()
                 }
-                group.shared.raceList[i].racePoint[raceInformation.shared.currentRaceNumber-1] = sum
-                //total,badpointの計算
-                group.shared.raceList[i].calculateRacePoint()
+                //大学ごとの現在までのレースの合計点を計算
+                for i in 0..<self.Group[0].raceList.count{
+                    var sum = 0
+                    //船の合計点を反映させる
+                    for j in 0..<self.Group[0].raceList[i].boat.count{
+                        sum = sum + self.Group[0].raceList[i].boat[j].racePoint[self.RaceInformation[0].currentRaceNumber-1]
+                    }
+                    self.Group[0].raceList[i].racePoint[self.RaceInformation[0].currentRaceNumber-1] = sum
+                    //total,badpointの計算
+                    self.Group[0].raceList[i].calculateRacePoint()
+                }
             }
 
         }
@@ -275,16 +327,16 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     //レース順位のソート
     //cutレースの時の順位の計算
     func cutRaceResult() {
-        personal.shared.raceList.sort{ $0.cutPoint < $1.cutPoint }
-        for i in 0..<personal.shared.raceList.count {
-            personal.shared.raceList[i].cutResult = i + 1
+        Personal[0].raceList.sort{ $0.cutPoint < $1.cutPoint }
+        for i in 0..<Personal[0].raceList.count {
+            Personal[0].raceList[i].cutResult = i + 1
         }
     }
     //cutレースがない時の順位の計算
     func raceResult() {
-        personal.shared.raceList.sort{$0.totalPoint < $1.totalPoint}
-        for i in 0..<personal.shared.raceList.count {
-            personal.shared.raceList[i].result = i + 1
+        Personal[0].raceList.sort{$0.totalPoint < $1.totalPoint}
+        for i in 0..<Personal[0].raceList.count {
+            Personal[0].raceList[i].result = i + 1
         }
     }
     

@@ -7,34 +7,35 @@
 //
 
 import Foundation
+import RealmSwift
 
-class raceInformation:NSObject {
+
+class raceInformation:Object {
+    
     //大会名
-    var raceName = ""
+    @objc dynamic var raceName = ""
     //大会開始
-    var startRace = ""
+    @objc dynamic var startRace = ""
     //大会終了
-    var endRace = ""
+    @objc dynamic var endRace = ""
     //レース数
-    var raceCount:Int = 1
+    @objc dynamic var raceCount:Int = 1
     //現在のレース
-    var currentRaceNumber:Int = 1
+    @objc dynamic var currentRaceNumber:Int = 1
     //cutレースがいつからか
-    var cutRaceNumber = 0
+    @objc dynamic var cutRaceNumber = 0
     //船の数
-    var boatNum = 0
+    @objc dynamic var boatNum = 0
     //レースの状態
     //470:470レース中，snipe:スナイプレース中,no:レースしていない
-    var state = "no"
+    @objc dynamic var state = "no"
     //レースを更新したかどうか
-    var doneUpdateCount = 0
+    @objc dynamic var doneUpdateCount = 0
 
     //英語の種類一覧
-    var DNF = 0
-    var black: Int!
+    @objc dynamic var DNF = 0
+//    @objc dynamic var black: Int!
     
-    static let shared = raceInformation()
-    private override init(){}
     //レース情報の初期化
     func initialize() {
         raceCount = 1
@@ -43,126 +44,102 @@ class raceInformation:NSObject {
         DNF = 1
         doneUpdateCount = 0
     }
-    func update() {
-        boatNum = personal.shared.raceList.count
-        DNF = boatNum + 1
-    }
 }
 
 //大学情報一覧
-class alluniv:NSObject {
-    var univList: [universal] = []
-    static let shared = alluniv()
-    private override init(){}
+class alluniv:Object {
+    var univList = List<universal>()
+    @objc dynamic static let shared = alluniv()
+//    private override init(){}
 }
 //大学情報，大学ごとの所有艇の情報も保持
-class universal:NSObject {
-    var univ: String!
-    var fourList: [boat] = []
-    var snipeList: [boat] = []
+class universal:Object {
+    @objc dynamic var univ: String!
+    var fourList = List<boat>()
+    var snipeList = List<boat>()
     
 }
 //レースに参加する大学一覧
-class group:NSObject {
-    var raceList: [boats] = []
-    static let shared = group()
-    private override init(){}
+class group:Object {
+    var raceList = List<boats>()
 }
 //レースに参加する大学情報
-class boats:NSObject {
+class boats:Object {
     //大学名
-    var univ: String!
+    @objc dynamic var univ: String!
     //各レースの順位
-    var racePoint:[Int] = [0]
+    var racePoint = List<Int>()
     //どの艇が所属しているか
-    var boat:[boat] = []
+    var boat = List<boat>()
     //合計得点
-    var totalPoint = 0
-//    //cutの点数
-//    var cutPoint = 0
-//    //一番悪い点数
-//    var badPoint = 0
+    @objc dynamic var totalPoint = 0
     //順位
-    var result:Int!
-//    //cut順位
-//    var cutResult:Int!
-    //色付け
-//    var color = false
+    @objc dynamic var result = 0
     //clear:色なし，blue:青色，red:赤色
-    var selectColor = "clear"
+    @objc dynamic var selectColor = "clear"
     
     //大学のレース情報の初期化
     func initialize(){
         racePoint.removeAll()
-        racePoint = [0]
+        racePoint.append(0)
         boat.removeAll()
         totalPoint = 0
-//        cutPoint = 0
-//        badPoint = 0
     }
     //レースの合計点数を計算する
     func calculateRacePoint() {
         let sum = racePoint.reduce(0,+)
         totalPoint = sum
-
-//        badPoint = 0
-//        let sum = racePoint.reduce(0) {(num1:Int,num2:Int) -> Int in
-//            if badPoint < num2 {
-//                badPoint = num2
-//            }
-//            return num1 + num2
-//        }
-//        totalPoint = sum
-//        cutPoint = sum - badPoint
     }
 
 }
 //レースに参加する船リスト
-class personal:NSObject {
-    var raceList: [boat] = []
-    static let shared = personal()
-    private override init(){}
+class personal:Object {
+    var raceList = List<boat>()
 }
 
 //艇情報
-class boat:NSObject {
+class boat:Object {
     //艇番
-    var boatNumber: Int!
+    @objc dynamic var boatNumber = 0
     //スキッパー
-    var skipper: String!
+    @objc dynamic var skipper = ""
     //クルー
-    var crew: String!
+    @objc dynamic var crew = ""
     //大学名
-    var univ:String!
+    @objc dynamic var univ:String!
     //艇種
     //True:470,false:snipe
-    var boatType:Bool!
+    @objc dynamic var boatType = true
     //各レースのの順位
-    var racePoint:[Int] = [0]
+    //0を入れないといけない
+    var racePoint = List<Int>()
+//    var racePoint:[Int] = [0]
     //カットされるかされないか
-    var cutSelect:[Bool] = [false]
+    //falseを入れないといけない
+    var cutSelect = List<Bool>()
+//    @objc dynamic var cutSelect:[Bool] = [false]
     //合計点数
-    var totalPoint:Int = 0
+    @objc dynamic var totalPoint:Int = 0
     //cutの点数
-    var cutPoint:Int = 0
+    @objc dynamic var cutPoint:Int = 0
     //一番悪い点数
-    var badPoint:Int=0
+    @objc dynamic var badPoint:Int = 0
     //順位
-    var result = 1
+    @objc dynamic var result = 1
     //cut順位
-    var cutResult = 1
+    @objc dynamic var cutResult = 1
     //レースに出るかの判断基準，色の選択の判断基準
-    var selected:Bool!
+    @objc dynamic var selected = false
     //色付け
-//    var color = false
     //clear:色なし，blue:青色，red:赤色
-    var selectColor = "clear"
+    @objc dynamic var selectColor = "clear"
 
     
     //艇のレース情報の初期化
     func initialize(){
         racePoint.removeAll()
-        racePoint = [0]
+//        racePoint = [0]
+        racePoint.append(0)
         totalPoint = 0
         cutPoint = 0
         badPoint = 0
@@ -197,47 +174,39 @@ class boat:NSObject {
         if let max = temp.max() {
             badPoint = max
         }
-//        var temp = racePoint
-//        //cutPointの計算
-//        for _ in 0..<cutSelect.count {
-//            let maxIndex = temp.firstIndex{ $0 == temp.max() }
-//            if !cutSelect[maxIndex!] {
-//                badPoint = temp[maxIndex!]
-//                break
-//            }
-//            temp.remove(at: maxIndex!)
-//        }
-        
         let sum = racePoint.reduce(0,+)
         totalPoint = sum
         cutPoint = sum - badPoint
     }
     
 }
+//多分いらない
+class fourSevenZero:Object {
+    var list = List<boat>()
+//    @objc dynamic var list: [boat] = []
+//    @objc dynamic static let shared = fourSevenZero()
+//    private override init(){}
+}
+//多分いらない
+class snipe:Object {
+    var list = List<boat>()
+    //    @objc dynamic var list: [boat] = []
+//    @objc dynamic static let shared = snipe()
 
-class fourSevenZero:NSObject {
-    var list: [boat] = []
-    static let shared = fourSevenZero()
-    private override init(){}
 }
 
-class snipe:NSObject {
-    var list: [boat] = []
-    static let shared = snipe()
-    private override init(){}
+
+class beforeGoalBoat:Object {
+    var list = List<boat>()
+//    var list = [[boat]]()
+//    static let shared = beforeGoalBoat()
+//    private override init() {}
 
 }
-
-
-class beforeGoalBoat:NSObject {
-    var list = [[boat]]()
-    static let shared = beforeGoalBoat()
-    private override init() {}
-
-}
-class afterGoalBoat:NSObject {
-    var list = [[boat]]()
-    static let shared = afterGoalBoat()
-    private override init() {}
+class afterGoalBoat:Object {
+    var list = List<boat>()
+//    var list = [[boat]]()
+//    static let shared = afterGoalBoat()
+//    private override init() {}
 
 }

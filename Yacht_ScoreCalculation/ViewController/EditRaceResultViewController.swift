@@ -11,6 +11,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class EditRaceResultViewController: UIViewController,UITextFieldDelegate {
 
@@ -24,14 +25,21 @@ class EditRaceResultViewController: UIViewController,UITextFieldDelegate {
     //raceNum+1レース目
     var raceNum: Int!
     var tableViewControllerDelegate:PersonalTableViewControllerDelegate!
-    
+    //realm
+    let realm = try! Realm()
+    var Group: Results<group>!
+    var Personal: Results<personal>!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //realm
+        Group = realm.objects(group.self)
+        Personal = realm.objects(personal.self)
+
         editTextField.delegate = self
         editTextField.keyboardType = .numberPad
 
-        boat = personal.shared.raceList[boatNum]
+        boat = Personal[0].raceList[boatNum]
         boatNumberLabel.text = "艇番:\(String(boat.boatNumber))"
         raceNumberLabel.text = "第\(String(raceNum+1))レース目"
         editTextField.text = String(boat.racePoint[raceNum])
@@ -46,27 +54,27 @@ class EditRaceResultViewController: UIViewController,UITextFieldDelegate {
             alert.addAction(ok)
             present(alert, animated: true, completion: nil)
         }else {
-            boat.cutSelect[raceNum] = cutSwitch.isOn
-            let point = Int(editTextField.text!)
-            //船の点数の更新
-            boat.racePoint[raceNum] = point!
-            //合計点の更新
-            boat.calculateRacePoint()
-            //大学のレースの合計点を更新
-            for i in 0..<group.shared.raceList.count {
-                var sum = 0
-                if boat.univ == group.shared.raceList[i].univ {
-                    for j in 0..<group.shared.raceList[i].boat.count {
-                        sum = sum + group.shared.raceList[i].boat[j].racePoint[raceNum]
+            try! realm.write {
+                boat.cutSelect[raceNum] = cutSwitch.isOn
+                let point = Int(editTextField.text!)
+                //船の点数の更新
+                boat.racePoint[raceNum] = point!
+                //合計点の更新
+                boat.calculateRacePoint()
+                //大学のレースの合計点を更新
+                for i in 0..<Group[0].raceList.count {
+                    var sum = 0
+                    if boat.univ == Group[0].raceList[i].univ {
+                        for j in 0..<Group[0].raceList[i].boat.count {
+                            sum = sum + Group[0].raceList[i].boat[j].racePoint[raceNum]
+                        }
+                        Group[0].raceList[i].racePoint[raceNum] = sum
+                        //total.badpointの計算
+                        Group[0].raceList[i].calculateRacePoint()
+                        break
                     }
-                    group.shared.raceList[i].racePoint[raceNum] = sum
-                    //total.badpointの計算
-                    group.shared.raceList[i].calculateRacePoint()
-                    break
                 }
             }
-            
-            
             
             let alert = UIAlertController(title: "更新", message: "更新完了しました", preferredStyle: .alert)
             let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
