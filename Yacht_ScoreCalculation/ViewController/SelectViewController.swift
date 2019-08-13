@@ -45,22 +45,18 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return AllUniv.count
-//        return alluniv.shared.univList.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return AllUniv[section].univ
-//        return alluniv.shared.univList[section].univ
     }
 
     //tableviewの個数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if boatType {
             return AllUniv[section].fourList.count
-//            return alluniv.shared.univList[section].fourList.count
         } else {
             return AllUniv[section].snipeList.count
-//            return alluniv.shared.univList[section].snipeList.count
 
         }
     }
@@ -153,13 +149,11 @@ class SelectViewController: UIViewController,UITableViewDelegate,UITableViewData
                     try! self.realm.write {
                         self.realm.delete(deleteData)
                     }
-//                    alluniv.shared.univList[indexPath.section].fourList.remove(at: indexPath.row)
                 } else {
                     let deleteData = self.AllUniv[indexPath.section].snipeList[indexPath.row]
                     try! self.realm.write {
                         self.realm.delete(deleteData)
                     }
-//                    alluniv.shared.univList[indexPath.section].snipeList.remove(at: indexPath.row)
                 }
                 //セルのリロード
                 tableView.deleteRows(at: [indexPath], with: .left)

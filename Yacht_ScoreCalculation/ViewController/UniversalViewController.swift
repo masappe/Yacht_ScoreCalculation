@@ -44,7 +44,6 @@ class UniversalViewController: UIViewController,UITextFieldDelegate,UITableViewD
             try! realm.write {
                 realm.add(newUniv)
             }
-            //        alluniv.shared.univList.append(newUniv)
             tableView.reloadData()
             univTextField.text = ""
         }
@@ -54,12 +53,10 @@ class UniversalViewController: UIViewController,UITextFieldDelegate,UITableViewD
     //tableviewに関する操作
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return AllUniv.count
-//        return alluniv.shared.univList.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
         cell?.textLabel?.text = AllUniv[indexPath.row].univ
-//        cell?.textLabel?.text = alluniv.shared.univList[indexPath.row].univ
         return cell!
     }
     
@@ -76,7 +73,6 @@ class UniversalViewController: UIViewController,UITextFieldDelegate,UITableViewD
                 try! self.realm.write {
                     self.realm.delete(deleteData)
                 }
-//                alluniv.shared.univList.remove(at: indexPath.row)
                 //セルのリロード
                 tableView.deleteRows(at: [indexPath], with: .left)
             })

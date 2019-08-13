@@ -38,25 +38,6 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         afterTableView.dataSource = self
         beforeTableView.delegate = self
         beforeTableView.dataSource = self
-        //要素を追加する前に配列を作成する
-//        afterGoalBoat.shared.list.removeAll()
-//        beforeGoalBoat.shared.list.removeAll()
-        //最初だけ追加
-        //なんかよくわからん
-//        if RaceInformation[0].raceCount == 1 {
-//            let after = afterGoalBoat()
-//            let before = beforeGoalBoat()
-//
-//            try! realm.write {
-//                realm.add(after)
-//                realm.add(before)
-////                AfterGoalBoat[0].list.append(boat())
-//                for i in Personal[0].raceList{
-//                    BeforeGoalBoat[0].list.append(i)
-//                }
-//            }
-//
-//        }
         //cutレースかどうかでタイトルを変える
         if RaceInformation[0].currentRaceNumber >= RaceInformation[0].cutRaceNumber {
             titleLabel.title = "\(RaceInformation[0].currentRaceNumber)レース目(cut有り)"
@@ -93,7 +74,7 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView.tag == 1 {
             let cell = afterTableView.dequeueReusableCell(withIdentifier: "after")
-            cell?.textLabel?.text = "\(String(AfterGoalBoat[RaceInformation[0].currentRaceNumber-1].list[indexPath.row].boatNumber))(\(AfterGoalBoat[RaceInformation[0].currentRaceNumber-1].list[indexPath.row].skipper))"
+            cell?.textLabel?.text = "\(indexPath.row+1)位:\(String(AfterGoalBoat[RaceInformation[0].currentRaceNumber-1].list[indexPath.row].boatNumber))(\(AfterGoalBoat[RaceInformation[0].currentRaceNumber-1].list[indexPath.row].skipper))"
             if indexPath.row % 2 == 0 {
                 cell?.backgroundColor = .clearGreen
             }
@@ -101,7 +82,7 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }
         if tableView.tag ==  2 {
             let cell = beforeTableView.dequeueReusableCell(withIdentifier: "before")
-            cell?.textLabel?.text = "\(String(BeforeGoalBoat[RaceInformation[0].currentRaceNumber-1].list[indexPath.row].boatNumber))(\(BeforeGoalBoat[RaceInformation[0].currentRaceNumber-1].list[indexPath.row].skipper))"
+            cell?.textLabel?.text = "\(indexPath.row+1)位:\(String(BeforeGoalBoat[RaceInformation[0].currentRaceNumber-1].list[indexPath.row].boatNumber))(\(BeforeGoalBoat[RaceInformation[0].currentRaceNumber-1].list[indexPath.row].skipper))"
             if indexPath.row % 2 == 0 {
                 cell?.backgroundColor = .clearGreen
             }
@@ -192,7 +173,6 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                         self.RaceInformation[0].raceCount = self.RaceInformation[0].currentRaceNumber
                         let after = afterGoalBoat()
                         self.realm.add(after)
-//                        self.AfterGoalBoat[self.RaceInformation[0].currentRaceNumber-1].list.append(boat())
                         //次のレースに進むときはアペンドする
                         //個人
                         for i in 0..<self.Personal[0].raceList.count{
@@ -217,9 +197,6 @@ class RaceViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                             self.BeforeGoalBoat[self.RaceInformation[0].currentRaceNumber-1].list.append(i)
                         }
                     }
-                    
-
-//                    beforeGoalBoat.shared.list.append(Personal[0].raceList)
                     //cutレースかどうかでタイトルを変える
                     if self.RaceInformation[0].currentRaceNumber >= self.RaceInformation[0].cutRaceNumber {
                         self.titleLabel.title = "\(self.RaceInformation[0].currentRaceNumber)レース目(cut有り)"

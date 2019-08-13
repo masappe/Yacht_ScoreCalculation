@@ -12,7 +12,6 @@ import RealmSwift
 class DecideViewController: UIViewController,UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate {
     
     var updateBoat: boat!
-//    var registerBoat = boat()
     @IBOutlet weak var boatNumber: UITextField!
     @IBOutlet weak var skipper: UITextField!
     @IBOutlet weak var crew: UITextField!
@@ -112,7 +111,6 @@ class DecideViewController: UIViewController,UITextFieldDelegate,UIPickerViewDat
         if state == "add" {
             if pickerView == univPickerView {
                 return AllUniv.count
-//                return alluniv.shared.univList.count
             }else {
                 return 2
             }
@@ -124,7 +122,6 @@ class DecideViewController: UIViewController,UITextFieldDelegate,UIPickerViewDat
         if state == "add" {
             if pickerView == univPickerView {
                 return AllUniv[row].univ
-//                return alluniv.shared.univList[row].univ
             } else {
                 return boatKind[row]
             }
@@ -136,7 +133,6 @@ class DecideViewController: UIViewController,UITextFieldDelegate,UIPickerViewDat
         if state == "add" {
             if pickerView == univPickerView {
                 tempUniv = AllUniv[row].univ
-//                tempUniv = alluniv.shared.univList[row].univ
                 univTextField.text = tempUniv
             } else {
                 tempBoat = boatKind[row]
@@ -150,7 +146,6 @@ class DecideViewController: UIViewController,UITextFieldDelegate,UIPickerViewDat
         if state == "add" {
             if textField == univTextField {
                 univTextField.text = AllUniv[0].univ
-//                univTextField.text = alluniv.shared.univList[0].univ
             } else if textField == boatTypeTextField {
                 boatTypeTextField.text = boatKind[0]
             }
@@ -181,35 +176,16 @@ class DecideViewController: UIViewController,UITextFieldDelegate,UIPickerViewDat
                             try! realm.write {
                                 AllUniv[i].fourList.append(registerBoat)
                             }
-//                            alluniv.shared.univList[i].fourList.append(registerBoat)
                         } else {
                             try! realm.write {
                                 AllUniv[i].snipeList.append(registerBoat)
                                 print(AllUniv[i].snipeList)
-//                                print(registerBoat.boatNumber)
-//                                print(AllUniv[i].snipeList.count)
-//                                for j in 0..<AllUniv[i].snipeList.count{
-//                                    print(AllUniv[i].snipeList[j].boatNumber)
-//                                }
                             }
-//                            alluniv.shared.univList[i].snipeList.append(registerBoat)
                         }
                         break
                     }
                 }
 
-//                //大学に艇情報の保存
-//                for i in 0..<alluniv.shared.univList.count{
-//                    if tempUniv == alluniv.shared.univList[i].univ{
-//                        //艇種わけ
-//                        if tempBoat == "470" {
-//                            alluniv.shared.univList[i].fourList.append(registerBoat)
-//                        } else {
-//                            alluniv.shared.univList[i].snipeList.append(registerBoat)
-//                        }
-//                        break
-//                    }
-//                }
                 let alert = UIAlertController(title: "完了", message: "船を追加しました", preferredStyle: .alert)
                 let ok = UIAlertAction(title: "OK", style: .default) { (action) in
                     self.boatNumber.text = ""

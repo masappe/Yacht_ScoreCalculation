@@ -20,7 +20,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var addBoatButton: UIButton!
     @IBOutlet weak var resetButton: UIButton!
     //realm
-//    let realm = try! Realm()
     var AllUniv: Results<universal>!
     var Personal: Results<personal>!
     var Group: Results<group>!
@@ -186,9 +185,6 @@ class ViewController: UIViewController {
                     AfterGoalBoat[i].list.removeAll()
                 }
             }
-            
-//            beforeGoalBoat.shared.list.removeAll()
-//            afterGoalBoat.shared.list.removeAll()
         }
     }
     //470のレースに参加する船の反映

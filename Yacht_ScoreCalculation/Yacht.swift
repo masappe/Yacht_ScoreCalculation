@@ -34,7 +34,6 @@ class raceInformation:Object {
 
     //英語の種類一覧
     @objc dynamic var DNF = 0
-//    @objc dynamic var black: Int!
     
     //レース情報の初期化
     func initialize() {
@@ -50,12 +49,6 @@ class raceInformation:Object {
     }
 }
 
-//大学情報一覧
-class alluniv:Object {
-    var univList = List<universal>()
-    @objc dynamic static let shared = alluniv()
-//    private override init(){}
-}
 //大学情報，大学ごとの所有艇の情報も保持
 class universal:Object {
     @objc dynamic var univ: String!
@@ -85,7 +78,6 @@ class boats:Object {
     //大学のレース情報の初期化
     func initialize(){
         racePoint.removeAll()
-//        racePoint.append(0)
         boat.removeAll()
         totalPoint = 0
         result = 0
@@ -119,11 +111,9 @@ class boat:Object {
     //各レースのの順位
     //0を入れないといけない
     var racePoint = List<Int>()
-//    var racePoint:[Int] = [0]
     //カットされるかされないか
     //falseを入れないといけない
     var cutSelect = List<Bool>()
-//    @objc dynamic var cutSelect:[Bool] = [false]
     //合計点数
     @objc dynamic var totalPoint:Int = 0
     //cutの点数
@@ -144,8 +134,6 @@ class boat:Object {
     //艇のレース情報の初期化
     func initialize(){
         racePoint.removeAll()
-//        racePoint = [0]
-//        racePoint.append(0)
         cutSelect.removeAll()
         totalPoint = 0
         cutPoint = 0
@@ -188,33 +176,10 @@ class boat:Object {
     }
     
 }
-//多分いらない
-class fourSevenZero:Object {
-    var list = List<boat>()
-//    @objc dynamic var list: [boat] = []
-//    @objc dynamic static let shared = fourSevenZero()
-//    private override init(){}
-}
-//多分いらない
-class snipe:Object {
-    var list = List<boat>()
-    //    @objc dynamic var list: [boat] = []
-//    @objc dynamic static let shared = snipe()
-
-}
-
 
 class beforeGoalBoat:Object {
     var list = List<boat>()
-//    var list = [[boat]]()
-//    static let shared = beforeGoalBoat()
-//    private override init() {}
-
 }
 class afterGoalBoat:Object {
     var list = List<boat>()
-//    var list = [[boat]]()
-//    static let shared = afterGoalBoat()
-//    private override init() {}
-
 }
