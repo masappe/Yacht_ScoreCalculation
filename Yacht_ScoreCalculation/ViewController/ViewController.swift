@@ -179,14 +179,11 @@ class ViewController: UIViewController {
             let BeforeGoalBoat = realm.objects(beforeGoalBoat.self)
             let AfterGoalBoat = realm.objects(afterGoalBoat.self)
             for i in 0..<BeforeGoalBoat.count{
-                try! realm.write {
-                    if BeforeGoalBoat[i].list.count >= 1 {
-                        BeforeGoalBoat[i].list.removeAll()
-                    }
-                    if AfterGoalBoat[i].list.count >= 1{
-                        AfterGoalBoat[i].list.removeAll()
-
-                    }
+                if BeforeGoalBoat[i].list.count >= 1 {
+                    BeforeGoalBoat[i].list.removeAll()
+                }
+                if AfterGoalBoat[i].list.count >= 1{
+                    AfterGoalBoat[i].list.removeAll()
                 }
             }
             

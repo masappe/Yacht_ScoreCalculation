@@ -146,7 +146,7 @@ class DecideViewController: UIViewController,UITextFieldDelegate,UIPickerViewDat
     }
     
     //最初に現れるものの選択
-    func textFieldDidBeginEditing(_ textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField, didseletRow row: Int) {
         if state == "add" {
             if textField == univTextField {
                 univTextField.text = AllUniv[0].univ

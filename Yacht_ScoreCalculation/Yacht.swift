@@ -38,8 +38,12 @@ class raceInformation:Object {
     
     //レース情報の初期化
     func initialize() {
+        raceName = ""
+        startRace = ""
+        endRace = ""
         raceCount = 1
         currentRaceNumber = 1
+        cutRaceNumber = 0
         boatNum = 0
         DNF = 1
         doneUpdateCount = 0
@@ -81,9 +85,11 @@ class boats:Object {
     //大学のレース情報の初期化
     func initialize(){
         racePoint.removeAll()
-        racePoint.append(0)
+//        racePoint.append(0)
         boat.removeAll()
         totalPoint = 0
+        result = 0
+        selectColor = "clear"
     }
     //レースの合計点数を計算する
     func calculateRacePoint() {
@@ -139,11 +145,13 @@ class boat:Object {
     func initialize(){
         racePoint.removeAll()
 //        racePoint = [0]
-        racePoint.append(0)
+//        racePoint.append(0)
+        cutSelect.removeAll()
         totalPoint = 0
         cutPoint = 0
         badPoint = 0
         selected = false
+        selectColor = "clear"
     }
 
     //艇情報の追加
